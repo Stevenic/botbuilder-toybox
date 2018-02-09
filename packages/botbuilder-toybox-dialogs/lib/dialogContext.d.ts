@@ -3,8 +3,10 @@
  */
 /** Licensed under the MIT License. */
 import { DialogInstance } from './dialogStack';
+import { PromptSet } from './prompts/index';
 export interface DialogContext<T extends Object = {}> extends BotContext {
     readonly dialog: DialogInstance<T>;
+    readonly prompts: PromptSet;
     beginDialog(dialogId: string, dialogArgs?: any): Promise<void>;
     cancelDialog(dialogId: string, replaceWithId?: string, replaceWithArgs?: any): Promise<void>;
     endDialog(): Promise<void>;

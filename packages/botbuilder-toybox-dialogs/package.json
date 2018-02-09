@@ -18,8 +18,8 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "botbuilder": "^4.0.0-m1.2",
-    "@microsoft/recognizers-text-suite": "^1.0.0-rc.30.0"
+    "@microsoft/recognizers-text-suite": "^1.0.0-rc.30.0",
+    "botbuilder": "^4.0.0-m1.3"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.47",
@@ -33,7 +33,7 @@
   "scripts": {
     "test": "tsc && nyc mocha tests/",
     "build": "tsc",
-    "build-docs": "typedoc --theme markdown --entryPoint botbuilder-toybox-dialogs --excludePrivate --includeDeclarations --ignoreCompilerErrors --module amd --out ..\\..\\doc\\botbuilder-toybox-dialogs .\\lib\\index.d.ts --hideGenerator --name \"Bot Builder Toybox - Dialogs\" --readme none",
+    "build-docs": "typedoc --theme markdown --entryPoint botbuilder-toybox-dialogs --excludePrivate --includeDeclarations --ignoreCompilerErrors --module amd --out ..\\..\\docs\\botbuilder-toybox-dialogs .\\lib\\index.d.ts --hideGenerator --name \"Bot Builder Toybox - Dialogs\" --readme none",
     "clean": "erase /q lib\\*.*"
   }
 }

@@ -6,7 +6,7 @@ import { Dialog } from './dialog';
 import { DialogInstance } from './dialogStack';
 import { Waterfall, WaterfallStep } from './waterfall';
 import { DialogContext } from './dialogContext';
-import { stat } from 'fs';
+import { PromptSet } from './prompts/index';
 
 export class DialogSet {
     private readonly dialogs: { [id:string]: Dialog<any>; } = {};
@@ -22,8 +22,6 @@ export class DialogSet {
             // Cancel any current dialogs
             const state = conversationState(context, 'DialogSet.beginDialog()');
             state.dialogStack = [];
-
-            // Lookup 
 
             // Create new dialog context and start dialog
             const dc = this.createDialogContext(context);
@@ -85,17 +83,9 @@ export class DialogSet {
         if (this.dialogs.hasOwnProperty(dialogId)) {
             return this.dialogs[dialogId];
         } else {
-            return findPromptDialog(dialogId);
+            return PromptSet.findPromptDialog(dialogId) as Dialog<T>;
         }
     }
-}
-
-function findPromptDialog<T>(dialogId: string): Dialog<T>|undefined  {
-    switch(dialogId) {
-        case 'prompt:text':
-            break;
-    }
-    return undefined;
 }
 
 function conversationState(context: BotContext, method: string): ConversationState {
@@ -204,6 +194,14 @@ function createDialogContext(dialogs: DialogSet, context: BotContext): DialogCon
         }
     }
 
+    let prompts: PromptSet|undefined;
+    function getPrompts(): PromptSet {
+        if (!prompts) {
+            prompts = new PromptSet(revocable.proxy);
+        }
+        return prompts;
+    }
+
     function revoke(): void {
         revocable.revoke();
     }
@@ -215,6 +213,8 @@ function createDialogContext(dialogs: DialogSet, context: BotContext): DialogCon
                     const instance = dialogs.currentDialog(context);
                     if (!instance) { throw new Error(`DialogContext: There are no dialogs on the stack.`) }
                     return instance;
+                case 'prompts':
+                    return getPrompts();
                 case 'beginDialog':
                     return beginDialog;
                 case 'cancelDialog':

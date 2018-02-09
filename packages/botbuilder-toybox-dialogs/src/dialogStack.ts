@@ -12,9 +12,3 @@ export interface DialogInstance<T extends Object = {}> {
     state: T;
 }
 
-declare global {
-    export interface ConversationState {
-        /** Persisted stack of dialog instances that are active. */
-        dialogStack?: DialogInstance[];
-    }
-}

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const waterfall_1 = require("./waterfall");
+const index_1 = require("./prompts/index");
 class DialogSet {
     constructor() {
         this.dialogs = {};
@@ -17,7 +18,6 @@ class DialogSet {
             // Cancel any current dialogs
             const state = conversationState(context, 'DialogSet.beginDialog()');
             state.dialogStack = [];
-            // Lookup 
             // Create new dialog context and start dialog
             const dc = this.createDialogContext(context);
             return dc.beginDialog(dialogId, dialogArgs)
@@ -80,18 +80,11 @@ class DialogSet {
             return this.dialogs[dialogId];
         }
         else {
-            return findPromptDialog(dialogId);
+            return index_1.PromptSet.findPromptDialog(dialogId);
         }
     }
 }
 exports.DialogSet = DialogSet;
-function findPromptDialog(dialogId) {
-    switch (dialogId) {
-        case 'prompt:text':
-            break;
-    }
-    return undefined;
-}
 function conversationState(context, method) {
     if (!context.state.conversation) {
         throw new Error(`${method}: No conversation state found. Please add a BotStateManager instance to your bots middleware stack.`);
@@ -211,6 +204,13 @@ function createDialogContext(dialogs, context) {
             return Promise.reject(err);
         }
     }
+    let prompts;
+    function getPrompts() {
+        if (!prompts) {
+            prompts = new index_1.PromptSet(revocable.proxy);
+        }
+        return prompts;
+    }
     function revoke() {
         revocable.revoke();
     }
@@ -223,6 +223,8 @@ function createDialogContext(dialogs, context) {
                         throw new Error(`DialogContext: There are no dialogs on the stack.`);
                     }
                     return instance;
+                case 'prompts':
+                    return getPrompts();
                 case 'beginDialog':
                     return beginDialog;
                 case 'cancelDialog':
