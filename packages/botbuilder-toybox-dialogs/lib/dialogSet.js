@@ -30,6 +30,11 @@ class DialogSet {
             return Promise.reject(err);
         }
     }
+    cancelAll(context) {
+        // Cancel any current dialogs
+        const state = conversationState(context, 'DialogSet.cancelAll()');
+        state.dialogStack = [];
+    }
     continueDialog(context) {
         try {
             // Get current dialog instance

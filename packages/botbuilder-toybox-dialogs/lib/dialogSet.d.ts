@@ -10,6 +10,7 @@ export declare class DialogSet {
     private readonly dialogs;
     add<T extends Object>(dialogId: string, dialogOrSteps: Dialog<T> | WaterfallStep<T>[]): this;
     beginDialog(context: BotContext, dialogId: string, dialogArgs?: any): Promise<void>;
+    cancelAll(context: BotContext): void;
     continueDialog(context: BotContext): Promise<boolean>;
     createDialogContext(context: BotContext): DialogContext;
     currentDialog(context: BotContext): DialogInstance | undefined;

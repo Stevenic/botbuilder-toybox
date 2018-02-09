@@ -35,6 +35,12 @@ export class DialogSet {
         }
     }
 
+    public cancelAll(context: BotContext): void {
+        // Cancel any current dialogs
+        const state = conversationState(context, 'DialogSet.cancelAll()');
+        state.dialogStack = [];
+    }
+
     public continueDialog(context: BotContext): Promise<boolean> {
         try {
             // Get current dialog instance
