@@ -1,6 +1,7 @@
 import { Bot, MemoryStorage, BotStateManager } from 'botbuilder';
 import { BotFrameworkAdapter } from 'botbuilder-services';
 import { DialogSet, DialogContext } from 'botbuilder-toybox-dialogs';
+import { FoundChoice, Choice } from 'botbuilder-choices';
 import * as restify from 'restify';
 
 // Create server
@@ -24,39 +25,124 @@ const bot = new Bot(adapter)
     .use(new BotStateManager())
     .onReceive((context) => {
         if (context.request.type === 'message') {
+            // Check for cancel
+            const utterance = (context.request.text || '').trim().toLowerCase();
+            if (utterance === 'menu' || utterance === 'cancel') { dialogs.cancelAll(context) }
+
             // Continue the current dialog
             return dialogs.continueDialog(context).then((handled) => {
-                // Start demo if no active dialog.
+                // Show menu if no active dialog.
                 if (!handled) {
-                    return dialogs.beginDialog(context, 'promptDemo');
+                    return dialogs.beginDialog(context, 'mainMenu');
                 }
             });
         }
     });
 
-dialogs.add('promptDemo', [
+dialogs.add('mainMenu', [
     function (context) {
-        return context.beginDialog('datetimePrompt');
+        function choice(title: string, value: string): Choice {
+            return {
+                value: value,
+                action: { type: 'imBack', title: title, value: title }
+            };
+        }
+        return context.prompts.choice(`Select a demo to run:`, [
+            choice('choice', 'choicePrompt'),
+            choice('confirm', 'confirmPrompt'),
+            choice('datetime', 'datetimePrompt'),
+            choice('number', 'numberPrompt'),
+            choice('text', 'textPrompt'),
+            choice('<all>', 'runAll')
+        ]);
     },
-    function (context, value: boolean) {
-        return context.endDialog();
+    function (context, choice: FoundChoice) {
+        if (choice.value === 'runAll') {
+            return context.replaceDialog(choice.value);
+        } else {
+            context.reply(`The demo will loop so say "menu" or "cancel" to end.`);
+            return context.replaceDialog('loop', { dialogId: choice.value });
+        }
     }
 ]);
 
+dialogs.add('choicePrompt', [
+    function (context) {
+        return context.prompts.choice(`choice: select a color`, ['red', 'green', 'blue']);
+    },
+    function (context, choice: FoundChoice) {
+        return context.reply(`Recognized choice: ${JSON.stringify(choice)}`).endDialog();
+    }
+]);
+
+
 dialogs.add('confirmPrompt', [
     function (context) {
-        return context.prompts.confirm(`Answer "yes" or "no"`);
+        return context.prompts.confirm(`confirm: answer "yes" or "no"`);
     },
     function (context, value: boolean) {
-        return context.reply(`You said "${value ? 'yes' : 'no'}".`).endDialog();
+        return context.reply(`Recognized value: ${value}`).endDialog();
     }
 ]);
 
 dialogs.add('datetimePrompt', [
     function (context) {
-        return context.prompts.datetime(`Enter a datetime:`);
+        return context.prompts.datetime(`datetime: enter a datetime`);
     },
     function (context, values: any[]) {
-        return context.reply(`Values received: ${JSON.stringify(values)}`).endDialog();
+        return context.reply(`Recognized values: ${JSON.stringify(values)}`).endDialog();
     }
 ]);
+
+dialogs.add('numberPrompt', [
+    function (context) {
+        return context.prompts.number(`number: enter a number`);
+    },
+    function (context, value: number) {
+        return context.reply(`Recognized value: ${value}`).endDialog();
+    }
+]);
+
+dialogs.add('textPrompt', [
+    function (context) {
+        return context.prompts.text(`text: enter some text`);
+    },
+    function (context, value: string) {
+        return context.reply(`Recognized value: ${value}`).endDialog();
+    }
+]);
+
+dialogs.add('loop', [
+    function (context: DialogContext<LoopArgs>, args: LoopArgs ) {
+        context.dialog.state = Object.assign({}, args);
+        return context.beginDialog(args.dialogId);
+    },
+    function (context) {
+        return context.replaceDialog('loop', context.dialog.state);
+    }
+])
+
+dialogs.add('runAll', [
+    function (context) {
+        return context.beginDialog('choicePrompt');
+    },
+    function (context) {
+        return context.beginDialog('confirmPrompt');
+    },
+    function (context) {
+        return context.beginDialog('datetimePrompt');
+    },
+    function (context) {
+        return context.beginDialog('numberPrompt');
+    },
+    function (context) {
+        return context.beginDialog('textPrompt');
+    },
+    function (context, value: boolean) {
+        return context.replaceDialog('mainMenu');
+    }
+]);
+
+interface LoopArgs {
+    dialogId: string;
+}

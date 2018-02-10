@@ -7,13 +7,9 @@ import { Dialog } from './dialog';
 import { DialogContext } from './dialogContext';
 import { Context } from 'vm';
 
-export interface WaterfallState {
-    step: number;
-} 
-
 export type WaterfallStep<T extends Object> = (Context: DialogContext<T>, args?: any, next?: (args?: any) => Promise<void>) => Promiseable<void>;
 
-export class Waterfall<T extends WaterfallState = WaterfallState> implements Dialog<T> {
+export class Waterfall<T extends Object = {}> implements Dialog<T> {
     private readonly steps: WaterfallStep<T>[];
 
     constructor(steps: WaterfallStep<T>[]) {
@@ -21,22 +17,22 @@ export class Waterfall<T extends WaterfallState = WaterfallState> implements Dia
     }
 
     public beginDialog(context: DialogContext<T>, args?: any): Promiseable<void> {
-        context.dialog.state.step = 0;
+        (context.dialog as any).step = 0;
         return this.runStep(context, args);
     }
 
     public resumeDialog(context: DialogContext<T>, result?: any): Promiseable<void> {
-        context.dialog.state.step += 1;
+        (context.dialog as any).step += 1;
         return this.runStep(context, result);
     }
 
     private runStep(context: DialogContext<T>, result?: any): Promise<void> {
         try {
-            const step = context.dialog.state.step;
+            const step = (context.dialog as any).step;
             if (step >= 0 && step <this.steps.length) {
                 // Execute step
                 return Promise.resolve(this.steps[step](context, result, (r?: any) => {
-                    context.dialog.state.step += 1;
+                    (context.dialog as any).step += 1;
                     return this.runStep(context, r);
                 }));
             } else {

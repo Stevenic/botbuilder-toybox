@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const botbuilder_choices_1 = require("botbuilder-choices");
+const choicePrompt_1 = require("./choicePrompt");
 const confirmPrompt_1 = require("./confirmPrompt");
 const datetimePrompt_1 = require("./datetimePrompt");
 const numberPrompt_1 = require("./numberPrompt");
@@ -7,6 +9,14 @@ const textPrompt_1 = require("./textPrompt");
 class PromptSet {
     constructor(context) {
         this.context = context;
+    }
+    choice(prompt, choices, retryPrompt) {
+        const o = { choices: choices };
+        o.prompt = formatChoicePrompt(this.context, prompt, choices);
+        if (retryPrompt) {
+            o.retryPrompt = formatChoicePrompt(this.context, retryPrompt, choices);
+        }
+        return this.context.beginDialog(choicePrompt_1.ChoicePrompt.dialogId, o);
     }
     confirm(prompt, retryPrompt) {
         const o = formatOptions(prompt, retryPrompt);
@@ -37,11 +47,15 @@ function formatOptions(prompt, retryPrompt) {
     const o = {};
     o.prompt = typeof prompt === 'string' ? { type: 'message', text: prompt } : prompt;
     if (retryPrompt) {
-        o.retryPrompt = typeof prompt === 'string' ? { type: 'message', text: prompt } : prompt;
+        o.retryPrompt = typeof retryPrompt === 'string' ? { type: 'message', text: retryPrompt } : retryPrompt;
     }
     return o;
 }
+function formatChoicePrompt(context, prompt, choices) {
+    return typeof prompt === 'string' ? botbuilder_choices_1.ChoiceStyler.forChannel(context, choices, prompt) : prompt;
+}
 // Register prompts
+PromptSet.addPromptDialog(choicePrompt_1.ChoicePrompt.dialogId, new choicePrompt_1.ChoicePrompt());
 PromptSet.addPromptDialog(confirmPrompt_1.ConfirmPrompt.dialogId, new confirmPrompt_1.ConfirmPrompt());
 PromptSet.addPromptDialog(datetimePrompt_1.DatetimePrompt.dialogId, new datetimePrompt_1.DatetimePrompt());
 PromptSet.addPromptDialog(textPrompt_1.TextPrompt.dialogId, new textPrompt_1.TextPrompt());

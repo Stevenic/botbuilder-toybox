@@ -19,7 +19,8 @@
   "typings": "./lib/index.d.ts",
   "dependencies": {
     "@microsoft/recognizers-text-suite": "^1.0.0-rc.30.0",
-    "botbuilder": "^4.0.0-m1.3"
+    "botbuilder": "^4.0.0-m1.4",
+    "botbuilder-choices": "^4.0.0-m1.2"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.47",

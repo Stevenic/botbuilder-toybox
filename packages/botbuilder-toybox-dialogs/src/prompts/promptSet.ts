@@ -3,9 +3,11 @@
  */
 /** Licensed under the MIT License. */
 import { Activity } from 'botbuilder';
+import { ChoiceStyler, Choice } from 'botbuilder-choices';
 import { PromptOptions } from './prompt';
 import { Dialog } from '../dialog';
 import { DialogContext } from '../dialogContext';
+import { ChoicePrompt, ChoicePromptOptions } from './choicePrompt';
 import { ConfirmPrompt } from './confirmPrompt';
 import { DatetimePrompt } from './datetimePrompt';
 import { NumberPrompt } from './numberPrompt';
@@ -13,6 +15,15 @@ import { TextPrompt } from './textPrompt';
 
 export class PromptSet {
     constructor(private context: DialogContext) { }
+
+    public choice(prompt: string|Partial<Activity>, choices: (string|Choice)[], retryPrompt?: string|Partial<Activity>): Promise<void> {
+        const o = { choices: choices } as ChoicePromptOptions;
+        o.prompt = formatChoicePrompt(this.context, prompt, choices);
+        if (retryPrompt) {
+            o.retryPrompt = formatChoicePrompt(this.context, retryPrompt, choices);
+        }
+        return this.context.beginDialog(ChoicePrompt.dialogId, o);
+    }
 
     public confirm(prompt: string|Partial<Activity>, retryPrompt?: string|Partial<Activity>): Promise<void> {
         const o = formatOptions(prompt, retryPrompt);
@@ -49,12 +60,17 @@ function formatOptions<T extends PromptOptions = PromptOptions>(prompt: string|P
     const o = {} as T;
     o.prompt = typeof prompt === 'string' ? { type: 'message', text: prompt } : prompt;
     if (retryPrompt) {
-        o.retryPrompt = typeof prompt === 'string' ? { type: 'message', text: prompt } : prompt;
+        o.retryPrompt = typeof retryPrompt === 'string' ? { type: 'message', text: retryPrompt } : retryPrompt;
     }
     return o;
 }
 
+function formatChoicePrompt(context: BotContext, prompt: string|Partial<Activity>, choices: (string|Choice)[]): Partial<Activity> {
+    return typeof prompt === 'string' ? ChoiceStyler.forChannel(context, choices, prompt) : prompt;
+}
+
 // Register prompts
+PromptSet.addPromptDialog(ChoicePrompt.dialogId, new ChoicePrompt());
 PromptSet.addPromptDialog(ConfirmPrompt.dialogId, new ConfirmPrompt());
 PromptSet.addPromptDialog(DatetimePrompt.dialogId, new DatetimePrompt());
 PromptSet.addPromptDialog(TextPrompt.dialogId, new TextPrompt());
