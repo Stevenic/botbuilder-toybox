@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const waterfall_1 = require("./waterfall");
 const index_1 = require("./prompts/index");
 class DialogSet {
-    constructor() {
+    constructor(stackName) {
         this.dialogs = {};
+        this.stackName = stackName || 'dialogStack';
     }
     add(dialogId, dialogOrSteps) {
         if (this.dialogs.hasOwnProperty(dialogId)) {
@@ -17,7 +18,7 @@ class DialogSet {
         try {
             // Cancel any current dialogs
             const state = conversationState(context, 'DialogSet.beginDialog()');
-            state.dialogStack = [];
+            state[this.stackName] = [];
             // Create new dialog context and start dialog
             const dc = this.createDialogContext(context);
             return dc.beginDialog(dialogId, dialogArgs)
@@ -33,7 +34,7 @@ class DialogSet {
     cancelAll(context) {
         // Cancel any current dialogs
         const state = conversationState(context, 'DialogSet.cancelAll()');
-        state.dialogStack = [];
+        state[this.stackName] = [];
     }
     continueDialog(context) {
         try {
@@ -73,11 +74,11 @@ class DialogSet {
         }
     }
     createDialogContext(context) {
-        return createDialogContext(this, context);
+        return createDialogContext(this, context, this.stackName);
     }
     currentDialog(context) {
         const state = context.state.conversation || {};
-        const stack = state.dialogStack || [];
+        const stack = state[this.stackName] || [];
         return stack.length > 0 ? stack[stack.length - 1] : undefined;
     }
     findDialog(dialogId) {
@@ -96,11 +97,11 @@ function conversationState(context, method) {
     }
     return context.state.conversation;
 }
-function createDialogContext(dialogs, context) {
+function createDialogContext(dialogs, context, stackName) {
     function beginDialog(dialogId, dialogArgs) {
         try {
             const state = conversationState(context, 'DialogContext.beginDialog()');
-            const stack = state.dialogStack || [];
+            const stack = state[stackName] || [];
             const dialog = dialogs.findDialog(dialogId);
             if (!dialog) {
                 throw new Error(`DialogContext.beginDialog(): Can't find a dialog with an id of '${dialogId}'.`);
@@ -117,7 +118,7 @@ function createDialogContext(dialogs, context) {
             // Cancel dialog
             let cancelled = false;
             const state = conversationState(context, 'DialogContext.cancelDialog()');
-            const stack = state.dialogStack || [];
+            const stack = state[stackName] || [];
             for (let i = stack.length - 1; i >= 0; i--) {
                 if (stack[i].id === dialogId) {
                     stack.splice(i, (stack.length - i));
@@ -163,33 +164,28 @@ function createDialogContext(dialogs, context) {
     function endDialogWithResult(result) {
         try {
             const state = conversationState(context, 'DialogContext.endDialogWithResult()');
-            const stack = state.dialogStack || [];
-            if (stack.length > 0) {
+            const stack = state[stackName] || [];
+            if (stack.length > 1) {
                 // End current dialog and resume parent 
                 stack.pop();
-                if (stack.length > 0) {
-                    // Find parent dialog
-                    const dialogId = stack[stack.length - 1].id;
-                    const dialog = dialogs.findDialog(dialogId);
-                    if (!dialog) {
-                        throw new Error(`DialogContext.endDialogWithResult(): Can't resume dialog. Can't find a dialog with an id of '${dialogId}'.`);
-                    }
-                    if (dialog.resumeDialog) {
-                        // Resume dialog
-                        return Promise.resolve(dialog.resumeDialog(revocable.proxy, result));
-                    }
-                    else {
-                        // Just end that dialog and pass result to parent
-                        return endDialogWithResult(result);
-                    }
+                const dialogId = stack[stack.length - 1].id;
+                const dialog = dialogs.findDialog(dialogId);
+                if (!dialog) {
+                    throw new Error(`DialogContext.endDialogWithResult(): Can't resume dialog. Can't find a dialog with an id of '${dialogId}'.`);
+                }
+                if (dialog.resumeDialog) {
+                    // Resume dialog
+                    return Promise.resolve(dialog.resumeDialog(revocable.proxy, result));
                 }
                 else {
-                    return Promise.resolve();
+                    // Just end that dialog and pass result to parent
+                    return endDialogWithResult(result);
                 }
             }
-            else {
-                return Promise.resolve();
+            else if (state.hasOwnProperty(stackName)) {
+                delete state[stackName];
             }
+            return Promise.resolve();
         }
         catch (err) {
             return Promise.reject(err);
@@ -199,7 +195,7 @@ function createDialogContext(dialogs, context) {
         try {
             // End current dialog and start new one 
             const state = conversationState(context, 'DialogContext.replaceDialog');
-            const stack = state.dialogStack || [];
+            const stack = state[stackName] || [];
             if (stack.length > 0) {
                 stack.pop();
             }

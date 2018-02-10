@@ -13,17 +13,6 @@ import { TextPrompt } from './textPrompt';
 export class PromptSet {
     constructor(private context: DialogContext) { }
 
-    public getDefaultRetryPrompt(): Partial<Activity>|undefined {
-        if (!this.context.state.conversation) { throw new Error(`DialogContext.prompts.getDefaultRetryPrompt(): Missing conversation state. Please add BotStateManager to your bots middleware stack.`) }
-        return this.context.state.conversation.defaultRetryPrompt;
-    }
-
-    public setDefaultRetryPrompt(prompt: string|Partial<Activity>): void {
-        if (!this.context.state.conversation) { throw new Error(`DialogContext.prompts.setDefaultRetryPrompt(): Missing conversation state. Please add BotStateManager to your bots middleware stack.`) }
-        const p: Partial<Activity> = typeof prompt === 'string' ? { type: 'message', text: prompt } : prompt;
-        this.context.state.conversation.defaultRetryPrompt = p;
-    }
-
     public confirm(prompt: string|Partial<Activity>, retryPrompt?: string|Partial<Activity>): Promise<void> {
         const o = formatOptions(prompt, retryPrompt);
         return this.context.beginDialog(ConfirmPrompt.dialogId, o);

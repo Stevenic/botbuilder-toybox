@@ -7,19 +7,6 @@ class PromptSet {
     constructor(context) {
         this.context = context;
     }
-    getDefaultRetryPrompt() {
-        if (!this.context.state.conversation) {
-            throw new Error(`DialogContext.prompts.getDefaultRetryPrompt(): Missing conversation state. Please add BotStateManager to your bots middleware stack.`);
-        }
-        return this.context.state.conversation.defaultRetryPrompt;
-    }
-    setDefaultRetryPrompt(prompt) {
-        if (!this.context.state.conversation) {
-            throw new Error(`DialogContext.prompts.setDefaultRetryPrompt(): Missing conversation state. Please add BotStateManager to your bots middleware stack.`);
-        }
-        const p = typeof prompt === 'string' ? { type: 'message', text: prompt } : prompt;
-        this.context.state.conversation.defaultRetryPrompt = p;
-    }
     confirm(prompt, retryPrompt) {
         const o = formatOptions(prompt, retryPrompt);
         return this.context.beginDialog(confirmPrompt_1.ConfirmPrompt.dialogId, o);

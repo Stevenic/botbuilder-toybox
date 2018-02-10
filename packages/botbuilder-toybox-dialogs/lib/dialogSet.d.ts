@@ -7,7 +7,9 @@ import { DialogInstance } from './dialogStack';
 import { WaterfallStep } from './waterfall';
 import { DialogContext } from './dialogContext';
 export declare class DialogSet {
+    private readonly stackName;
     private readonly dialogs;
+    constructor(stackName?: string);
     add<T extends Object>(dialogId: string, dialogOrSteps: Dialog<T> | WaterfallStep<T>[]): this;
     beginDialog(context: BotContext, dialogId: string, dialogArgs?: any): Promise<void>;
     cancelAll(context: BotContext): void;

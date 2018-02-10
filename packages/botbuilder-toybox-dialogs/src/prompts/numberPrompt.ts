@@ -30,9 +30,7 @@ export class NumberPrompt implements Dialog {
             // Send retry prompt
             context.responses.push(state.retryPrompt);
         } else {
-            // Send default retry prompt + original prompt
-            const retryPrompt = context.prompts.getDefaultRetryPrompt();
-            if (retryPrompt) { context.responses.push(retryPrompt) }
+            // Send original prompt
             if (state.prompt) { context.responses.push(state.prompt) }
         }
         return Promise.resolve();

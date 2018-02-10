@@ -9,7 +9,12 @@ import { DialogContext } from './dialogContext';
 import { PromptSet } from './prompts/index';
 
 export class DialogSet {
+    private readonly stackName: string;
     private readonly dialogs: { [id:string]: Dialog<any>; } = {};
+
+    constructor (stackName?: string) {
+        this.stackName = stackName || 'dialogStack';
+    }
 
     public add<T extends Object>(dialogId: string, dialogOrSteps: Dialog<T>|WaterfallStep<T>[]): this {
         if (this.dialogs.hasOwnProperty(dialogId)) { throw new Error(`DialogSet.add(): A dialog with an id of '${dialogId}' already added.`) }
@@ -21,7 +26,7 @@ export class DialogSet {
         try {
             // Cancel any current dialogs
             const state = conversationState(context, 'DialogSet.beginDialog()');
-            state.dialogStack = [];
+            state[this.stackName] = [];
 
             // Create new dialog context and start dialog
             const dc = this.createDialogContext(context);
@@ -38,7 +43,7 @@ export class DialogSet {
     public cancelAll(context: BotContext): void {
         // Cancel any current dialogs
         const state = conversationState(context, 'DialogSet.cancelAll()');
-        state.dialogStack = [];
+        state[this.stackName] = [];
     }
 
     public continueDialog(context: BotContext): Promise<boolean> {
@@ -76,12 +81,12 @@ export class DialogSet {
     }
 
     public createDialogContext(context: BotContext): DialogContext {
-        return createDialogContext(this, context);
+        return createDialogContext(this, context, this.stackName);
     }
 
     public currentDialog(context: BotContext): DialogInstance|undefined {
         const state = context.state.conversation || {};
-        const stack = state.dialogStack || [];
+        const stack = state[this.stackName] || [];
         return stack.length > 0 ? stack[stack.length - 1] : undefined;
     }
 
@@ -99,11 +104,11 @@ function conversationState(context: BotContext, method: string): ConversationSta
     return context.state.conversation;
 }
 
-function createDialogContext(dialogs: DialogSet, context: BotContext): DialogContext {
+function createDialogContext(dialogs: DialogSet, context: BotContext, stackName: string): DialogContext {
     function beginDialog(dialogId: string, dialogArgs?: any): Promise<void> {
         try {
             const state = conversationState(context, 'DialogContext.beginDialog()');
-            const stack = state.dialogStack || [];
+            const stack = state[stackName] || [];
             const dialog = dialogs.findDialog(dialogId);
             if (!dialog) { throw new Error(`DialogContext.beginDialog(): Can't find a dialog with an id of '${dialogId}'.`) }
             stack.push({ id: dialogId, state: {} });
@@ -118,7 +123,7 @@ function createDialogContext(dialogs: DialogSet, context: BotContext): DialogCon
             // Cancel dialog
             let cancelled = false;
             const state = conversationState(context, 'DialogContext.cancelDialog()');
-            const stack = state.dialogStack || [];
+            const stack = state[stackName] || [];
             for (let i = stack.length - 1; i >= 0; i--) {
                 if (stack[i].id === dialogId) {
                     stack.splice(i, (stack.length - i));
@@ -159,28 +164,24 @@ function createDialogContext(dialogs: DialogSet, context: BotContext): DialogCon
     function endDialogWithResult(result: any): Promise<void> {
         try {
             const state = conversationState(context, 'DialogContext.endDialogWithResult()');
-            const stack = state.dialogStack || [];
-            if (stack.length > 0) {
+            const stack = state[stackName] || [];
+            if (stack.length > 1) {
                 // End current dialog and resume parent 
                 stack.pop();
-                if (stack.length > 0) {
-                    // Find parent dialog
-                    const dialogId = stack[stack.length - 1].id;
-                    const dialog = dialogs.findDialog(dialogId);
-                    if (!dialog) { throw new Error(`DialogContext.endDialogWithResult(): Can't resume dialog. Can't find a dialog with an id of '${dialogId}'.`) }
-                    if (dialog.resumeDialog) {
-                        // Resume dialog
-                        return Promise.resolve(dialog.resumeDialog(revocable.proxy, result));
-                    } else {
-                        // Just end that dialog and pass result to parent
-                        return endDialogWithResult(result);
-                    }
+                const dialogId = stack[stack.length - 1].id;
+                const dialog = dialogs.findDialog(dialogId);
+                if (!dialog) { throw new Error(`DialogContext.endDialogWithResult(): Can't resume dialog. Can't find a dialog with an id of '${dialogId}'.`) }
+                if (dialog.resumeDialog) {
+                    // Resume dialog
+                    return Promise.resolve(dialog.resumeDialog(revocable.proxy, result));
                 } else {
-                    return Promise.resolve();
+                    // Just end that dialog and pass result to parent
+                    return endDialogWithResult(result);
                 }
-            } else {
-                return Promise.resolve();
+            } else if (state.hasOwnProperty(stackName)) {
+                delete state[stackName];
             }
+            return Promise.resolve();
         } catch(err) {
             return Promise.reject(err);
         }
@@ -190,7 +191,7 @@ function createDialogContext(dialogs: DialogSet, context: BotContext): DialogCon
         try {
             // End current dialog and start new one 
             const state = conversationState(context, 'DialogContext.replaceDialog');
-            const stack = state.dialogStack || [];
+            const stack = state[stackName] || [];
             if (stack.length > 0) {
                 stack.pop();
             }

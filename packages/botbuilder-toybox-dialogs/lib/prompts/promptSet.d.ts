@@ -9,8 +9,6 @@ import { DialogContext } from '../dialogContext';
 export declare class PromptSet {
     private context;
     constructor(context: DialogContext);
-    getDefaultRetryPrompt(): Partial<Activity> | undefined;
-    setDefaultRetryPrompt(prompt: string | Partial<Activity>): void;
     confirm(prompt: string | Partial<Activity>, retryPrompt?: string | Partial<Activity>): Promise<void>;
     number(prompt: string | Partial<Activity>, retryPrompt?: string | Partial<Activity>): Promise<void>;
     text(prompt: string | Partial<Activity>, retryPrompt?: string | Partial<Activity>): Promise<void>;
