@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Recognizers = require("@microsoft/recognizers-text-number");
-const numberModel = Recognizers.NumberRecognizer.instance.getNumberModel("en-us");
+const numberModel = Recognizers.NumberRecognizer.instance.getNumberModel('en-us');
 class NumberPrompt {
     beginDialog(context, args) {
         context.dialog.state = Object.assign({}, args);

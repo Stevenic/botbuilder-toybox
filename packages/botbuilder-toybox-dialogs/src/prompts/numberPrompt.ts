@@ -7,7 +7,7 @@ import { DialogContext } from '../dialogContext';
 import { PromptOptions } from './prompt';
 import * as Recognizers from '@microsoft/recognizers-text-number';
 
-const numberModel = Recognizers.NumberRecognizer.instance.getNumberModel("en-us");
+const numberModel = Recognizers.NumberRecognizer.instance.getNumberModel('en-us');
 
 export class NumberPrompt implements Dialog {
     static dialogId = 'prompt:number';

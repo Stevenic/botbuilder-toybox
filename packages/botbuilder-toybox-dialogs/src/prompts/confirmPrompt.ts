@@ -5,6 +5,9 @@
 import { Dialog } from '../dialog';
 import { DialogContext } from '../dialogContext';
 import { PromptOptions } from './prompt';
+import * as Recognizers from '@microsoft/recognizers-text-options';
+
+const booleanModel = Recognizers.OptionsRecognizer.instance.getBooleanModel('en-us');
 
 export class ConfirmPrompt implements Dialog {
     static dialogId = 'prompt:confirm';
@@ -18,12 +21,11 @@ export class ConfirmPrompt implements Dialog {
     public continueDialog(context: DialogContext<PromptOptions>): Promise<void> {
         const state = context.dialog.state;
         const utterance = context.request && context.request.text ? context.request.text : '';
-        if (/^(yes|yep|sure|y|ok|true)$/i.test(utterance)) {
-            // Return recognized true
-            return context.endDialogWithResult(true);
-        } else if (/^(no|nope|false)$/i.test(utterance)) {
-            // Return recognized false
-            return context.endDialogWithResult(false);
+        const results = booleanModel.parse(utterance);
+        if (results.length > 0) {
+            // Return recognized value
+            const value = results[0].resolution.value;
+            return context.endDialogWithResult(value);
         } else if (state.retryPrompt) {
             // Send retry prompt
             context.responses.push(state.retryPrompt);
