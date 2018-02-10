@@ -33,10 +33,26 @@ const bot = new botbuilder_1.Bot(adapter)
 });
 dialogs.add('promptDemo', [
     function (context) {
+        return context.beginDialog('datetimePrompt');
+    },
+    function (context, value) {
+        return context.endDialog();
+    }
+]);
+dialogs.add('confirmPrompt', [
+    function (context) {
         return context.prompts.confirm(`Answer "yes" or "no"`);
     },
     function (context, value) {
         return context.reply(`You said "${value ? 'yes' : 'no'}".`).endDialog();
+    }
+]);
+dialogs.add('datetimePrompt', [
+    function (context) {
+        return context.prompts.datetime(`Enter a datetime:`);
+    },
+    function (context, values) {
+        return context.reply(`Values received: ${JSON.stringify(values)}`).endDialog();
     }
 ]);
 //# sourceMappingURL=app.js.map

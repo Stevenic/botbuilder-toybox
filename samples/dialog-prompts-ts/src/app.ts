@@ -36,9 +36,27 @@ const bot = new Bot(adapter)
 
 dialogs.add('promptDemo', [
     function (context) {
+        return context.beginDialog('datetimePrompt');
+    },
+    function (context, value: boolean) {
+        return context.endDialog();
+    }
+]);
+
+dialogs.add('confirmPrompt', [
+    function (context) {
         return context.prompts.confirm(`Answer "yes" or "no"`);
     },
     function (context, value: boolean) {
         return context.reply(`You said "${value ? 'yes' : 'no'}".`).endDialog();
+    }
+]);
+
+dialogs.add('datetimePrompt', [
+    function (context) {
+        return context.prompts.datetime(`Enter a datetime:`);
+    },
+    function (context, values: any[]) {
+        return context.reply(`Values received: ${JSON.stringify(values)}`).endDialog();
     }
 ]);

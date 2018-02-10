@@ -7,6 +7,7 @@ import { PromptOptions } from './prompt';
 import { Dialog } from '../dialog';
 import { DialogContext } from '../dialogContext';
 import { ConfirmPrompt } from './confirmPrompt';
+import { DatetimePrompt } from './datetimePrompt';
 import { NumberPrompt } from './numberPrompt';
 import { TextPrompt } from './textPrompt';
 
@@ -18,6 +19,11 @@ export class PromptSet {
         return this.context.beginDialog(ConfirmPrompt.dialogId, o);
     }
 
+    public datetime(prompt: string|Partial<Activity>, retryPrompt?: string|Partial<Activity>): Promise<void> {
+        const o = formatOptions(prompt, retryPrompt);
+        return this.context.beginDialog(DatetimePrompt.dialogId, o);
+    }
+    
     public number(prompt: string|Partial<Activity>, retryPrompt?: string|Partial<Activity>): Promise<void> {
         const o = formatOptions(prompt, retryPrompt);
         return this.context.beginDialog(NumberPrompt.dialogId, o);
@@ -50,5 +56,6 @@ function formatOptions<T extends PromptOptions = PromptOptions>(prompt: string|P
 
 // Register prompts
 PromptSet.addPromptDialog(ConfirmPrompt.dialogId, new ConfirmPrompt());
+PromptSet.addPromptDialog(DatetimePrompt.dialogId, new DatetimePrompt());
 PromptSet.addPromptDialog(TextPrompt.dialogId, new TextPrompt());
 PromptSet.addPromptDialog(NumberPrompt.dialogId, new NumberPrompt());
