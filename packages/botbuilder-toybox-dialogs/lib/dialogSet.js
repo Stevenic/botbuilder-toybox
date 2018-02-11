@@ -51,22 +51,16 @@ class DialogSet {
                 if (dialog.continueDialog) {
                     // Continue execution of dialog
                     return Promise.resolve(dialog.continueDialog(dc))
-                        .then(() => {
-                        dc.revoke();
-                        return true;
-                    });
+                        .then(() => dc.revoke());
                 }
                 else {
                     // Just end the dialog
                     return dc.endDialog()
-                        .then(() => {
-                        dc.revoke();
-                        return true;
-                    });
+                        .then(() => dc.revoke());
                 }
             }
             else {
-                return Promise.resolve(false);
+                return Promise.resolve();
             }
         }
         catch (err) {

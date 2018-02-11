@@ -13,7 +13,7 @@ export declare class DialogSet {
     add<T extends Object>(dialogId: string, dialogOrSteps: Dialog<T> | WaterfallStep<T>[]): this;
     beginDialog(context: BotContext, dialogId: string, dialogArgs?: any): Promise<void>;
     cancelAll(context: BotContext): void;
-    continueDialog(context: BotContext): Promise<boolean>;
+    continueDialog(context: BotContext): Promise<void>;
     createDialogContext(context: BotContext): DialogContext;
     currentDialog(context: BotContext): DialogInstance | undefined;
     findDialog<T extends Object = {}>(dialogId: string): Dialog<T> | undefined;

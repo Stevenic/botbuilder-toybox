@@ -46,7 +46,7 @@ export class DialogSet {
         state[this.stackName] = [];
     }
 
-    public continueDialog(context: BotContext): Promise<boolean> {
+    public continueDialog(context: BotContext): Promise<void> {
         try {
             // Get current dialog instance
             const instance = this.currentDialog(context);
@@ -60,20 +60,14 @@ export class DialogSet {
                 if (dialog.continueDialog) {
                     // Continue execution of dialog
                     return Promise.resolve(dialog.continueDialog(dc))
-                        .then(() => {
-                            dc.revoke();
-                            return true;
-                        });
+                        .then(() => dc.revoke());
                 } else {
                     // Just end the dialog
                     return dc.endDialog()
-                        .then(() => {
-                            dc.revoke();
-                            return true;
-                        });
+                        .then(() => dc.revoke());
                 }
             } else {
-                return Promise.resolve(false);
+                return Promise.resolve();
             }
         } catch(err) {
             return Promise.reject(err);
