@@ -39,7 +39,7 @@ Similarly, calling a dialog/prompt from within the last step of the waterfall wi
 ### ⊕ **new Waterfall**(steps: *[WaterfallStep](../#waterfallstep)`T`[]*): [Waterfall](botbuilder_toybox_dialogs.waterfall.md)
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:37](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L37)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:37](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L37)*
 
 
 
@@ -72,7 +72,7 @@ Creates a new waterfall dialog containing the given array of steps.
 
 *Implementation of [Dialog](../interfaces/botbuilder_toybox_dialogs.dialog.md).[beginDialog](../interfaces/botbuilder_toybox_dialogs.dialog.md#begindialog)*
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:43](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L43)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:43](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L43)*
 
 
 
@@ -105,7 +105,7 @@ ___
 
 *Implementation of [Dialog](../interfaces/botbuilder_toybox_dialogs.dialog.md).[resumeDialog](../interfaces/botbuilder_toybox_dialogs.dialog.md#resumedialog)*
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:44](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L44)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:44](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L44)*
 
 
 

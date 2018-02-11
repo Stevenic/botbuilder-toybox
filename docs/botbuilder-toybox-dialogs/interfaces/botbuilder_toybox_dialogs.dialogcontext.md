@@ -68,7 +68,7 @@ ___
 
 **●  dialog**:  *[DialogInstance](botbuilder_toybox_dialogs.dialoginstance.md)`T`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:19](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L19)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:19](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L19)*
 
 
 
@@ -85,7 +85,7 @@ ___
 
 **●  prompts**:  *[PromptSet](../classes/botbuilder_toybox_dialogs.promptset.md)* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L25)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L25)*
 
 
 
@@ -239,7 +239,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:31](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L31)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:31](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L31)*
 
 
 
@@ -273,7 +273,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:39](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L39)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:39](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L39)*
 
 
 
@@ -380,7 +380,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L46)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L46)*
 
 
 
@@ -493,7 +493,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L52)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L52)*
 
 
 
@@ -653,7 +653,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L57)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L57)*
 
 
 

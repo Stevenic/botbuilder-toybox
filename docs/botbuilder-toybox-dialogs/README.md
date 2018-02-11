@@ -36,7 +36,7 @@
 
 **Τ SkipStepFunction**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:19](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L19)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:19](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L19)*
 
 
 
@@ -72,7 +72,7 @@ ___
 
 **Τ WaterfallStep**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/10d3e83/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L14)*
 
 
 
@@ -88,8 +88,8 @@ Function signature of a waterfall step.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | context | [DialogContext](interfaces/botbuilder_toybox_dialogs.dialogcontext.md)`T`   |  The dialog context for the current turn of conversation. |
-| args | `any`   |  (Optional) argument(s) passed into the dialog for the first step and then the results from calling a prompt or other dialog for subsequent steps. |
-| next | [SkipStepFunction](#skipstepfunction)   |  (Optional) function passed into the step to let you manually skip to the next step in the waterfall. |
+| args | `any`   |  Argument(s) passed into the dialog for the first step and then the results from calling a prompt or other dialog for subsequent steps. |
+| next | [SkipStepFunction](#skipstepfunction)   |  Function passed into the step to let you manually skip to the next step in the waterfall. |
 
 
 

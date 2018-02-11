@@ -10,8 +10,8 @@ import { Context } from 'vm';
 /**
  * Function signature of a waterfall step.
  * @param WaterfallStep.context The dialog context for the current turn of conversation.
- * @param WaterfallStep.args (Optional) argument(s) passed into the dialog for the first step and then the results from calling a prompt or other dialog for subsequent steps.
- * @param WaterfallStep.next (Optional) function passed into the step to let you manually skip to the next step in the waterfall.  
+ * @param WaterfallStep.args Argument(s) passed into the dialog for the first step and then the results from calling a prompt or other dialog for subsequent steps.
+ * @param WaterfallStep.next Function passed into the step to let you manually skip to the next step in the waterfall.  
  */
 export type WaterfallStep<T extends Object> = (context: DialogContext<T>, args?: any, next?: SkipStepFunction) => Promiseable<void>;
 
