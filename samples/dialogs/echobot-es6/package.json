@@ -1,0 +1,19 @@
+{
+  "name": "echobot-es6",
+  "version": "1.0.0",
+  "description": "Bot Builder Toubox example showing a simple bot that uses dialogs to echo anything you say.",
+  "main": "./app.js",
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^9.3.0",
+    "@types/restify": "^5.0.7",
+    "botbuilder": "^4.0.0-m1.4",
+    "botbuilder-services": "^4.0.0-m1.2",
+    "botbuilder-toybox-dialogs": "^0.1.0-m1.2",
+    "restify": "6.3.4"
+  }
+}
