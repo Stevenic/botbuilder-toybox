@@ -10,9 +10,9 @@
 
 ### «Optional» prompt
 
-**●  prompt**:  *[Activity]()* 
+**●  prompt**:  *[Partial]()[Activity]()* 
 
-*Defined in packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts:10*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts:10](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts#L10)*
 
 
 
@@ -27,9 +27,9 @@ ___
 
 ### «Optional» retryPrompt
 
-**●  retryPrompt**:  *[Activity]()* 
+**●  retryPrompt**:  *[Partial]()[Activity]()* 
 
-*Defined in packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts:15*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts:15](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts#L15)*
 
 
 

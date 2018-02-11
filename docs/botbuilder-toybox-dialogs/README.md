@@ -6,16 +6,10 @@
 
 ## Index
 
-### Modules
-
-* [__global](modules/botbuilder_toybox_dialogs.__global.md)
-
-
 ### Classes
 
 * [DialogSet](classes/botbuilder_toybox_dialogs.dialogset.md)
-* [NumberPrompt](classes/botbuilder_toybox_dialogs.numberprompt.md)
-* [TextPrompt](classes/botbuilder_toybox_dialogs.textprompt.md)
+* [PromptSet](classes/botbuilder_toybox_dialogs.promptset.md)
 * [Waterfall](classes/botbuilder_toybox_dialogs.waterfall.md)
 
 
@@ -25,7 +19,6 @@
 * [DialogContext](interfaces/botbuilder_toybox_dialogs.dialogcontext.md)
 * [DialogInstance](interfaces/botbuilder_toybox_dialogs.dialoginstance.md)
 * [PromptOptions](interfaces/botbuilder_toybox_dialogs.promptoptions.md)
-* [WaterfallState](interfaces/botbuilder_toybox_dialogs.waterfallstate.md)
 
 
 ### Type aliases
@@ -42,11 +35,14 @@
 
 **Τ WaterfallStep**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:11](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L11)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/waterfall.d.ts#L14)*
 
+
+
+Function signature of a waterfall step.
 
 #### Type declaration
-►(Context: *[DialogContext](interfaces/botbuilder_toybox_dialogs.dialogcontext.md)`T`*, args?: *`any`*, next?: *`undefined`⎮`function`*): [Promiseable]()`void`
+►(context: *[DialogContext](interfaces/botbuilder_toybox_dialogs.dialogcontext.md)`T`*, args?: *`any`*, next?: *`undefined`⎮`function`*): [Promiseable]()`void`
 
 
 
@@ -54,9 +50,9 @@
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| Context | [DialogContext](interfaces/botbuilder_toybox_dialogs.dialogcontext.md)`T`   |  - |
-| args | `any`   |  - |
-| next | `undefined`⎮`function`   |  - |
+| context | [DialogContext](interfaces/botbuilder_toybox_dialogs.dialogcontext.md)`T`   |  The dialog context for the current turn of conversation. |
+| args | `any`   |  (Optional) argument(s) passed into the dialog for the first step and then the results from calling a prompt or other dialog for subsequent steps. |
+| next | `undefined`⎮`function`   |  (Optional) function passed into the step to let you manually skip to the next step in the waterfall. |
 
 
 

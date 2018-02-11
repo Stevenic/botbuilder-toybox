@@ -4,6 +4,9 @@
 
 # Interface: DialogContext
 
+
+Dialog specific extensions to the BotContext object. These extensions are only available from within dialogs added to a `DialogSet`. The extended context object will be automatically revoked once either the `DialogSet.beginDialog()` or `DialogSet.continueDialog()` method completes. Any calls to members of either the DialogContext or base BotContext after that point will result in an exception being raised.
+
 ## Type parameters
 #### T :  `Object`
 ## Hierarchy
@@ -65,8 +68,28 @@ ___
 
 **●  dialog**:  *[DialogInstance](botbuilder_toybox_dialogs.dialoginstance.md)`T`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:7](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L7)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:19](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L19)*
 
+
+
+The "current" dialogs instance data. This is persisted between turns of conversation with the user as part of the `context.state.conversation` object.
+
+
+
+
+___
+
+<a id="prompts"></a>
+
+###  prompts
+
+**●  prompts**:  *[PromptSet](../classes/botbuilder_toybox_dialogs.promptset.md)* 
+
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L25)*
+
+
+
+Collection of prompts that simplify asking the user questions. Prompts are just dialogs and they're typed such that you can ask the user for a specific type of answer and the prompt won't return until the user successfully answers the question.
 
 
 
@@ -216,16 +239,19 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:8](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L8)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:31](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L31)*
 
+
+
+Starts a new dialog by pushing it onto the dialog stack.
 
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| dialogId | `string`   |  - |
-| dialogArgs | `any`   |  - |
+| dialogId | `string`   |  ID of the dialog to start. |
+| dialogArgs | `any`   |  (Optional) additional argument(s) to pass to the dialog being started. |
 
 
 
@@ -247,17 +273,20 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:9](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L9)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:39](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L39)*
 
+
+
+Cancels or replaces a dialog with the given ID. The dialog stack will be searched top-down and any dialogs after the target dialog will also be cancelled.
 
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| dialogId | `string`   |  - |
-| replaceWithId | `undefined`⎮`string`   |  - |
-| replaceWithArgs | `any`   |  - |
+| dialogId | `string`   |  ID of the dialog to cancel. |
+| replaceWithId | `undefined`⎮`string`   |  (Optional) ID of a new dialog to start in the cancelled dialogs place. |
+| replaceWithArgs | `any`   |  (Optional) additional argument(s) to pass the replacement dialog. |
 
 
 
@@ -347,41 +376,22 @@ ___
 
 ###  endDialog
 
-► **endDialog**(): `Promise`.<`void`>
+► **endDialog**(result?: *`any`*): `Promise`.<`void`>
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:10](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L10)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L46)*
 
 
 
-
-
-**Returns:** `Promise`.<`void`>
-
-
-
-
-
-___
-
-<a id="enddialogwithresult"></a>
-
-###  endDialogWithResult
-
-► **endDialogWithResult**(result: *`any`*): `Promise`.<`void`>
-
-
-
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:11](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L11)*
-
+Ends the current dialog and returns control to the dialog that started it. If the dialog is the only dialog on the stack, the `DialogSet.beginDialog()` or `DialogSet.continueDialog()` call will complete.
 
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| result | `any`   |  - |
+| result | `any`   |  (Optional) result to return to the calling dialog. |
 
 
 
@@ -483,16 +493,19 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L52)*
 
+
+
+Ends the current dialog and starts a new dialog in its place.
 
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| dialogId | `string`   |  - |
-| dialogArgs | `any`   |  - |
+| dialogId | `string`   |  ID of the new dialog to start. |
+| dialogArgs | `any`   |  (Optional) additional argument(s) to pass to the new dialog. |
 
 
 
@@ -640,8 +653,11 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:13](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L13)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogContext.d.ts#L57)*
 
+
+
+INTERNAL and called when the dialog context goes out of scope. Once called the context will no longer be usable and calling any of its methods will result in an exception.
 
 
 

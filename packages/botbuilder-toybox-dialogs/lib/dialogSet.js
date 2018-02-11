@@ -2,11 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const waterfall_1 = require("./waterfall");
 const promptSet_1 = require("./prompts/promptSet");
+/**
+ * A related set of dialogs that can all call each other.
+ */
 class DialogSet {
+    /**
+     * Creates an empty dialog set.
+     * @param stackName (Optional) name of the field to store the dialog stack in off the bots conversation state object. This defaults to 'dialogStack'.
+     */
     constructor(stackName) {
         this.dialogs = {};
         this.stackName = stackName || 'dialogStack';
     }
+    /**
+     * Adds a new dialog to the set.
+     * @param dialogId Unique ID of the dialog within the set.
+     * @param dialogOrSteps Either a new dialog or an array of waterfall steps to execute. If waterfall steps are passed in they will automatically be passed into an new instance of a `Waterfall` class.
+     */
     add(dialogId, dialogOrSteps) {
         if (this.dialogs.hasOwnProperty(dialogId)) {
             throw new Error(`DialogSet.add(): A dialog with an id of '${dialogId}' already added.`);
@@ -14,13 +26,20 @@ class DialogSet {
         this.dialogs[dialogId] = Array.isArray(dialogOrSteps) ? new waterfall_1.Waterfall(dialogOrSteps) : dialogOrSteps;
         return this;
     }
+    /**
+     * Starts a new dialog at the root of the dialog stack. This will immediately cancel any dialogs
+     * that are currently on the stack.
+     * @param context Context object for the current turn of conversation with the user. This will get mapped into a `DialogContext` and passed to the dialog started.
+     * @param dialogId ID of the dialog to start.
+     * @param dialogArgs (Optional) additional argument(s) to pass to the dialog being started.
+     */
     beginDialog(context, dialogId, dialogArgs) {
         try {
             // Cancel any current dialogs
             const state = conversationState(context, 'DialogSet.beginDialog()');
             state[this.stackName] = [];
             // Create new dialog context and start dialog
-            const dc = this.createDialogContext(context);
+            const dc = this.toDialogContext(context);
             return dc.beginDialog(dialogId, dialogArgs)
                 .then(() => {
                 // Revoke dialog context
@@ -31,11 +50,20 @@ class DialogSet {
             return Promise.reject(err);
         }
     }
+    /**
+     * Deletes any existing dialog stack, cancelling any dialogs on the stack.
+     * @param context Context object for the current turn of conversation with the user.
+     */
     cancelAll(context) {
         // Cancel any current dialogs
         const state = conversationState(context, 'DialogSet.cancelAll()');
         state[this.stackName] = [];
     }
+    /**
+     * Continues execution of the [current dialog](#currentdialog), if there is one, by passing the
+     * context object to its `Dialog.continueDialog()` method.
+     * @param context Context object for the current turn of conversation with the user. This will get mapped into a `DialogContext` and passed to the dialog started.
+     */
     continueDialog(context) {
         try {
             // Get current dialog instance
@@ -47,7 +75,7 @@ class DialogSet {
                     throw new Error(`DialogSet.continueDialog(): Can't continue dialog. A dialog with an id of '${instance.id}' wasn't found.`);
                 }
                 // Create new dialog context
-                const dc = this.createDialogContext(context);
+                const dc = this.toDialogContext(context);
                 if (dialog.continueDialog) {
                     // Continue execution of dialog
                     return Promise.resolve(dialog.continueDialog(dc))
@@ -67,14 +95,31 @@ class DialogSet {
             return Promise.reject(err);
         }
     }
-    createDialogContext(context) {
+    /**
+     * Maps an instance of the `BotContext` to a `DialogContext` with extensions for working
+     * with dialogs in the set. Access to the extended object can be revoked by calling
+     * `context.revoke()`.
+     * @param context Context object for the current turn of conversation with the user.
+     */
+    toDialogContext(context) {
         return createDialogContext(this, context, this.stackName);
     }
+    /**
+     * Looks up and returns the dialog instance data for the "current" dialog that's on the top of
+     * the stack.
+     * @param context Context object for the current turn of conversation with the user.
+     */
     currentDialog(context) {
         const state = context.state.conversation || {};
         const stack = state[this.stackName] || [];
         return stack.length > 0 ? stack[stack.length - 1] : undefined;
     }
+    /**
+     * Looks up to see if a dialog with the given ID has been registered with the set. If not an
+     * attempt will be made to look up the dialog as a prompt. If the dialog still can't be found,
+     * then `undefined` will be returned.
+     * @param dialogId ID of the dialog/prompt to lookup.
+     */
     findDialog(dialogId) {
         if (this.dialogs.hasOwnProperty(dialogId)) {
             return this.dialogs[dialogId];

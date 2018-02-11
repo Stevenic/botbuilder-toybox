@@ -36,8 +36,7 @@ export interface Dialog<T extends Object = {}> {
     /**
      * Method called when a new dialog has been pushed onto the stack and is being activated.
      * @param context The dialog context for the current turn of conversation.
-     * @param args (Optional) arguments that were passed to the dialog during `beginDialog()` call
-     * that started the instance.
+     * @param args (Optional) arguments that were passed to the dialog during `beginDialog()` call that started the instance.
      */
     beginDialog(context: DialogContext<T>, args?: any): Promiseable<void>;
     /**
@@ -58,8 +57,7 @@ export interface Dialog<T extends Object = {}> {
      * to `context.endDialogWithResult()`. Any result passed from teh called dialog will be passed
      * to the current dialogs parent.
      * @param context The dialog context for the current turn of conversation.
-     * @param result (Optional) value returned from the dialog that was called. The type of the
-     * value returned is dependant on the dialog that was called.
+     * @param result (Optional) value returned from the dialog that was called. The type of the value returned is dependant on the dialog that was called.
      */
     resumeDialog?(context: DialogContext<T>, result?: any): Promiseable<void>;
 }

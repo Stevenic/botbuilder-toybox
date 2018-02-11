@@ -18,18 +18,11 @@ class PromptSet {
     /**
      * Prompts the user to select an option from a list of choices. The calling dialog will be
      * resumed with a result of type `FindChoice`.
-     * @param prompt Prompt to send the user. If this is an `Activity` the prompt will be sent to
-     * the user unmodified. If, however, it is a `string` then the prompt text will be combined with
-     * the list of choices passed in to create the activity sent to the user.
+     * @param prompt Prompt to send the user. If this is an `Activity` the prompt will be sent to the user unmodified. If, however, it is a `string` then the prompt text will be combined with the list of choices passed in to create the activity sent to the user.
      *
-     * The activity will be generated using `ChoiceStyler.fromChannel()` which automatically selects
-     * the style to use based upon the capabilities of the channel. If you'd like to force a particular
-     * style then it's recommended you use the ChoiceStyler directly to generate the prompt passed in.
-     * @param choices List of choices to recognize against and optionally generate the users prompt.
-     * The users reply will be matched against the choices using a fuzzy match.
-     * @param retryPrompt (Optional) prompt to send the user if their initial reply isn't recognized.
-     * Just like the `prompt` argument. If this is a `string` it will be combined with the list of
-     * choices to generate the activity sent to the user.
+     * The activity will be generated using `ChoiceStyler.fromChannel()` which automatically selects the style to use based upon the capabilities of the channel. If you'd like to force a particular style then it's recommended you use the ChoiceStyler directly to generate the prompt passed in.
+     * @param choices List of choices to recognize against and optionally generate the users prompt. The users reply will be matched against the choices using a fuzzy match.
+     * @param retryPrompt (Optional) prompt to send the user if their initial reply isn't recognized. Just like the `prompt` argument. If this is a `string` it will be combined with the list of choices to generate the activity sent to the user.
      */
     choice(prompt, choices, retryPrompt) {
         const o = { choices: choices };

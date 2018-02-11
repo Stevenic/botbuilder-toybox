@@ -5,7 +5,7 @@
 # Interface: DialogInstance
 
 
-Licensed under the MIT License.
+Tracking information for a dialog on the stack.
 
 ## Type parameters
 #### T :  `Object`
@@ -17,7 +17,7 @@ Licensed under the MIT License.
 
 **●  id**:  *`string`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts:7](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts#L7)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts:10](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts#L10)*
 
 
 
@@ -34,7 +34,7 @@ ___
 
 **●  state**:  *`T`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts:9](https://github.com/Stevenic/botbuilder-toybox/blob/57c768f/packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts#L9)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts#L12)*
 
 
 
