@@ -1,7 +1,7 @@
 {
-  "name": "alarmbot-ts",
+  "name": "prompts-ts",
   "version": "1.0.0",
-  "description": "Bot Builder v4 example showing a simple alarm bot",
+  "description": "Bot Builder Toybox example showing the various prompts supported by dialogs.",
   "main": "./lib/app.js",
   "scripts": {
     "build-sample": "tsc",

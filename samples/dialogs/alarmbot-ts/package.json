@@ -1,7 +1,7 @@
 {
-  "name": "dialog-prompts-ts",
+  "name": "alarmbot-ts",
   "version": "1.0.0",
-  "description": "Bot Builder Toybox example showing the various prompts supported by dialogs.",
+  "description": "Bot Builder Toybox example showing the use of dialogs to build a simple alarm bot",
   "main": "./lib/app.js",
   "scripts": {
     "build-sample": "tsc",

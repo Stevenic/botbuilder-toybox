@@ -49,9 +49,9 @@ const bot = new Bot(adapter)
 
             } else {
                 // Continue the current dialog
-                return dialogs.continueDialog(context).then((handled) => {
-                    // Return default message if no active dialog.
-                    if (!handled) {
+                return dialogs.continueDialog(context).then(() => {
+                    // Return default message if nothing replied.
+                    if (!context.responded) {
                         context.reply(`Hi! I'm a simple alarm bot. Say "add alarm", "delete alarm", or "show alarms".`)
                     }
                 });

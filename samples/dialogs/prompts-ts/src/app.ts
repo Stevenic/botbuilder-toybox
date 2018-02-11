@@ -30,9 +30,9 @@ const bot = new Bot(adapter)
             if (utterance === 'menu' || utterance === 'cancel') { dialogs.cancelAll(context) }
 
             // Continue the current dialog
-            return dialogs.continueDialog(context).then((handled) => {
-                // Show menu if no active dialog.
-                if (!handled) {
+            return dialogs.continueDialog(context).then(() => {
+                // Show menu if no response queued.
+                if (!context.responded) {
                     return dialogs.beginDialog(context, 'mainMenu');
                 }
             });
