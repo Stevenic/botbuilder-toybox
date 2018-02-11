@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const waterfall_1 = require("./waterfall");
-const index_1 = require("./prompts/index");
+const promptSet_1 = require("./prompts/promptSet");
 class DialogSet {
     constructor(stackName) {
         this.dialogs = {};
@@ -80,7 +80,7 @@ class DialogSet {
             return this.dialogs[dialogId];
         }
         else {
-            return index_1.PromptSet.findPromptDialog(dialogId);
+            return promptSet_1.PromptSet.findPromptDialog(dialogId);
         }
     }
 }
@@ -198,7 +198,7 @@ function createDialogContext(dialogs, context, stackName) {
     let prompts;
     function getPrompts() {
         if (!prompts) {
-            prompts = new index_1.PromptSet(revocable.proxy);
+            prompts = new promptSet_1.PromptSet(revocable.proxy);
         }
         return prompts;
     }

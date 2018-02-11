@@ -7,7 +7,7 @@ export * from './dialogContext';
 export * from './dialogSet';
 export * from './dialogStack';
 export * from './waterfall';
-export * from './prompts/index';
+export * from './prompts/promptSet';
 
 import { Activity } from 'botbuilder';
 import { DialogInstance } from './dialogStack';

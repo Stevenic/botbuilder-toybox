@@ -6,7 +6,7 @@ import { Dialog } from './dialog';
 import { DialogInstance } from './dialogStack';
 import { Waterfall, WaterfallStep } from './waterfall';
 import { DialogContext } from './dialogContext';
-import { PromptSet } from './prompts/index';
+import { PromptSet } from './prompts/promptSet';
 
 export class DialogSet {
     private readonly stackName: string;

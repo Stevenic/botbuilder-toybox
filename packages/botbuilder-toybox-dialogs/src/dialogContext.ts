@@ -3,13 +3,13 @@
  */
 /** Licensed under the MIT License. */
 import { DialogInstance } from './dialogStack';
-import { PromptSet } from './prompts/index';
+import { PromptSet } from './prompts/promptSet';
 
 /**
  * Dialog specific extensions to the BotContext object. These extensions are only available from 
  * within dialogs added to a `DialogSet`. The extended context object will be automatically revoked 
  * once either the `DialogSet.beginDialog()` or `DialogSet.continueDialog()` method completes.
- * Any calls to members of either the DialogContext or base BotCotext after that point will result
+ * Any calls to members of either the DialogContext or base BotContext after that point will result
  * in an exception being raised.
  */
 export interface DialogContext<T extends Object = {}> extends BotContext {
