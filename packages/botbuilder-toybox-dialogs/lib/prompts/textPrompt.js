@@ -9,7 +9,7 @@ class TextPrompt {
     }
     continueDialog(context) {
         const utterance = context.request && context.request.text ? context.request.text : '';
-        return context.endDialogWithResult(utterance);
+        return context.endDialog(utterance);
     }
 }
 TextPrompt.dialogId = 'prompt:text';

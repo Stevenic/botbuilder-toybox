@@ -17,7 +17,7 @@ class ConfirmPrompt {
         if (results.length > 0) {
             // Return recognized value
             const value = results[0].resolution.value;
-            return context.endDialogWithResult(value);
+            return context.endDialog(value);
         }
         else if (state.retryPrompt) {
             // Send retry prompt

@@ -15,7 +15,7 @@ class ChoicePrompt {
         const results = botbuilder_choices_1.recognizeChoices(utterance, state.choices);
         if (results.length > 0) {
             // Return recognized value
-            return context.endDialogWithResult(results[0].resolution);
+            return context.endDialog(results[0].resolution);
         }
         else if (state.retryPrompt) {
             // Send retry prompt

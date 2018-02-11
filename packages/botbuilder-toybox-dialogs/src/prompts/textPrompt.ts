@@ -16,6 +16,6 @@ export class TextPrompt implements Dialog {
 
     public continueDialog(context: DialogContext<any>): Promise<void> {
         const utterance = context.request && context.request.text ? context.request.text : '';
-        return context.endDialogWithResult(utterance);
+        return context.endDialog(utterance);
     }
 }

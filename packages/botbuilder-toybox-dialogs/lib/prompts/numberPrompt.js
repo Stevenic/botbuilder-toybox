@@ -17,7 +17,7 @@ class NumberPrompt {
         if (results.length > 0) {
             // Return recognized number
             const value = parseInt(results[0].resolution.value);
-            return context.endDialogWithResult(value);
+            return context.endDialog(value);
         }
         else if (state.retryPrompt) {
             // Send retry prompt

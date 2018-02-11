@@ -140,7 +140,7 @@ function createDialogContext(dialogs: DialogSet, context: BotContext, stackName:
                     return Promise.resolve(dialog.resumeDialog(revocable.proxy, undefined));
                 } else {
                     // Just end that dialog
-                    return endDialogWithResult(undefined);
+                    return endDialog(undefined);
                 }
             } else {
                 return Promise.resolve();
@@ -150,14 +150,9 @@ function createDialogContext(dialogs: DialogSet, context: BotContext, stackName:
         }
     }
 
-    function endDialog(): Promise<void> {
-        conversationState(context, 'DialogContext.endDialog()'); 
-        return endDialogWithResult(undefined);
-    }
-
-    function endDialogWithResult(result: any): Promise<void> {
+    function endDialog(result?: any): Promise<void> {
         try {
-            const state = conversationState(context, 'DialogContext.endDialogWithResult()');
+            const state = conversationState(context, 'DialogContext.endDialog()');
             const stack = state[stackName] || [];
             if (stack.length > 1) {
                 // End current dialog and resume parent 
@@ -170,7 +165,7 @@ function createDialogContext(dialogs: DialogSet, context: BotContext, stackName:
                     return Promise.resolve(dialog.resumeDialog(revocable.proxy, result));
                 } else {
                     // Just end that dialog and pass result to parent
-                    return endDialogWithResult(result);
+                    return endDialog(result);
                 }
             } else if (state.hasOwnProperty(stackName)) {
                 delete state[stackName];
@@ -222,8 +217,6 @@ function createDialogContext(dialogs: DialogSet, context: BotContext, stackName:
                     return cancelDialog;
                 case 'endDialog':
                     return endDialog;
-                case 'endDialogWithResult':
-                    return endDialogWithResult;
                 case 'replaceDialog':
                     return replaceDialog;
                 case 'revoke':

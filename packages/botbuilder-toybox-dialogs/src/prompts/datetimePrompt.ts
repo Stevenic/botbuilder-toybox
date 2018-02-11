@@ -25,7 +25,7 @@ export class DatetimePrompt implements Dialog {
         const results = dateTimeModel.parse(utterance);
         if (results.length > 0) {
             // Return recognized value(s)
-            return context.endDialogWithResult(results[0].resolution.values);
+            return context.endDialog(results[0].resolution.values);
         } else if (state.retryPrompt) {
             // Send retry prompt
             context.responses.push(state.retryPrompt);
