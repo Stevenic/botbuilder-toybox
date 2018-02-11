@@ -33,7 +33,7 @@ When the dialog is the "current" dialog it can call `context.beginDialog()` to t
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialog.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialog.d.ts#L41)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialog.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialog.d.ts#L41)*
 
 
 
@@ -67,7 +67,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialog.d.ts:51](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialog.d.ts#L51)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialog.d.ts:51](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialog.d.ts#L51)*
 
 
 
@@ -102,7 +102,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialog.d.ts:62](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialog.d.ts#L62)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialog.d.ts:62](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialog.d.ts#L62)*
 
 
 

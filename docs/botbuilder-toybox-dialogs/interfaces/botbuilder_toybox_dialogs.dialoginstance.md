@@ -17,7 +17,7 @@ Tracking information for a dialog on the stack.
 
 **●  id**:  *`string`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts:10](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts#L10)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts:10](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts#L10)*
 
 
 
@@ -34,7 +34,7 @@ ___
 
 **●  state**:  *`T`* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogStack.d.ts#L12)*
 
 
 

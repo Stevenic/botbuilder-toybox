@@ -34,7 +34,7 @@ A related set of dialogs that can all call each other.
 ### ⊕ **new DialogSet**(stackName?: *`undefined`⎮`string`*): [DialogSet](botbuilder_toybox_dialogs.dialogset.md)
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L14)*
 
 
 
@@ -65,7 +65,7 @@ Creates an empty dialog set.
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L25)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L25)*
 
 
 
@@ -102,7 +102,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:33](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L33)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:33](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L33)*
 
 
 
@@ -137,7 +137,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:38](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L38)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:38](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L38)*
 
 
 
@@ -170,7 +170,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:44](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L44)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:44](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L44)*
 
 
 
@@ -203,7 +203,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L57)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L57)*
 
 
 
@@ -236,7 +236,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:64](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L64)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:64](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L64)*
 
 
 
@@ -272,7 +272,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:51](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L51)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts:51](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/dialogSet.d.ts#L51)*
 
 
 

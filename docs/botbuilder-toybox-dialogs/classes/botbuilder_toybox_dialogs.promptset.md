@@ -34,7 +34,7 @@ Collection of builtin prompts.
 ### ⊕ **new PromptSet**(context: *[DialogContext](../interfaces/botbuilder_toybox_dialogs.dialogcontext.md)*): [PromptSet](botbuilder_toybox_dialogs.promptset.md)
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L12)*
 
 
 
@@ -65,7 +65,7 @@ INTERNAL creates a new instance of the set.
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:27](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L27)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:27](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L27)*
 
 
 
@@ -100,7 +100,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:34](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L34)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:34](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L34)*
 
 
 
@@ -134,7 +134,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L41)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L41)*
 
 
 
@@ -168,7 +168,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:48](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L48)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:48](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L48)*
 
 
 
@@ -202,7 +202,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:54](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L54)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:54](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L54)*
 
 
 
@@ -235,7 +235,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:60](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L60)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:60](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L60)*
 
 
 
@@ -269,7 +269,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:65](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L65)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts:65](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/promptSet.d.ts#L65)*
 
 
 

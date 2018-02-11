@@ -12,7 +12,7 @@
 
 **●  prompt**:  *[Partial]()[Activity]()* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts:10](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts#L10)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts:10](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts#L10)*
 
 
 
@@ -29,7 +29,7 @@ ___
 
 **●  retryPrompt**:  *[Partial]()[Activity]()* 
 
-*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts:15](https://github.com/Stevenic/botbuilder-toybox/blob/ef10ea3/packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts#L15)*
+*Defined in [packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts:15](https://github.com/Stevenic/botbuilder-toybox/blob/d4a3180/packages/botbuilder-toybox-dialogs/lib/prompts/prompt.d.ts#L15)*
 
 
 

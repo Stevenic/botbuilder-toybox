@@ -13,7 +13,13 @@ import { Context } from 'vm';
  * @param WaterfallStep.args (Optional) argument(s) passed into the dialog for the first step and then the results from calling a prompt or other dialog for subsequent steps.
  * @param WaterfallStep.next (Optional) function passed into the step to let you manually skip to the next step in the waterfall.  
  */
-export type WaterfallStep<T extends Object> = (context: DialogContext<T>, args?: any, next?: (args?: any) => Promise<void>) => Promiseable<void>;
+export type WaterfallStep<T extends Object> = (context: DialogContext<T>, args?: any, next?: SkipStepFunction) => Promiseable<void>;
+
+/**
+ * When called, control will skip to the next waterfall step.
+ * @param SkipStepFunction.args (Optional) additional argument(s) to pass into the next step.
+ */
+export type SkipStepFunction = (args?: any) => Promise<void>;
 
 /**
  * Dialog optimized for prompting a user with a series of questions. Waterfalls accept a stack of
