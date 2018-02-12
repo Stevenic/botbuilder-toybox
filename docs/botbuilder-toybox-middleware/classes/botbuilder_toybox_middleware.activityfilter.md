@@ -44,10 +44,10 @@ You can also use an activity filter to greet a user as they join a conversation:
 <a id="constructor"></a>
 
 
-### ⊕ **new ActivityFilter**(type: *`string`*, handler: *`function`*): [ActivityFilter](botbuilder_toybox_middleware.activityfilter.md)
+### ⊕ **new ActivityFilter**(type: *`string`*, handler: *[ActivityFilterHandler](../#activityfilterhandler)*): [ActivityFilter](botbuilder_toybox_middleware.activityfilter.md)
 
 
-*Defined in packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:31*
+*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:38](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L38)*
 
 
 
@@ -59,7 +59,7 @@ Creates a new instance of an ActivityFilter.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | type | `string`   |  Type of activity to trigger on. |
-| handler | `function`   |  Function that will be called anytime an activity of the specified type is received. Simply avoid calling `next()` to prevent the activity from being further routed. |
+| handler | [ActivityFilterHandler](../#activityfilterhandler)   |  Function that will be called anytime an activity of the specified type is received. Simply avoid calling `next()` to prevent the activity from being further routed. |
 
 
 
@@ -79,7 +79,7 @@ Creates a new instance of an ActivityFilter.
 
 
 
-*Defined in packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:38*
+*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L45)*
 
 
 

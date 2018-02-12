@@ -1,13 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @module botbuilder-toybox-middleware
- */
-/** Licensed under the MIT License. */
-const botbuilder_1 = require("botbuilder");
-botbuilder_1.ActivityTypes.contactRelationUpdate;
-botbuilder_1.ActivityTypes.conversationUpdate;
-/**
  * This middleware lets you easily filter out activity types your bot doesn't care about. For
  * example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
  *

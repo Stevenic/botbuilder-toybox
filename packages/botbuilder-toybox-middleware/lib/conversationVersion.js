@@ -24,12 +24,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 class ConversationVersion {
     /**
-     * Creates a new instance of a CoversationVersion.
+     * Creates a new instance of the CoversationVersion.
      * @param version Latest version number in major.minor form.
-     * @param handler Function that will be called anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number.
-     * @param handler.context Context object for the current turn of conversation.
-     * @param handler.version Current conversations version number.
-     * @param handler.next Function that should be called to continue execution to the next piece of middleware. Calling `next()` will first update the conversations version number to match the latest version and then call the next piece of middleware.
+     * @param handler Handler that will be invoked anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number.
      * @param settings (Optional) settings to customize the middleware.
      */
     constructor(version, handler, settings) {

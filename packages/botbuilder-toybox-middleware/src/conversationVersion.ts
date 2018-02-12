@@ -16,6 +16,15 @@ export interface ConversationVersionSettings {
 }
 
 /**
+ * Handler that will be called anytime the version number for the current conversation doesn't match
+ * the latest version.
+ * @param ConversationVersionHandler.context Context object for the current turn of conversation.
+ * @param ConversationVersionHandler.version Current conversations version number.
+ * @param ConversationVersionHandler.next Function that should be called to continue execution to the next piece of middleware. Calling `next()` will first update the conversations version number to match the latest version and then call the next piece of middleware.
+ */
+export type ConversationVersionHandler = (context: BotContext, version: number, next: () => Promise<void>) => Promise<void>;
+
+/**
  * Deploying new versions of your bot more often then not should have little
  * to no impact on the current conversations you're having with a user. Sometimes, however, a change 
  * to your bots conversation logic can result in the user getting into a stuck state that can only be 
@@ -41,15 +50,12 @@ export class ConversationVersion implements Middleware {
     private readonly settings: ConversationVersionSettings;
 
     /**
-     * Creates a new instance of a CoversationVersion.
+     * Creates a new instance of the CoversationVersion.
      * @param version Latest version number in major.minor form.
-     * @param handler Function that will be called anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number. 
-     * @param handler.context Context object for the current turn of conversation.
-     * @param handler.version Current conversations version number.
-     * @param handler.next Function that should be called to continue execution to the next piece of middleware. Calling `next()` will first update the conversations version number to match the latest version and then call the next piece of middleware.
+     * @param handler Handler that will be invoked anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number. 
      * @param settings (Optional) settings to customize the middleware.
      */
-    constructor(private version: number, private handler: (context: BotContext, version: number, next: () => Promise<void>) => Promise<void>, settings?: Partial<ConversationVersionSettings>) {
+    constructor(private version: number, private handler: ConversationVersionHandler, settings?: Partial<ConversationVersionSettings>) {
         this.settings = Object.assign({
             conversationVersionProperty: 'conversationVersion'
         } as ConversationVersionSettings, settings)

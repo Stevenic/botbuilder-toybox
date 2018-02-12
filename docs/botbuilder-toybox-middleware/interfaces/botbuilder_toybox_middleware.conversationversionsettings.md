@@ -15,7 +15,7 @@
 
 **●  conversationVersionProperty**:  *`string`* 
 
-*Defined in packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:14*
+*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L14)*
 
 
 

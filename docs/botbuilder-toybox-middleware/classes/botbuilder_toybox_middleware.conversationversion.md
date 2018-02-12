@@ -41,14 +41,14 @@ This middleware lets you track a version number for the conversations your bot i
 <a id="constructor"></a>
 
 
-### ⊕ **new ConversationVersion**(version: *`number`*, handler: *`function`*, settings?: *[Partial]()[ConversationVersionSettings](../interfaces/botbuilder_toybox_middleware.conversationversionsettings.md)*): [ConversationVersion](botbuilder_toybox_middleware.conversationversion.md)
+### ⊕ **new ConversationVersion**(version: *`number`*, handler: *[ConversationVersionHandler](../#conversationversionhandler)*, settings?: *[Partial]()[ConversationVersionSettings](../interfaces/botbuilder_toybox_middleware.conversationversionsettings.md)*): [ConversationVersion](botbuilder_toybox_middleware.conversationversion.md)
 
 
-*Defined in packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:41*
+*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L49)*
 
 
 
-Creates a new instance of a CoversationVersion.
+Creates a new instance of the CoversationVersion.
 
 
 **Parameters:**
@@ -56,7 +56,7 @@ Creates a new instance of a CoversationVersion.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | version | `number`   |  Latest version number in major.minor form. |
-| handler | `function`   |  Function that will be called anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number. |
+| handler | [ConversationVersionHandler](../#conversationversionhandler)   |  Handler that will be invoked anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number. |
 | settings | [Partial]()[ConversationVersionSettings](../interfaces/botbuilder_toybox_middleware.conversationversionsettings.md)   |  (Optional) settings to customize the middleware. |
 
 
@@ -77,7 +77,7 @@ Creates a new instance of a CoversationVersion.
 
 
 
-*Defined in packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:52*
+*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L57)*
 
 
 
