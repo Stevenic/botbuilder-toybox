@@ -39,7 +39,12 @@ class PromptSet {
      * @param retryPrompt (Optional) prompt to send the user if their initial reply isn't recognized.
      */
     confirm(prompt, retryPrompt) {
-        const o = formatOptions(prompt, retryPrompt);
+        const choices = ['yes', 'no'];
+        const o = {};
+        o.prompt = formatChoicePrompt(this.context, prompt, choices);
+        if (retryPrompt) {
+            o.retryPrompt = formatChoicePrompt(this.context, retryPrompt, choices);
+        }
         return this.context.beginDialog(confirmPrompt_1.ConfirmPrompt.dialogId, o);
     }
     /**
