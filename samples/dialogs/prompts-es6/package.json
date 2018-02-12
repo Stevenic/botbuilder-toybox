@@ -1,7 +1,7 @@
 {
-  "name": "alarmbot-es6",
+  "name": "prompts-es6",
   "version": "1.0.0",
-  "description": "Bot Builder Toybox example showing the use of dialogs to build a simple alarm bot",
+  "description": "Bot Builder Toybox example showing the various prompts supported by dialogs.",
   "main": "./app.js",
   "scripts": {
     "start": "node ./app.js"

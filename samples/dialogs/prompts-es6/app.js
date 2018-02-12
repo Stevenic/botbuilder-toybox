@@ -1,8 +1,7 @@
-import { Bot, MemoryStorage, BotStateManager } from 'botbuilder';
-import { BotFrameworkAdapter } from 'botbuilder-services';
-import { DialogSet, DialogContext } from 'botbuilder-toybox-dialogs';
-import { FoundChoice, Choice } from 'botbuilder-choices';
-import * as restify from 'restify';
+const { Bot, MemoryStorage, BotStateManager } = require('botbuilder');
+const { BotFrameworkAdapter } = require('botbuilder-services');
+const { DialogSet, DialogContext } = require('botbuilder-toybox-dialogs');
+const restify = require('restify');
 
 // Create server
 let server = restify.createServer();
@@ -15,7 +14,7 @@ const adapter = new BotFrameworkAdapter({
     appId: process.env.MICROSOFT_APP_ID, 
     appPassword: process.env.MICROSOFT_APP_PASSWORD 
 });
-server.post('/api/messages', <any>adapter.listen());
+server.post('/api/messages', adapter.listen());
 
 const dialogs = new DialogSet();
 
@@ -41,7 +40,7 @@ const bot = new Bot(adapter)
 
 dialogs.add('mainMenu', [
     function (context) {
-        function choice(title: string, value: string): Choice {
+        function choice(title, value) {
             return {
                 value: value,
                 action: { type: 'imBack', title: title, value: title }
@@ -56,7 +55,7 @@ dialogs.add('mainMenu', [
             choice('<all>', 'runAll')
         ]);
     },
-    function (context, choice: FoundChoice) {
+    function (context, choice) {
         if (choice.value === 'runAll') {
             return context.replaceDialog(choice.value);
         } else {
@@ -70,7 +69,7 @@ dialogs.add('choicePrompt', [
     function (context) {
         return context.prompts.choice(`choice: select a color`, ['red', 'green', 'blue']);
     },
-    function (context, choice: FoundChoice) {
+    function (context, choice) {
         return context.reply(`Recognized choice: ${JSON.stringify(choice)}`).endDialog();
     }
 ]);
@@ -80,7 +79,7 @@ dialogs.add('confirmPrompt', [
     function (context) {
         return context.prompts.confirm(`confirm: answer "yes" or "no"`);
     },
-    function (context, value: boolean) {
+    function (context, value) {
         return context.reply(`Recognized value: ${value}`).endDialog();
     }
 ]);
@@ -89,7 +88,7 @@ dialogs.add('datetimePrompt', [
     function (context) {
         return context.prompts.datetime(`datetime: enter a datetime`);
     },
-    function (context, values: any[]) {
+    function (context, values) {
         return context.reply(`Recognized values: ${JSON.stringify(values)}`).endDialog();
     }
 ]);
@@ -98,7 +97,7 @@ dialogs.add('numberPrompt', [
     function (context) {
         return context.prompts.number(`number: enter a number`);
     },
-    function (context, value: number) {
+    function (context, value) {
         return context.reply(`Recognized value: ${value}`).endDialog();
     }
 ]);
@@ -107,13 +106,13 @@ dialogs.add('textPrompt', [
     function (context) {
         return context.prompts.text(`text: enter some text`);
     },
-    function (context, value: string) {
+    function (context, value) {
         return context.reply(`Recognized value: ${value}`).endDialog();
     }
 ]);
 
 dialogs.add('loop', [
-    function (context: DialogContext<LoopArgs>, args: LoopArgs) {
+    function (context, args) {
         context.dialog.state = Object.assign({}, args);
         return context.beginDialog(args.dialogId);
     },
@@ -142,7 +141,3 @@ dialogs.add('runAll', [
         return context.replaceDialog('mainMenu');
     }
 ]);
-
-interface LoopArgs {
-    dialogId: string;
-}

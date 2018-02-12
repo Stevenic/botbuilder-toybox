@@ -128,7 +128,7 @@ dialogs.add('runAll', [
     function (context) {
         return context.beginDialog('textPrompt');
     },
-    function (context, value) {
+    function (context) {
         return context.replaceDialog('mainMenu');
     }
 ]);
