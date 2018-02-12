@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, ActivityTypes } from 'botbuilder';
+import { Middleware } from 'botbuilder';
 
 /**
  * Function that will be called anytime an activity of the specified type is received. Simply avoid 
@@ -38,7 +38,7 @@ export type ActivityFilterHandler = (context: BotContext, next: () => Promise<vo
  */
 export class ActivityFilter implements Middleware {
     /**
-     * Creates a new instance of an ActivityFilter.
+     * Creates a new instance of an `ActivityFilter` middleware.
      * @param type Type of activity to trigger on.
      * @param handler Function that will be called anytime an activity of the specified type is received. Simply avoid calling `next()` to prevent the activity from being further routed.
      */
@@ -48,7 +48,7 @@ export class ActivityFilter implements Middleware {
         // Call handler if filter matched
         if (context.request && context.request.type === this.type) {
             try {
-                return Promise.resolve(this.handler(context, next));
+                return this.handler(context, next);
             } catch (err) {
                 return Promise.reject(err);
             }

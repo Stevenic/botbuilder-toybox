@@ -37,7 +37,7 @@ export declare class ActivityFilter implements Middleware {
     private type;
     private handler;
     /**
-     * Creates a new instance of an ActivityFilter.
+     * Creates a new instance of an `ActivityFilter` middleware.
      * @param type Type of activity to trigger on.
      * @param handler Function that will be called anytime an activity of the specified type is received. Simply avoid calling `next()` to prevent the activity from being further routed.
      */

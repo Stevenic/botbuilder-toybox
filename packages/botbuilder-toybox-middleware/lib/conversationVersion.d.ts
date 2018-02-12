@@ -48,7 +48,7 @@ export declare class ConversationVersion implements Middleware {
     private handler;
     private readonly settings;
     /**
-     * Creates a new instance of the CoversationVersion.
+     * Creates a new instance of `CoversationVersion` middleware.
      * @param version Latest version number in major.minor form.
      * @param handler Handler that will be invoked anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number.
      * @param settings (Optional) settings to customize the middleware.

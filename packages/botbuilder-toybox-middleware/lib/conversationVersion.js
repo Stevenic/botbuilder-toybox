@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 class ConversationVersion {
     /**
-     * Creates a new instance of the CoversationVersion.
+     * Creates a new instance of `CoversationVersion` middleware.
      * @param version Latest version number in major.minor form.
      * @param handler Handler that will be invoked anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number.
      * @param settings (Optional) settings to customize the middleware.
@@ -45,13 +45,13 @@ class ConversationVersion {
         // Call handler if version doesn't match
         if (version !== this.version) {
             try {
-                return Promise.resolve(this.handler(context, version, () => {
+                return this.handler(context, version, () => {
                     // Update version and call next
                     if (context.state.conversation) {
                         context.state.conversation[this.settings.conversationVersionProperty] = this.version;
                     }
                     return next();
-                }));
+                });
             }
             catch (err) {
                 return Promise.reject(err);
