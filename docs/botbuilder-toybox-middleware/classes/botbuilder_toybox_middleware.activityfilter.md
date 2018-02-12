@@ -47,7 +47,7 @@ You can also use an activity filter to greet a user as they join a conversation:
 ### ⊕ **new ActivityFilter**(type: *`string`*, handler: *[ActivityFilterHandler](../#activityfilterhandler)*): [ActivityFilter](botbuilder_toybox_middleware.activityfilter.md)
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:38](https://github.com/Stevenic/botbuilder-toybox/blob/07d7186/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L38)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:38](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L38)*
 
 
 
@@ -79,7 +79,7 @@ Creates a new instance of an `ActivityFilter` middleware.
 
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/07d7186/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L45)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L45)*
 
 
 

@@ -5,3 +5,4 @@
 export * from './activityFilter';
 export * from './catchError';
 export * from './conversationVersion';
+export * from './showTyping';

@@ -10,4 +10,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./activityFilter"));
 __export(require("./catchError"));
 __export(require("./conversationVersion"));
+__export(require("./showTyping"));
 //# sourceMappingURL=index.js.map
