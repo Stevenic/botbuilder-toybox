@@ -47,4 +47,4 @@ dialogs.add('echo', [
         context.state.conversation.count = count + 1;
         return context.endDialog();
     }
-])
+]);

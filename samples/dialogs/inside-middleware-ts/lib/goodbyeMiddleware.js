@@ -9,24 +9,31 @@ class GoodbyeMiddleware {
             return next();
         }
         // Intercept the message if we're prompting the user.
-        return dialogs.continueDialog(context).then((handled) => {
-            // If not handled. Check for user to say "goodbye"
-            const utterance = (context.request.text || '').trim();
-            if (!handled && /^goodbye/i.test(utterance)) {
-                // Ensure conversation state isn't empty
-                const state = context.state.conversation || {};
-                if (Object.keys(state).length > 0) {
-                    // Start confirmation dialog
-                    return dialogs.beginDialog(context, 'confirmGoodbye');
+        return dialogs.continueDialog(context).then(() => {
+            // Ensure the utterance handled by an active dialog
+            if (!context.responded) {
+                // Check for user to say "goodbye"
+                const utterance = (context.request.text || '').trim().toLowerCase();
+                if (utterance === 'goodbye') {
+                    // Ensure conversation state isn't empty 
+                    const state = context.state.conversation || {};
+                    if (!isEmpty(state)) {
+                        // Start confirmation dialog
+                        return dialogs.beginDialog(context, 'confirmGoodbye');
+                    }
+                    else {
+                        context.state.conversation = {};
+                        context.reply(`Ok... Goodbye`);
+                        return Promise.resolve();
+                    }
                 }
                 else {
-                    context.state.conversation = {};
-                    context.reply(`Ok... Goodbye`);
-                    return Promise.resolve();
+                    return next();
                 }
             }
             else {
-                return next();
+                // Prevent further processing since we're in a dialog with the user.
+                return Promise.resolve();
             }
         });
     }
@@ -51,4 +58,15 @@ dialogs.add('confirmGoodbye', [
         return context.endDialog();
     }
 ]);
+function isEmpty(obj) {
+    for (const key in obj) {
+        if (key === 'eTag') {
+            continue;
+        }
+        if (obj.hasOwnProperty(key)) {
+            return false;
+        }
+    }
+    return true;
+}
 //# sourceMappingURL=goodbyeMiddleware.js.map
