@@ -9,6 +9,7 @@
 ### Classes
 
 * [ActivityFilter](classes/botbuilder_toybox_middleware.activityfilter.md)
+* [CatchError](classes/botbuilder_toybox_middleware.catcherror.md)
 * [ConversationVersion](classes/botbuilder_toybox_middleware.conversationversion.md)
 
 
@@ -20,6 +21,7 @@
 ### Type aliases
 
 * [ActivityFilterHandler](#activityfilterhandler)
+* [CatchErrorHandler](#catcherrorhandler)
 * [ConversationVersionHandler](#conversationversionhandler)
 
 
@@ -32,7 +34,7 @@
 
 **Τ ActivityFilterHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/951b3b9/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/07d7186/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L12)*
 
 
 
@@ -63,13 +65,51 @@ Function that will be called anytime an activity of the specified type is receiv
 
 ___
 
+<a id="catcherrorhandler"></a>
+
+###  CatchErrorHandler
+
+**Τ CatchErrorHandler**:  *`function`* 
+
+*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:13](https://github.com/Stevenic/botbuilder-toybox/blob/07d7186/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L13)*
+
+
+
+Function that will be called when the `CatchError` middleware catches an error raised by the bot or another piece of middleware.
+
+#### Type declaration
+►(context: *[BotContext]()*, phase: *`string`*, err: *`Error`*): `Promise`.<`void`>
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| context | [BotContext]()   |  Context object for the current turn of conversation. |
+| phase | `string`   |  The middleware phase that the error was detected during. This can be 'contextCreated', 'receiveActivity', or 'postActivity'. |
+| err | `Error`   |  The error that was caught. |
+
+
+
+
+
+**Returns:** `Promise`.<`void`>
+
+
+
+
+
+
+___
+
 <a id="conversationversionhandler"></a>
 
 ###  ConversationVersionHandler
 
 **Τ ConversationVersionHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:23](https://github.com/Stevenic/botbuilder-toybox/blob/951b3b9/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L23)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:23](https://github.com/Stevenic/botbuilder-toybox/blob/07d7186/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L23)*
 
 
 

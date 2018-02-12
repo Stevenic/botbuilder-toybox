@@ -8,5 +8,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 /** Licensed under the MIT License. */
 __export(require("./activityFilter"));
+__export(require("./catchError"));
 __export(require("./conversationVersion"));
 //# sourceMappingURL=index.js.map
