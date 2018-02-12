@@ -1,7 +1,7 @@
 {
   "name": "dialogs-inside-middleware-ts",
   "version": "1.0.0",
-  "description": "Bot Builder Toybox example showing the use of dialogs inside middleware.",
+  "description": "Bot Builder Toybox example showing the use of dialogs inside of middleware.",
   "main": "./lib/app.js",
   "scripts": {
     "build-sample": "tsc",
