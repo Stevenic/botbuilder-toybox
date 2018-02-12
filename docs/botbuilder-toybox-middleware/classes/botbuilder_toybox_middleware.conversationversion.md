@@ -44,11 +44,11 @@ This middleware lets you track a version number for the conversations your bot i
 ### ⊕ **new ConversationVersion**(version: *`number`*, handler: *[ConversationVersionHandler](../#conversationversionhandler)*, settings?: *[Partial]()[ConversationVersionSettings](../interfaces/botbuilder_toybox_middleware.conversationversionsettings.md)*): [ConversationVersion](botbuilder_toybox_middleware.conversationversion.md)
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L49)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/951b3b9/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L49)*
 
 
 
-Creates a new instance of the CoversationVersion.
+Creates a new instance of `CoversationVersion` middleware.
 
 
 **Parameters:**
@@ -77,7 +77,7 @@ Creates a new instance of the CoversationVersion.
 
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L57)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/951b3b9/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L57)*
 
 
 

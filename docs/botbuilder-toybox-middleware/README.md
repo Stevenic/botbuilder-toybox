@@ -32,7 +32,7 @@
 
 **Τ ActivityFilterHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/951b3b9/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L12)*
 
 
 
@@ -69,7 +69,7 @@ ___
 
 **Τ ConversationVersionHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:23](https://github.com/Stevenic/botbuilder-toybox/blob/788e58e/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L23)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:23](https://github.com/Stevenic/botbuilder-toybox/blob/951b3b9/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L23)*
 
 
 
