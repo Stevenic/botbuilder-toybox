@@ -42,7 +42,7 @@ const bot = new Bot(adapter)
                 // Cancel if there's an active dialog
                 if (dialogs.currentDialog(context)) {
                     dialogs.cancelAll(context);
-                    context.reply(`Ok... Canceled.`);
+                    context.reply(`Ok... Cancelled.`);
                 } else {
                     context.reply(`Nothing to cancel.`);
                 }
