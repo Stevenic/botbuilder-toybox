@@ -45,13 +45,13 @@ class ConversationVersion {
         // Call handler if version doesn't match
         if (version !== this.version) {
             try {
-                return this.handler(context, version, () => {
+                return Promise.resolve(this.handler(context, version, () => {
                     // Update version and call next
                     if (context.state.conversation) {
                         context.state.conversation[this.settings.conversationVersionProperty] = this.version;
                     }
                     return next();
-                });
+                }));
             }
             catch (err) {
                 return Promise.reject(err);

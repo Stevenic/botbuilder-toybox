@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware } from 'botbuilder';
+import { Middleware, Promiseable } from 'botbuilder';
 
 /**
  * (Optional) settings passed to `ConversationVersion` middleware.
@@ -22,7 +22,7 @@ export interface ConversationVersionSettings {
  * @param ConversationVersionHandler.version Current conversations version number.
  * @param ConversationVersionHandler.next Function that should be called to continue execution to the next piece of middleware. Calling `next()` will first update the conversations version number to match the latest version and then call the next piece of middleware.
  */
-export type ConversationVersionHandler = (context: BotContext, version: number, next: () => Promise<void>) => Promise<void>;
+export type ConversationVersionHandler = (context: BotContext, version: number, next: () => Promise<void>) => Promiseable<void>;
 
 /**
  * Deploying new versions of your bot more often then not should have little
@@ -69,11 +69,11 @@ export class ConversationVersion implements Middleware {
         // Call handler if version doesn't match
         if (version !== this.version) {
             try {
-                return this.handler(context, version, () => {
+                return Promise.resolve(this.handler(context, version, () => {
                     // Update version and call next
                     if (context.state.conversation) { context.state.conversation[this.settings.conversationVersionProperty] = this.version }
                     return next();
-                });
+                }));
             } catch (err) {
                 return Promise.reject(err);
             }
