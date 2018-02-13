@@ -10,6 +10,8 @@ import { Middleware, Activity, ConversationResourceResponse } from 'botbuilder';
  * automatically send additional messages at a given rate until it sees the bot send a reply.
  *
  * ```JavaScript
+ * const { FromPatch } = require('botbuilder-toybox-middleware');
+ *
  * bot.use(new ShowTyping());
  * ```
  *

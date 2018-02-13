@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const timers_1 = require("timers");
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
  * too long to reply to a message. Most channels require you periodically send an additional
@@ -8,6 +7,8 @@ const timers_1 = require("timers");
  * automatically send additional messages at a given rate until it sees the bot send a reply.
  *
  * ```JavaScript
+ * const { FromPatch } = require('botbuilder-toybox-middleware');
+ *
  * bot.use(new ShowTyping());
  * ```
  *
@@ -49,7 +50,7 @@ class ShowTyping {
         if (state && !state.finished) {
             state.finished = true;
             if (state.hTimeout) {
-                timers_1.clearTimeout(state.hTimeout);
+                clearTimeout(state.hTimeout);
             }
         }
         return next();

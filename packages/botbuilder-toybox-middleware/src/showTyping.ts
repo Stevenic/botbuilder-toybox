@@ -3,7 +3,6 @@
  */
 /** Licensed under the MIT License. */
 import { Middleware, Activity, ConversationResourceResponse } from 'botbuilder';
-import { clearTimeout } from 'timers';
 
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
@@ -12,6 +11,8 @@ import { clearTimeout } from 'timers';
  * automatically send additional messages at a given rate until it sees the bot send a reply. 
  * 
  * ```JavaScript
+ * const { FromPatch } = require('botbuilder-toybox-middleware');
+ *
  * bot.use(new ShowTyping());
  * ``` 
  * 

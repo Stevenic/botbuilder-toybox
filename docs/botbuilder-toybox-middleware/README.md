@@ -11,6 +11,7 @@
 * [ActivityFilter](classes/botbuilder_toybox_middleware.activityfilter.md)
 * [CatchError](classes/botbuilder_toybox_middleware.catcherror.md)
 * [ConversationVersion](classes/botbuilder_toybox_middleware.conversationversion.md)
+* [FromPatch](classes/botbuilder_toybox_middleware.frompatch.md)
 * [ShowTyping](classes/botbuilder_toybox_middleware.showtyping.md)
 
 
@@ -35,7 +36,7 @@
 
 **Τ ActivityFilterHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/activityFilter.d.ts#L12)*
 
 
 
@@ -72,7 +73,7 @@ ___
 
 **Τ CatchErrorHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:13](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L13)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:13](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L13)*
 
 
 
@@ -110,7 +111,7 @@ ___
 
 **Τ ConversationVersionHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:23](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L23)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:23](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L23)*
 
 
 

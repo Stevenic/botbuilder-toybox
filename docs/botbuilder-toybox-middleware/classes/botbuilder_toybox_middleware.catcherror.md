@@ -56,7 +56,7 @@ If we're in the `postActivity` phase we're simply passing through the error to t
 ### ⊕ **new CatchError**(handler: *[CatchErrorHandler](../#catcherrorhandler)*): [CatchError](botbuilder_toybox_middleware.catcherror.md)
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L47)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L47)*
 
 
 
@@ -85,7 +85,7 @@ Creates an instance of `CatchError` middleware.
 
 **●  id**:  *`number`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L46)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L46)*
 
 
 
@@ -103,7 +103,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:53](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L53)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:53](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L53)*
 
 
 
@@ -134,7 +134,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:55](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L55)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:55](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L55)*
 
 
 
@@ -166,7 +166,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:54](https://github.com/Stevenic/botbuilder-toybox/blob/12f3395/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L54)*
+*Defined in [packages/botbuilder-toybox-middleware/lib/catchError.d.ts:54](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/catchError.d.ts#L54)*
 
 
 
