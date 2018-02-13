@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * bot.use(new ActivityFilter('conversationUpdate', (context, next) => {
  *      const added = context.request.membersAdded || [];
  *      for (let i = 0; i < added.length; i++) {
- *          if (added[i].id !== 'myBot') {
+ *          if (added[i].id !== context.request.recipient.id) {
  *              context.reply(`Welcome to my bot!`);
  *              break;
  *          }
@@ -37,7 +37,7 @@ class ActivityFilter {
         // Call handler if filter matched
         if (context.request && context.request.type === this.type) {
             try {
-                return this.handler(context, next);
+                return Promise.resolve(this.handler(context, next));
             }
             catch (err) {
                 return Promise.reject(err);

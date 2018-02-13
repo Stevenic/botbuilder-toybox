@@ -2,14 +2,14 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware } from 'botbuilder';
+import { Middleware, Promiseable } from 'botbuilder';
 /**
  * Function that will be called anytime an activity of the specified type is received. Simply avoid
  * calling `next()` to prevent the activity from being further routed.
  * @param ActivityFilterHandler.context Context object for the current turn of conversation.
  * @param ActivityFilterHandler.next Function that should be called to continue execution to the next piece of middleware. Omitting this call will effectively filter out the activity.
  */
-export declare type ActivityFilterHandler = (context: BotContext, next: () => Promise<void>) => Promise<void>;
+export declare type ActivityFilterHandler = (context: BotContext, next: () => Promise<void>) => Promiseable<void>;
 /**
  * This middleware lets you easily filter out activity types your bot doesn't care about. For
  * example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
@@ -25,7 +25,7 @@ export declare type ActivityFilterHandler = (context: BotContext, next: () => Pr
  * bot.use(new ActivityFilter('conversationUpdate', (context, next) => {
  *      const added = context.request.membersAdded || [];
  *      for (let i = 0; i < added.length; i++) {
- *          if (added[i].id !== 'myBot') {
+ *          if (added[i].id !== context.request.recipient.id) {
  *              context.reply(`Welcome to my bot!`);
  *              break;
  *          }
