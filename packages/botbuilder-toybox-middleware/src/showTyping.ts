@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Activity, ConversationResourceResponse } from 'botbuilder';
+import { Middleware, Activity, ConversationResourceResponse, applyConversationReference } from 'botbuilder';
 
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
@@ -35,7 +35,7 @@ export class ShowTyping implements Middleware {
     public receiveActivity(context: BotContext, next: () => Promise<void>): Promise<void> {
         function sendTyping() {
             state.hTimeout = undefined;
-            context.bot.adapter.post([{ type: 'typing' }]).then(() => {
+            context.bot.adapter.post([activity]).then(() => {
                 if (!state.finished) {
                     state.hTimeout = setTimeout(sendTyping, frequency);
                 }
@@ -43,6 +43,10 @@ export class ShowTyping implements Middleware {
                 console.error(`showTyping: error sending typing indicator: ${err.toString()}`);
             });
         }
+
+        // Initialize activity
+        const activity = { type: 'typing' }
+        applyConversationReference(activity, context.conversationReference);
 
         // Start delay timer and call next()
         const { delay, frequency } = this;

@@ -1,6 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
+ * @module botbuilder-toybox-middleware
+ */
+/** Licensed under the MIT License. */
+const botbuilder_1 = require("botbuilder");
+/**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
  * too long to reply to a message. Most channels require you periodically send an additional
  * 'typing' activity in order to keep the typing indicator lite so the middleware plugin will
@@ -29,7 +34,7 @@ class ShowTyping {
     receiveActivity(context, next) {
         function sendTyping() {
             state.hTimeout = undefined;
-            context.bot.adapter.post([{ type: 'typing' }]).then(() => {
+            context.bot.adapter.post([activity]).then(() => {
                 if (!state.finished) {
                     state.hTimeout = setTimeout(sendTyping, frequency);
                 }
@@ -37,6 +42,9 @@ class ShowTyping {
                 console.error(`showTyping: error sending typing indicator: ${err.toString()}`);
             });
         }
+        // Initialize activity
+        const activity = { type: 'typing' };
+        botbuilder_1.applyConversationReference(activity, context.conversationReference);
         // Start delay timer and call next()
         const { delay, frequency } = this;
         const state = { finished: false, hTimeout: undefined };
