@@ -19,7 +19,7 @@ Prompts the user to reply with a date or time.
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:35*
+*Defined in [packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:35](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts#L35)*
 
 
 
@@ -54,7 +54,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:40*
+*Defined in [packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:40](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts#L40)*
 
 
 

@@ -15,7 +15,7 @@ Datetime result returned by `DatetimePrompt`. For more details see the LUIS docs
 
 **●  timex**:  *`string`* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:15*
+*Defined in [packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:15](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts#L15)*
 
 
 
@@ -32,7 +32,7 @@ ___
 
 **●  type**:  *`string`* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:20*
+*Defined in [packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:20](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts#L20)*
 
 
 
@@ -49,7 +49,7 @@ ___
 
 **●  value**:  *`string`* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:25*
+*Defined in [packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts#L25)*
 
 
 

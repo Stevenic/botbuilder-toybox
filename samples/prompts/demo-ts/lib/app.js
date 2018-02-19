@@ -137,6 +137,7 @@ function datetimeDemo(context) {
         return datetimePrompt.recognize(context).then((value) => {
             if (value !== undefined) {
                 context.reply(`You entered: ${JSON.stringify(value)}`);
+                return attachmentDemo(context);
             }
             else {
                 return datetimePrompt.prompt(context, `Not recognized. Enter a date or time like "tomorrow at 9am".`);

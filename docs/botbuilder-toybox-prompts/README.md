@@ -31,12 +31,12 @@
 
 ### Functions
 
-* [attachmentPrompt](#attachmentprompt-1)
-* [choicePrompt](#choiceprompt-1)
-* [confirmPrompt](#confirmprompt-1)
-* [datetimePrompt](#datetimeprompt-1)
-* [numberPrompt](#numberprompt-1)
-* [textPrompt](#textprompt-1)
+* [createAttachmentPrompt](#createattachmentprompt)
+* [createChoicePrompt](#createchoiceprompt)
+* [createConfirmPrompt](#createconfirmprompt)
+* [createDatetimePrompt](#createdatetimeprompt)
+* [createNumberPrompt](#createnumberprompt)
+* [createTextPrompt](#createtextprompt)
 
 
 
@@ -48,7 +48,7 @@
 
 **Τ ChoicePromptValidator**:  *`function`* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:57*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L57)*
 
 
 
@@ -88,7 +88,7 @@ ___
 
 **Τ PromptValidator**:  *`function`* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts:29*
+*Defined in [packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts:29](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts#L29)*
 
 
 
@@ -125,15 +125,15 @@ ___
 
 
 ## Functions
-<a id="attachmentprompt-1"></a>
+<a id="createattachmentprompt"></a>
 
-###  attachmentPrompt
+###  createAttachmentPrompt
 
-► **attachmentPrompt**O(validator?: *[PromptValidator](#promptvalidator)[Attachment]()[], `O`*): [AttachmentPrompt](interfaces/botbuilder_toybox_prompts.attachmentprompt.md)`O`
+► **createAttachmentPrompt**O(validator?: *[PromptValidator](#promptvalidator)[Attachment]()[], `O`*): [AttachmentPrompt](interfaces/botbuilder_toybox_prompts.attachmentprompt.md)`O`
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts:26*
+*Defined in [packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts:26](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts#L26)*
 
 
 
@@ -161,15 +161,15 @@ Creates a new prompt that asks the user to upload one or more attachments.
 
 ___
 
-<a id="choiceprompt-1"></a>
+<a id="createchoiceprompt"></a>
 
-###  choicePrompt
+###  createChoicePrompt
 
-► **choicePrompt**O(validator?: *[ChoicePromptValidator](#choicepromptvalidator)`O`*): [ChoicePrompt](interfaces/botbuilder_toybox_prompts.choiceprompt.md)`O`
+► **createChoicePrompt**O(validator?: *[ChoicePromptValidator](#choicepromptvalidator)`O`*): [ChoicePrompt](interfaces/botbuilder_toybox_prompts.choiceprompt.md)`O`
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:62*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:62](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L62)*
 
 
 
@@ -197,15 +197,15 @@ Creates a new prompt that asks the user to select from a list of choices.
 
 ___
 
-<a id="confirmprompt-1"></a>
+<a id="createconfirmprompt"></a>
 
-###  confirmPrompt
+###  createConfirmPrompt
 
-► **confirmPrompt**O(validator?: *[PromptValidator](#promptvalidator)`O`*): [ConfirmPrompt](interfaces/botbuilder_toybox_prompts.confirmprompt.md)`O`
+► **createConfirmPrompt**O(validator?: *[PromptValidator](#promptvalidator)`O`*): [ConfirmPrompt](interfaces/botbuilder_toybox_prompts.confirmprompt.md)`O`
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:54*
+*Defined in [packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:54](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts#L54)*
 
 
 
@@ -233,15 +233,15 @@ Creates a new prompt that asks the user to answer a yes/no question.
 
 ___
 
-<a id="datetimeprompt-1"></a>
+<a id="createdatetimeprompt"></a>
 
-###  datetimePrompt
+###  createDatetimePrompt
 
-► **datetimePrompt**O(validator?: *[PromptValidator](#promptvalidator)[FoundDatetime](interfaces/botbuilder_toybox_prompts.founddatetime.md)[], `O`*): [DatetimePrompt](interfaces/botbuilder_toybox_prompts.datetimeprompt.md)`O`
+► **createDatetimePrompt**O(validator?: *[PromptValidator](#promptvalidator)[FoundDatetime](interfaces/botbuilder_toybox_prompts.founddatetime.md)[], `O`*): [DatetimePrompt](interfaces/botbuilder_toybox_prompts.datetimeprompt.md)`O`
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:46*
+*Defined in [packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/datetimePrompt.d.ts#L46)*
 
 
 
@@ -269,15 +269,15 @@ Creates a new prompt that asks the user to reply with a date or time.
 
 ___
 
-<a id="numberprompt-1"></a>
+<a id="createnumberprompt"></a>
 
-###  numberPrompt
+###  createNumberPrompt
 
-► **numberPrompt**O(validator?: *[PromptValidator](#promptvalidator)`number`, `O`*): [NumberPrompt](interfaces/botbuilder_toybox_prompts.numberprompt.md)`O`
+► **createNumberPrompt**O(validator?: *[PromptValidator](#promptvalidator)`number`, `O`*): [NumberPrompt](interfaces/botbuilder_toybox_prompts.numberprompt.md)`O`
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/numberPrompt.d.ts:26*
+*Defined in [packages/botbuilder-toybox-prompts/lib/numberPrompt.d.ts:26](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/numberPrompt.d.ts#L26)*
 
 
 
@@ -305,15 +305,15 @@ Creates a new prompt that asks the user to reply with a number.
 
 ___
 
-<a id="textprompt-1"></a>
+<a id="createtextprompt"></a>
 
-###  textPrompt
+###  createTextPrompt
 
-► **textPrompt**O(validator?: *[PromptValidator](#promptvalidator)`string`, `O`*): [TextPrompt](interfaces/botbuilder_toybox_prompts.textprompt.md)`O`
+► **createTextPrompt**O(validator?: *[PromptValidator](#promptvalidator)`string`, `O`*): [TextPrompt](interfaces/botbuilder_toybox_prompts.textprompt.md)`O`
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts:34*
+*Defined in [packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts:34](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts#L34)*
 
 
 

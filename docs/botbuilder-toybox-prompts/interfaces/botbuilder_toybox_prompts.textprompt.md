@@ -19,7 +19,7 @@ Prompts the user to reply with some text.
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts:14*
+*Defined in [packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts#L14)*
 
 
 
@@ -54,7 +54,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts:19*
+*Defined in [packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts:19](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/textPrompt.d.ts#L19)*
 
 
 

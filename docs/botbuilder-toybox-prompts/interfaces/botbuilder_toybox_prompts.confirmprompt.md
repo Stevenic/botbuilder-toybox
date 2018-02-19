@@ -17,7 +17,7 @@ Prompts the user to answer a yes/no question.
 
 **●  choices**:  *[ConfirmChoices](botbuilder_toybox_prompts.confirmchoices.md)* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:29*
+*Defined in [packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:29](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts#L29)*
 
 
 
@@ -41,7 +41,7 @@ ___
 
 **●  style**:  *[ListStyle](../enums/botbuilder_toybox_prompts.liststyle.md)* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:34*
+*Defined in [packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:34](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts#L34)*
 
 
 
@@ -58,7 +58,7 @@ ___
 
 **●  stylerOptions**:  *[ChoiceStylerOptions]()* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:36*
+*Defined in [packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:36](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts#L36)*
 
 
 
@@ -79,7 +79,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:43*
+*Defined in [packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:43](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts#L43)*
 
 
 
@@ -114,7 +114,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:48*
+*Defined in [packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts:48](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/confirmPrompt.d.ts#L48)*
 
 
 

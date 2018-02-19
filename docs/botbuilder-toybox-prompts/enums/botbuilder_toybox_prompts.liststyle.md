@@ -27,7 +27,7 @@ Controls the way that choices for a `ChoicePrompt` or yes/no options for a `Conf
 
 ** auto**:    = 1
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:15*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:15](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L15)*
 
 
 
@@ -44,7 +44,7 @@ ___
 
 ** inline**:    = 2
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:17*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:17](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L17)*
 
 
 
@@ -61,7 +61,7 @@ ___
 
 ** list**:    = 3
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:19*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:19](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L19)*
 
 
 
@@ -78,7 +78,7 @@ ___
 
 ** none**:    = 0
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:13*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:13](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L13)*
 
 
 
@@ -95,7 +95,7 @@ ___
 
 ** suggestedAction**:    = 4
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:21*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:21](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L21)*
 
 
 

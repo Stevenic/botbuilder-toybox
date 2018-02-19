@@ -17,7 +17,7 @@ Prompts the user to select from a list of choices.
 
 **●  recognizerOptions**:  *[FindChoicesOptions]()* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:33*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:33](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L33)*
 
 
 
@@ -34,7 +34,7 @@ ___
 
 **●  style**:  *[ListStyle](../enums/botbuilder_toybox_prompts.liststyle.md)* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:29*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:29](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L29)*
 
 
 
@@ -51,7 +51,7 @@ ___
 
 **●  stylerOptions**:  *[ChoiceStylerOptions]()* 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:31*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:31](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L31)*
 
 
 
@@ -68,11 +68,11 @@ ___
 
 ###  prompt
 
-► **prompt**(context: *[BotContext]()*, prompt: *`string`⎮[Partial]()[Activity]()*, choices: *(`string`⎮[Choice]())[]*, speak?: *`undefined`⎮`string`*): `Promise`.<`void`>
+► **prompt**(context: *[BotContext]()*, choices: *(`string`⎮[Choice]())[]*, prompt?: *`string`⎮[Partial]()[Activity]()*, speak?: *`undefined`⎮`string`*): `Promise`.<`void`>
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:41*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L41)*
 
 
 
@@ -84,8 +84,8 @@ Sends a formated prompt to the user.
 | Param | Type | Description |
 | ------ | ------ | ------ |
 | context | [BotContext]()   |  Context for the current turn of conversation. |
-| prompt | `string`⎮[Partial]()[Activity]()   |  Text or activity to send as the prompt. |
 | choices | (`string`⎮[Choice]())[]   |  Array of choices that should be prompted for. |
+| prompt | `string`⎮[Partial]()[Activity]()   |  (Optional) Text or activity to send as the prompt. |
 | speak | `undefined`⎮`string`   |  (Optional) SSML that should be spoken for prompt. The prompts `inputHint` will be automatically set to `expectingInput`. |
 
 
@@ -108,7 +108,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:47*
+*Defined in [packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/choicePrompt.d.ts#L47)*
 
 
 

@@ -19,7 +19,7 @@ Prompts the user to upload one or more attachments.
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts:15*
+*Defined in [packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts:15](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts#L15)*
 
 
 
@@ -54,7 +54,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts:20*
+*Defined in [packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts:20](https://github.com/Stevenic/botbuilder-toybox/blob/848ed38/packages/botbuilder-toybox-prompts/lib/attachmentPrompt.d.ts#L20)*
 
 
 
