@@ -52,7 +52,7 @@ export interface DatetimePrompt<O = FoundDatetime[]> {
  * Creates a new prompt that asks the user to reply with a date or time.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-export function datetimePrompt<O = FoundDatetime[]>(validator?: PromptValidator<FoundDatetime[], O>): DatetimePrompt<O> {
+export function createDatetimePrompt<O = FoundDatetime[]>(validator?: PromptValidator<FoundDatetime[], O>): DatetimePrompt<O> {
     return {
         prompt: function prompt(context, prompt, speak) {
             const msg: Partial<Activity> = typeof prompt === 'string' ? { type: 'message', text: prompt } : Object.assign({}, prompt);

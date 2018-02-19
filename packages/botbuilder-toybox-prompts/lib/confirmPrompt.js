@@ -8,7 +8,7 @@ const booleanModel = Recognizers.OptionsRecognizer.instance.getBooleanModel('en-
  * Creates a new prompt that asks the user to answer a yes/no question.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-function confirmPrompt(validator) {
+function createConfirmPrompt(validator) {
     return {
         choices: { '*': ['yes', 'no'] },
         style: choicePrompt_1.ListStyle.auto,
@@ -64,5 +64,5 @@ function confirmPrompt(validator) {
         }
     };
 }
-exports.confirmPrompt = confirmPrompt;
+exports.createConfirmPrompt = createConfirmPrompt;
 //# sourceMappingURL=confirmPrompt.js.map

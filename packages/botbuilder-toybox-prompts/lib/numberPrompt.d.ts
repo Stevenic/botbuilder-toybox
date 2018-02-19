@@ -23,4 +23,4 @@ export interface NumberPrompt<O = number> {
  * Creates a new prompt that asks the user to reply with a number.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-export declare function numberPrompt<O = number>(validator?: PromptValidator<number, O>): NumberPrompt<O>;
+export declare function createNumberPrompt<O = number>(validator?: PromptValidator<number, O>): NumberPrompt<O>;

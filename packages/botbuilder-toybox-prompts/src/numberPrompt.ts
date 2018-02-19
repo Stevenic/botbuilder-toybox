@@ -29,7 +29,7 @@ export interface NumberPrompt<O = number> {
  * Creates a new prompt that asks the user to reply with a number.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-export function numberPrompt<O = number>(validator?: PromptValidator<number, O>): NumberPrompt<O> {
+export function createNumberPrompt<O = number>(validator?: PromptValidator<number, O>): NumberPrompt<O> {
     return {
         prompt: function prompt(context, prompt, speak) {
             const msg: Partial<Activity> = typeof prompt === 'string' ? { type: 'message', text: prompt } : Object.assign({}, prompt);

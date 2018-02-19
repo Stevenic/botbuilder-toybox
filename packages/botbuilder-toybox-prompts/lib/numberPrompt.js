@@ -6,7 +6,7 @@ const numberModel = Recognizers.NumberRecognizer.instance.getNumberModel('en-us'
  * Creates a new prompt that asks the user to reply with a number.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-function numberPrompt(validator) {
+function createNumberPrompt(validator) {
     return {
         prompt: function prompt(context, prompt, speak) {
             const msg = typeof prompt === 'string' ? { type: 'message', text: prompt } : Object.assign({}, prompt);
@@ -27,5 +27,5 @@ function numberPrompt(validator) {
         }
     };
 }
-exports.numberPrompt = numberPrompt;
+exports.createNumberPrompt = createNumberPrompt;
 //# sourceMappingURL=numberPrompt.js.map

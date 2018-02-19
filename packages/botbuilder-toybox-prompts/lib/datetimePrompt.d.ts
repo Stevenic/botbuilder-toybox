@@ -43,4 +43,4 @@ export interface DatetimePrompt<O = FoundDatetime[]> {
  * Creates a new prompt that asks the user to reply with a date or time.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-export declare function datetimePrompt<O = FoundDatetime[]>(validator?: PromptValidator<FoundDatetime[], O>): DatetimePrompt<O>;
+export declare function createDatetimePrompt<O = FoundDatetime[]>(validator?: PromptValidator<FoundDatetime[], O>): DatetimePrompt<O>;

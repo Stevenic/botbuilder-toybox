@@ -51,4 +51,4 @@ export interface ConfirmPrompt<O = boolean> {
  * Creates a new prompt that asks the user to answer a yes/no question.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-export declare function confirmPrompt<O = boolean>(validator?: PromptValidator<O>): ConfirmPrompt<O>;
+export declare function createConfirmPrompt<O = boolean>(validator?: PromptValidator<O>): ConfirmPrompt<O>;

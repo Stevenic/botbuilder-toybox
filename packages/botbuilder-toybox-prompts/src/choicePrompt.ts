@@ -43,11 +43,11 @@ export interface ChoicePrompt<O = FoundChoice> {
     /**
      * Sends a formated prompt to the user. 
      * @param context Context for the current turn of conversation.
-     * @param prompt Text or activity to send as the prompt.
      * @param choices Array of choices that should be prompted for.
+     * @param prompt (Optional) Text or activity to send as the prompt.
      * @param speak (Optional) SSML that should be spoken for prompt. The prompts `inputHint` will be automatically set to `expectingInput`.
      */
-    prompt(context: BotContext, prompt: string|Partial<Activity>, choices: (string|Choice)[], speak?: string): Promise<void>;
+    prompt(context: BotContext, choices: (string|Choice)[], prompt?: string|Partial<Activity>, speak?: string): Promise<void>;
 
     /**
      * Recognizes and validates the users reply.
@@ -71,12 +71,12 @@ export type ChoicePromptValidator<O = FoundChoice> = (context: BotContext, value
  * Creates a new prompt that asks the user to select from a list of choices.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-export function choicePrompt<O = FoundChoice>(validator?: ChoicePromptValidator<O>): ChoicePrompt<O> {
+export function createChoicePrompt<O = FoundChoice>(validator?: ChoicePromptValidator<O>): ChoicePrompt<O> {
     return {
         style: ListStyle.auto,
         stylerOptions: {},
         recognizerOptions: {},
-        prompt: function prompt(context, prompt, choices, speak) {
+        prompt: function prompt(context, choices, prompt, speak) {
             let msg: Partial<Activity>;
             if (typeof prompt !== 'object') {
                 switch (this.style) {

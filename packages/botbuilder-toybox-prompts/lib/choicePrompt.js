@@ -22,12 +22,12 @@ var ListStyle;
  * Creates a new prompt that asks the user to select from a list of choices.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-function choicePrompt(validator) {
+function createChoicePrompt(validator) {
     return {
         style: ListStyle.auto,
         stylerOptions: {},
         recognizerOptions: {},
-        prompt: function prompt(context, prompt, choices, speak) {
+        prompt: function prompt(context, choices, prompt, speak) {
             let msg;
             if (typeof prompt !== 'object') {
                 switch (this.style) {
@@ -72,5 +72,5 @@ function choicePrompt(validator) {
         }
     };
 }
-exports.choicePrompt = choicePrompt;
+exports.createChoicePrompt = createChoicePrompt;
 //# sourceMappingURL=choicePrompt.js.map

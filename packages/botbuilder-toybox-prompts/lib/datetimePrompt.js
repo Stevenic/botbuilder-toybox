@@ -6,7 +6,7 @@ const dateTimeModel = Recognizers.DateTimeRecognizer.instance.getDateTimeModel('
  * Creates a new prompt that asks the user to reply with a date or time.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-function datetimePrompt(validator) {
+function createDatetimePrompt(validator) {
     return {
         prompt: function prompt(context, prompt, speak) {
             const msg = typeof prompt === 'string' ? { type: 'message', text: prompt } : Object.assign({}, prompt);
@@ -27,5 +27,5 @@ function datetimePrompt(validator) {
         }
     };
 }
-exports.datetimePrompt = datetimePrompt;
+exports.createDatetimePrompt = createDatetimePrompt;
 //# sourceMappingURL=datetimePrompt.js.map

@@ -3,7 +3,8 @@
   "packages": [
     "packages/*",
     "samples/dialogs/*",
-    "samples/middleware/*"
+    "samples/middleware/*",
+    "samples/prompts/*"
   ],
   "version": "independent",
   "commands": {

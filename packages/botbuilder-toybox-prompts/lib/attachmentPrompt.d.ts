@@ -23,4 +23,4 @@ export interface AttachmentPrompt<O = Attachment[]> {
  * Creates a new prompt that asks the user to upload one or more attachments.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-export declare function attachmentPrompt<O = Attachment[]>(validator?: PromptValidator<Attachment[], O>): AttachmentPrompt<O>;
+export declare function createAttachmentPrompt<O = Attachment[]>(validator?: PromptValidator<Attachment[], O>): AttachmentPrompt<O>;

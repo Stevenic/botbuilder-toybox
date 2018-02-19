@@ -31,4 +31,4 @@ export declare type PromptValidator<R, O = R> = (context: BotContext, value: R |
  * Creates a new prompt that asks the user to enter some text.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-export declare function textPrompt<O = string>(validator?: PromptValidator<string, O>): TextPrompt<O>;
+export declare function createTextPrompt<O = string>(validator?: PromptValidator<string, O>): TextPrompt<O>;

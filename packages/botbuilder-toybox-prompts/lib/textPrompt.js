@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Creates a new prompt that asks the user to enter some text.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
  */
-function textPrompt(validator) {
+function createTextPrompt(validator) {
     return {
         prompt: function prompt(context, prompt, speak) {
             const msg = typeof prompt === 'string' ? { type: 'message', text: prompt } : Object.assign({}, prompt);
@@ -23,5 +23,5 @@ function textPrompt(validator) {
         }
     };
 }
-exports.textPrompt = textPrompt;
+exports.createTextPrompt = createTextPrompt;
 //# sourceMappingURL=textPrompt.js.map
