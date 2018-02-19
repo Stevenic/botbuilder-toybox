@@ -1,8 +1,8 @@
 {
-  "name": "botbuilder-toybox-dialogs",
+  "name": "botbuilder-toybox-prompts",
   "author": "stevenic@microsoft.com",
-  "description": "Extension for Bot Builder v4 that adds a dialog stack based system for managing conversation flow in a bot.",
-  "version": "0.1.0-m1.2",
+  "description": "Lightweight prompt system for Bot Builder v4.",
+  "version": "0.1.0-m1.5",
   "license": "MIT",
   "keywords": [
     "botbuilder",
@@ -34,7 +34,7 @@
   "scripts": {
     "test": "tsc && nyc mocha tests/",
     "build": "tsc",
-    "build-docs": "typedoc --theme markdown --entryPoint botbuilder-toybox-dialogs --excludePrivate --includeDeclarations --ignoreCompilerErrors --module amd --out ..\\..\\docs\\botbuilder-toybox-dialogs .\\lib\\index.d.ts --hideGenerator --name \"Bot Builder Toybox - Dialogs\" --readme none",
+    "build-docs": "typedoc --theme markdown --entryPoint botbuilder-toybox-prompts --excludePrivate --includeDeclarations --ignoreCompilerErrors --module amd --out ..\\..\\docs\\botbuilder-toybox-prompts .\\lib\\index.d.ts --hideGenerator --name \"Bot Builder Toybox - Prompts\" --readme none",
     "clean": "erase /q lib\\*.*"
   }
 }
