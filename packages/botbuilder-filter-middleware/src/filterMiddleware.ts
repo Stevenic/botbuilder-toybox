@@ -1,6 +1,6 @@
 import { Activity, Middleware, ConversationResourceResponse, MiddlewareSet } from 'botbuilder';
 
-export function filterMiddleware (predicate: (context: BotContext) => boolean, ...middlewares: Middleware[]): MiddlewareSet {
+export function filterMiddleware(predicate: (context: BotContext) => boolean, ...middlewares: Middleware[]): MiddlewareSet {
     let middlewareSet = new MiddlewareSet();
 
     middlewares.forEach(middleware => {
@@ -22,6 +22,5 @@ export function filterMiddleware (predicate: (context: BotContext) => boolean, .
             }
         })
     })
-
     return middlewareSet;
 }
