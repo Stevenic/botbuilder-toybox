@@ -2,7 +2,8 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Activity, ConversationResourceResponse, applyConversationReference } from 'botbuilder';
+import { Middleware, Activity, ConversationResourceResponse } from 'botbuilder';
+import { applyConversationReference } from './internal';
 
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking

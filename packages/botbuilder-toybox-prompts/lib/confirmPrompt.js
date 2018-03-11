@@ -2,8 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const botbuilder_choices_1 = require("botbuilder-choices");
 const choicePrompt_1 = require("./choicePrompt");
-const Recognizers = require("@microsoft/recognizers-text-options");
-const booleanModel = Recognizers.OptionsRecognizer.instance.getBooleanModel('en-us');
+const Recognizers = require("@microsoft/recognizers-text-choice");
 /**
  * Creates a new prompt that asks the user to answer a yes/no question.
  * @param validator (Optional) validator for providing additional validation logic or customizing the prompt sent to the user when invalid.
@@ -57,8 +56,10 @@ function createConfirmPrompt(validator) {
             return Promise.resolve();
         },
         recognize: function recognize(context) {
-            const utterance = context.request && context.request.text ? context.request.text : '';
-            const results = booleanModel.parse(utterance);
+            const request = context.request || {};
+            const utterance = request.text || '';
+            const locale = request.locale || 'en-us';
+            const results = Recognizers.recognizeBoolean(utterance, locale);
             const value = results.length > 0 && results[0].resolution ? results[0].resolution.value : undefined;
             return Promise.resolve(validator ? validator(context, value) : value);
         }

@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//import * as Recognizers from '@microsoft/recognizers-text-date-time';
-const Recognizers = require('@microsoft/recognizers-text-date-time');
-const dateTimeModel = Recognizers.DateTimeRecognizer.instance.getDateTimeModel('en-us');
+const Recognizers = require("@microsoft/recognizers-text-date-time");
 class DatetimePrompt {
     beginDialog(context, args) {
         context.dialog.state = Object.assign({}, args);
@@ -13,8 +11,10 @@ class DatetimePrompt {
     }
     continueDialog(context) {
         const state = context.dialog.state;
-        const utterance = context.request && context.request.text ? context.request.text : '';
-        const results = dateTimeModel.parse(utterance);
+        const request = context.request || {};
+        const utterance = request.text || '';
+        const locale = request.locale || 'en-us';
+        const results = Recognizers.recognizeDateTime(utterance, locale);
         if (results.length > 0) {
             // Return recognized value(s)
             return context.endDialog(results[0].resolution.values);

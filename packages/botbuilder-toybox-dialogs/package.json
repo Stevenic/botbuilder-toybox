@@ -2,7 +2,7 @@
   "name": "botbuilder-toybox-dialogs",
   "author": "stevenic@microsoft.com",
   "description": "Extension for Bot Builder v4 that adds a dialog stack based system for managing conversation flow in a bot.",
-  "version": "0.1.0-m1.2",
+  "version": "0.1.0-m1.10",
   "license": "MIT",
   "keywords": [
     "botbuilder",
@@ -18,9 +18,9 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "@microsoft/recognizers-text-suite": "^1.0.0-rc.32.0",
-    "botbuilder": "^4.0.0-m1.4",
-    "botbuilder-choices": "^4.0.0-m1.2"
+    "@microsoft/recognizers-text-suite": "^1.0.0",
+    "botbuilder": "4.0.0-m1.10",
+    "botbuilder-choices": "4.0.0-m1.10"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.47",

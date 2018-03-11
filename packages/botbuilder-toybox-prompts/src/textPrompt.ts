@@ -45,8 +45,9 @@ export function createTextPrompt<O = string>(validator?: PromptValidator<string,
             return Promise.resolve(); 
         },
         recognize: function recognize(context) {
-            const value = context.request && context.request.text ? context.request.text : '';
-            return Promise.resolve(validator ? validator(context, value) : value as any);
+            const request = context.request || {};
+            const utterance = request.text || '';
+            return Promise.resolve(validator ? validator(context, utterance) : utterance as any);
         }
     };
 }

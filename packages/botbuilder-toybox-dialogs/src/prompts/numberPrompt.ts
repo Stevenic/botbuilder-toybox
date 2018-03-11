@@ -7,8 +7,6 @@ import { DialogContext } from '../dialogContext';
 import { PromptOptions } from './prompt';
 import * as Recognizers from '@microsoft/recognizers-text-number';
 
-const numberModel = Recognizers.NumberRecognizer.instance.getNumberModel('en-us');
-
 export class NumberPrompt implements Dialog {
     static dialogId = 'prompt:number';
 
@@ -20,8 +18,10 @@ export class NumberPrompt implements Dialog {
 
     public continueDialog(context: DialogContext<PromptOptions>): Promise<void> {
         const state = context.dialog.state;
-        const utterance = context.request && context.request.text ? context.request.text : '';
-        const results = numberModel.parse(utterance);
+        const request = context.request || {};
+        const utterance = request.text || '';
+        const locale = request.locale || 'en-us';
+        const results = Recognizers.recognizeNumber(utterance, locale);
         if (results.length > 0) {
             // Return recognized number
             const value = parseInt(results[0].resolution.value);

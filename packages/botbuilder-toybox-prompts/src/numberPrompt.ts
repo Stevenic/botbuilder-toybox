@@ -6,8 +6,6 @@ import { Promiseable, Activity } from 'botbuilder';
 import { PromptValidator } from './textPrompt';
 import * as Recognizers from '@microsoft/recognizers-text-number';
 
-const numberModel = Recognizers.NumberRecognizer.instance.getNumberModel('en-us');
-
 /** Prompts the user to reply with a number. */
 export interface NumberPrompt<O = number> {
     /**
@@ -39,8 +37,10 @@ export function createNumberPrompt<O = number>(validator?: PromptValidator<numbe
             return Promise.resolve(); 
         },
         recognize: function recognize(context) {
-            const utterance = context.request && context.request.text ? context.request.text : '';
-            const results = numberModel.parse(utterance);
+            const request = context.request || {};
+            const utterance = request.text || '';
+            const locale = request.locale || 'en-us';
+            const results = Recognizers.recognizeNumber(utterance, locale);
             const value = results.length > 0 && results[0].resolution ? parseFloat(results[0].resolution.value) : undefined;
             return Promise.resolve(validator ? validator(context, value) : value as any);
         }

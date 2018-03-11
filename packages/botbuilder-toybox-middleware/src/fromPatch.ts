@@ -31,7 +31,7 @@ export class FromPatch implements Middleware {
     public contextCreated(context: BotContext, next: () => Promise<void>): Promise<void> {
         if (context.request && context.request.type !== 'message') {
             const members = context.request.membersAdded ? context.request.membersAdded : context.request.membersRemoved;
-            const accounts = members && context.request.recipient ? members.filter((m) => m.id !== context.request.recipient) : [];
+            const accounts = members && context.request.recipient ? members.filter((m) => m.id !== (context.request as any).recipient) : [];
             const l = accounts.length
             if (l > 0 && (l === 1 || !context.request.from)) {
                 context.request.from = accounts[0];

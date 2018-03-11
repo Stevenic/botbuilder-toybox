@@ -6,9 +6,8 @@ import { Promiseable, Activity } from 'botbuilder';
 import { ChoiceStyler, ChoiceStylerOptions, Choice } from 'botbuilder-choices';
 import { PromptValidator } from './textPrompt';
 import { ListStyle } from './choicePrompt';
-import * as Recognizers from '@microsoft/recognizers-text-options';
+import * as Recognizers from '@microsoft/recognizers-text-choice';
 
-const booleanModel = Recognizers.OptionsRecognizer.instance.getBooleanModel('en-us');
 
 /** Map of `ConfirmPrompt` choices for each locale the bot supports. */
 export interface ConfirmChoices {
@@ -102,8 +101,10 @@ export function createConfirmPrompt<O = boolean>(validator?: PromptValidator<O>)
             return Promise.resolve(); 
         },
         recognize: function recognize(context) {
-            const utterance = context.request && context.request.text ? context.request.text : '';
-            const results = booleanModel.parse(utterance);
+            const request = context.request || {};
+            const utterance = request.text || '';
+            const locale = request.locale || 'en-us';
+            const results = Recognizers.recognizeBoolean(utterance, locale);
             const value = results.length > 0 && results[0].resolution ? results[0].resolution.value : undefined;
             return Promise.resolve(validator ? validator(context, value) : value as any);
         }

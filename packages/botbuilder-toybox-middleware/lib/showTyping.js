@@ -1,10 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * @module botbuilder-toybox-middleware
- */
-/** Licensed under the MIT License. */
-const botbuilder_1 = require("botbuilder");
+const internal_1 = require("./internal");
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
  * too long to reply to a message. Most channels require you periodically send an additional
@@ -44,7 +40,7 @@ class ShowTyping {
         }
         // Initialize activity
         const activity = { type: 'typing' };
-        botbuilder_1.applyConversationReference(activity, context.conversationReference);
+        internal_1.applyConversationReference(activity, context.conversationReference);
         // Start delay timer and call next()
         const { delay, frequency } = this;
         const state = { finished: false, hTimeout: undefined };

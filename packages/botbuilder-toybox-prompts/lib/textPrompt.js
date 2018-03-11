@@ -18,8 +18,9 @@ function createTextPrompt(validator) {
             return Promise.resolve();
         },
         recognize: function recognize(context) {
-            const value = context.request && context.request.text ? context.request.text : '';
-            return Promise.resolve(validator ? validator(context, value) : value);
+            const request = context.request || {};
+            const utterance = request.text || '';
+            return Promise.resolve(validator ? validator(context, utterance) : utterance);
         }
     };
 }

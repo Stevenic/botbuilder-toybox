@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Recognizers = require("@microsoft/recognizers-text-options");
-const booleanModel = Recognizers.OptionsRecognizer.instance.getBooleanModel('en-us');
+const Recognizers = require("@microsoft/recognizers-text-choice");
 class ConfirmPrompt {
     beginDialog(context, args) {
         context.dialog.state = Object.assign({}, args);
@@ -12,8 +11,10 @@ class ConfirmPrompt {
     }
     continueDialog(context) {
         const state = context.dialog.state;
-        const utterance = context.request && context.request.text ? context.request.text : '';
-        const results = booleanModel.parse(utterance);
+        const request = context.request || {};
+        const utterance = request.text || '';
+        const locale = request.locale || 'en-us';
+        const results = Recognizers.recognizeBoolean(utterance, locale);
         if (results.length > 0) {
             // Return recognized value
             const value = results[0].resolution.value;

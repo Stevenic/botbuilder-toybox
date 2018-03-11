@@ -5,9 +5,7 @@
 import { Dialog } from '../dialog';
 import { DialogContext } from '../dialogContext';
 import { PromptOptions } from './prompt';
-import * as Recognizers from '@microsoft/recognizers-text-options';
-
-const booleanModel = Recognizers.OptionsRecognizer.instance.getBooleanModel('en-us');
+import * as Recognizers from '@microsoft/recognizers-text-choice';
 
 export class ConfirmPrompt implements Dialog {
     static dialogId = 'prompt:confirm';
@@ -20,8 +18,10 @@ export class ConfirmPrompt implements Dialog {
 
     public continueDialog(context: DialogContext<PromptOptions>): Promise<void> {
         const state = context.dialog.state;
-        const utterance = context.request && context.request.text ? context.request.text : '';
-        const results = booleanModel.parse(utterance);
+        const request = context.request || {};
+        const utterance = request.text || '';
+        const locale = request.locale || 'en-us';
+        const results = Recognizers.recognizeBoolean(utterance, locale);
         if (results.length > 0) {
             // Return recognized value
             const value = results[0].resolution.value;

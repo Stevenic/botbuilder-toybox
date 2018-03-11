@@ -6,8 +6,6 @@ import { Promiseable, Activity } from 'botbuilder';
 import { PromptValidator } from './textPrompt';
 import * as Recognizers from '@microsoft/recognizers-text-date-time';
 
-const dateTimeModel = Recognizers.DateTimeRecognizer.instance.getDateTimeModel('en-us');
-
 /**
  * Datetime result returned by `DatetimePrompt`. For more details see the LUIS docs for
  * [builtin.datetimev2](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-entities#builtindatetimev2).
@@ -62,8 +60,10 @@ export function createDatetimePrompt<O = FoundDatetime[]>(validator?: PromptVali
             return Promise.resolve(); 
         },
         recognize: function recognize(context) {
-            const utterance = context.request && context.request.text ? context.request.text : '';
-            const results = dateTimeModel.parse(utterance);
+            const request = context.request || {};
+            const utterance = request.text || '';
+            const locale = request.locale || 'en-us';
+            const results = Recognizers.recognizeDateTime(utterance, locale);
             const values = results.length > 0 && results[0].resolution ? results[0].resolution.values : undefined;
             return Promise.resolve(validator ? validator(context, values) : values as any);
         }
