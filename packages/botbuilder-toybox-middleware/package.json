@@ -2,7 +2,7 @@
   "name": "botbuilder-toybox-middleware",
   "author": "stevenic@microsoft.com",
   "description": "Useful collection of middleware for Bot Builder v4.",
-  "version": "0.1.0-m1.10",
+  "version": "0.1.0-m2.0",
   "license": "MIT",
   "keywords": [
     "botbuilder",
@@ -18,9 +18,10 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "botbuilder": "4.0.0-m1.10"
+    "botbuilder": "4.0.0-m2.1"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "7.2.5",    
     "@types/mocha": "^2.2.47",
     "@types/node": "^9.3.0",
     "codelyzer": "^4.1.0",

@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware } from 'botbuilder';
+import { Middleware, BotContext } from 'botbuilder';
 /**
  * This middleware patches an issue where for some channels, including the emulator, the initial
  * `from` field for a `conversationUpdate` activity is either missing or not correct. The issue is
@@ -21,11 +21,9 @@ import { Middleware } from 'botbuilder';
  * To use the plugin add it to your middleware stack before any state management middleware:
  *
  * ```JavaScript
- * const { FromPatch } = require('botbuilder-toybox-middleware');
- *
- * bot.use(new FromPatch());
+ *  bot.use(new FromPatch());
  * ```
  */
 export declare class FromPatch implements Middleware {
-    contextCreated(context: BotContext, next: () => Promise<void>): Promise<void>;
+    onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void>;
 }

@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Promiseable } from 'botbuilder';
+import { Middleware, Promiseable, BotContext } from 'botbuilder';
 /**
  * Function that will be called anytime an activity of the specified type is received. Simply avoid
  * calling `next()` to prevent the activity from being further routed.
@@ -15,22 +15,22 @@ export declare type ActivityFilterHandler = (context: BotContext, next: () => Pr
  * example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
  *
  * ```JavaScript
- * bot.use(new ActivityFilter('contactRelationUpdate', (context, next) => { })
- *    .use(new ActivityFilter('conversationUpdate', (context, next) => { }));
+ *  bot.use(new ActivityFilter('contactRelationUpdate', (context, next) => { })
+ *     .use(new ActivityFilter('conversationUpdate', (context, next) => { }));
  * ```
  *
  * You can also use an activity filter to greet a user as they join a conversation:
  *
  * ```JavaScript
- * bot.use(new ActivityFilter('conversationUpdate', (context, next) => {
+ *  bot.use(new ActivityFilter('conversationUpdate', async (context, next) => {
  *      const added = context.request.membersAdded || [];
  *      for (let i = 0; i < added.length; i++) {
  *          if (added[i].id !== context.request.recipient.id) {
- *              context.reply(`Welcome to my bot!`);
+ *              await context.sendActivity(`Welcome to my bot!`);
  *              break;
  *          }
  *      }
- * }));
+ *  }));
  * ```
  */
 export declare class ActivityFilter implements Middleware {
@@ -42,5 +42,5 @@ export declare class ActivityFilter implements Middleware {
      * @param handler Function that will be called anytime an activity of the specified type is received. Simply avoid calling `next()` to prevent the activity from being further routed.
      */
     constructor(type: string, handler: ActivityFilterHandler);
-    receiveActivity(context: BotContext, next: () => Promise<void>): Promise<void>;
+    onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void>;
 }

@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("./internal");
+/**
+ * @module botbuilder-toybox-middleware
+ */
+/** Licensed under the MIT License. */
+const botbuilder_1 = require("botbuilder");
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
  * too long to reply to a message. Most channels require you periodically send an additional
@@ -25,14 +29,15 @@ class ShowTyping {
     constructor(delay = 500, frequency = 2000) {
         this.delay = delay;
         this.frequency = frequency;
-        this.key = 'showTyping:' + ShowTyping.id++;
     }
-    receiveActivity(context, next) {
+    onProcessRequest(context, next) {
+        let finished = false;
+        let hTimeout = undefined;
         function sendTyping() {
-            state.hTimeout = undefined;
-            context.bot.adapter.post([activity]).then(() => {
-                if (!state.finished) {
-                    state.hTimeout = setTimeout(sendTyping, frequency);
+            hTimeout = undefined;
+            context.adapter.sendActivity([activity]).then(() => {
+                if (!finished) {
+                    hTimeout = setTimeout(sendTyping, frequency);
                 }
             }, (err) => {
                 console.error(`showTyping: error sending typing indicator: ${err.toString()}`);
@@ -40,26 +45,25 @@ class ShowTyping {
         }
         // Initialize activity
         const activity = { type: 'typing' };
-        internal_1.applyConversationReference(activity, context.conversationReference);
+        const ref = botbuilder_1.BotContext.getConversationReference(context.request);
+        botbuilder_1.BotContext.applyConversationReference(activity, ref);
         // Start delay timer and call next()
         const { delay, frequency } = this;
-        const state = { finished: false, hTimeout: undefined };
-        context.state[this.key] = state;
-        state.hTimeout = setTimeout(sendTyping, delay);
-        return next();
-    }
-    postActivity(context, activities, next) {
-        // Cancel timer and call next()
-        const state = context.state[this.key];
-        if (state && !state.finished) {
-            state.finished = true;
-            if (state.hTimeout) {
-                clearTimeout(state.hTimeout);
+        hTimeout = setTimeout(sendTyping, delay);
+        return next().then(() => {
+            // Stop timer
+            finished = true;
+            if (hTimeout) {
+                clearTimeout(hTimeout);
             }
-        }
-        return next();
+        }, (err) => {
+            // Stop timer
+            finished = true;
+            if (hTimeout) {
+                clearTimeout(hTimeout);
+            }
+        });
     }
 }
-ShowTyping.id = 0;
 exports.ShowTyping = ShowTyping;
 //# sourceMappingURL=showTyping.js.map

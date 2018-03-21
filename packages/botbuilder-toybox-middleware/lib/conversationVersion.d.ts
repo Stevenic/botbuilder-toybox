@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Promiseable } from 'botbuilder';
+import { Middleware, Promiseable, BotContext, ConversationState } from 'botbuilder';
 /**
  * (Optional) settings passed to `ConversationVersion` middleware.
  */
@@ -32,27 +32,27 @@ export declare type ConversationVersionHandler = (context: BotContext, version: 
  * detected. Example:
  *
  * ```JavaScript
- * const { ConversationVersion } = require('botbuilder-toybox-middleware');
+ *  const conversationState = new ConversationState(new MemoryStorage());
  *
- * bot.use(new ConversationVersion(2.0, (context, version, next) => {
- *      if (version < 2.0) {
- *          context.reply(`I'm sorry. My service has been upgraded and we need to start over.`);
- *          context.state.conversation = {};
- *      }
+ *  bot.use(new ConversationVersion(conversationState, 2.0, async (context, version, next) => {
+ *      conversationState.clear(context);
+ *      await context.sendActivity(`I'm sorry. My service has been upgraded and we need to start over.`);
  *      return next();
- * }));
+ *  }));
  * ```
  */
 export declare class ConversationVersion implements Middleware {
+    private conversationState;
     private version;
     private handler;
     private readonly settings;
     /**
      * Creates a new instance of `CoversationVersion` middleware.
+     * @param conversationState The conversation state to persist the version number to.
      * @param version Latest version number in major.minor form.
      * @param handler Handler that will be invoked anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number.
      * @param settings (Optional) settings to customize the middleware.
      */
-    constructor(version: number, handler: ConversationVersionHandler, settings?: Partial<ConversationVersionSettings>);
-    receiveActivity(context: BotContext, next: () => Promise<void>): Promise<void>;
+    constructor(conversationState: ConversationState, version: number, handler: ConversationVersionHandler, settings?: Partial<ConversationVersionSettings>);
+    onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void>;
 }

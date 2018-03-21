@@ -18,20 +18,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * To use the plugin add it to your middleware stack before any state management middleware:
  *
  * ```JavaScript
- * const { FromPatch } = require('botbuilder-toybox-middleware');
- *
- * bot.use(new FromPatch());
+ *  bot.use(new FromPatch());
  * ```
  */
 class FromPatch {
-    contextCreated(context, next) {
+    onProcessRequest(context, next) {
         if (context.request && context.request.type !== 'message') {
             const members = context.request.membersAdded ? context.request.membersAdded : context.request.membersRemoved;
             const accounts = members && context.request.recipient ? members.filter((m) => m.id !== context.request.recipient) : [];
             const l = accounts.length;
             if (l > 0 && (l === 1 || !context.request.from)) {
                 context.request.from = accounts[0];
-                context.conversationReference.user = accounts[0];
             }
         }
         return next();

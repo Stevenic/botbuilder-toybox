@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, ChannelAccount } from 'botbuilder';
+import { Middleware, ChannelAccount, BotContext } from 'botbuilder';
 
 /**
  * This middleware patches an issue where for some channels, including the emulator, the initial 
@@ -22,20 +22,17 @@ import { Middleware, ChannelAccount } from 'botbuilder';
  * To use the plugin add it to your middleware stack before any state management middleware:
  * 
  * ```JavaScript
- * const { FromPatch } = require('botbuilder-toybox-middleware');
- *
- * bot.use(new FromPatch());
+ *  bot.use(new FromPatch());
  * ```
  */
 export class FromPatch implements Middleware {
-    public contextCreated(context: BotContext, next: () => Promise<void>): Promise<void> {
+    public onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void> {
         if (context.request && context.request.type !== 'message') {
             const members = context.request.membersAdded ? context.request.membersAdded : context.request.membersRemoved;
             const accounts = members && context.request.recipient ? members.filter((m) => m.id !== (context.request as any).recipient) : [];
             const l = accounts.length
             if (l > 0 && (l === 1 || !context.request.from)) {
                 context.request.from = accounts[0];
-                context.conversationReference.user = accounts[0];
             }
         }
         return next();

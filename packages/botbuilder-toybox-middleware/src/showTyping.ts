@@ -2,8 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Activity, ConversationResourceResponse } from 'botbuilder';
-import { applyConversationReference } from './internal';
+import { Middleware, Activity, ConversationResourceResponse, BotContext } from 'botbuilder';
 
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
@@ -21,24 +20,21 @@ import { applyConversationReference } from './internal';
  * adapter so these additional activities will not go through middleware or be logged.
  */
 export class ShowTyping implements Middleware {
-    static id = 0;
-    private readonly key: string;
-
     /**
      * Creates a new instance of `ShowTyping` middleware.
      * @param delay (Optional) initial delay before sending first typing indicator. Defaults to 500ms.
      * @param frequency (Optional) rate at which additional typing indicators will be sent. Defaults to every 2000ms.
      */
-    constructor(private delay = 500, private frequency = 2000) { 
-        this.key = 'showTyping:' + ShowTyping.id++;
-    }
+    constructor(private delay = 500, private frequency = 2000) { }
 
-    public receiveActivity(context: BotContext, next: () => Promise<void>): Promise<void> {
+    public onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void> {
+        let finished = false;
+        let hTimeout: any = undefined;
         function sendTyping() {
-            state.hTimeout = undefined;
-            context.bot.adapter.post([activity]).then(() => {
-                if (!state.finished) {
-                    state.hTimeout = setTimeout(sendTyping, frequency);
+            hTimeout = undefined;
+            context.adapter.sendActivity([activity]).then(() => {
+                if (!finished) {
+                    hTimeout = setTimeout(sendTyping, frequency);
                 }
             }, (err) => {
                 console.error(`showTyping: error sending typing indicator: ${err.toString()}`);
@@ -46,29 +42,21 @@ export class ShowTyping implements Middleware {
         }
 
         // Initialize activity
-        const activity = { type: 'typing' }
-        applyConversationReference(activity, context.conversationReference);
+        const activity = { type: 'typing' };
+        const ref = BotContext.getConversationReference(context.request);
+        BotContext.applyConversationReference(activity, ref);
 
         // Start delay timer and call next()
         const { delay, frequency } = this;
-        const state: ShowTypingState = { finished: false, hTimeout: undefined };
-        context.state[this.key] = state;
-        state.hTimeout = setTimeout(sendTyping, delay);
-        return next();
+        hTimeout = setTimeout(sendTyping, delay);
+        return next().then(() => {
+            // Stop timer
+            finished = true;
+            if (hTimeout) { clearTimeout(hTimeout) }
+        }, (err) => {
+            // Stop timer
+            finished = true;
+            if (hTimeout) { clearTimeout(hTimeout) }
+        });
     }
-
-    public postActivity(context: BotContext, activities: Partial<Activity>[], next: () => Promise<ConversationResourceResponse[]>): Promise<ConversationResourceResponse[]> {
-        // Cancel timer and call next()
-        const state = context.state[this.key] as ShowTypingState;
-        if (state && !state.finished) {
-            state.finished = true;
-            if (state.hTimeout) { clearTimeout(state.hTimeout) }
-        }
-        return next();
-    }
-}
-
-interface ShowTypingState {
-    finished: boolean;
-    hTimeout: NodeJS.Timer|undefined;
 }

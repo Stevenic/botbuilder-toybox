@@ -7,28 +7,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * place to notify the user that an error occurred:
  *
  * ```JavaScript
- * bot.use(new CatchError((context, phase, error) => {
- *      switch (phase) {
- *          case 'contextCreated':
- *          case 'receiveActivity':
- *              context.reply(`I'm sorry... Something went wrong.`);
- *              context.state.conversation = {};
- *              return Promise.resolve();
- *          case 'postActivity':
- *          default:
- *              return Promise.reject(err);
- *      }
+ *  const conversationState = new ConversationState(new MemoryStorage());
+ *
+ *  bot.use(new CatchError(async (context, error) => {
+ *      conversationState.clear(context);
+ *      await context.sendActivity(`I'm sorry... Something went wrong.`);
+ *      return err;
  * }));
  * ```
  *
  * The example catches the error and reports it to the user the clears the conversation state to
  * prevent the user from getting trapped within a conversation loop. This protects against cases
  * where your bot is throwing errors because of some bad state its in.
- *
- * If we're in the `postActivity` phase we're simply passing through the error to the next piece
- * of middleware below us on the stack (errors occur on the trailing edge of the middleware chain.)
- * The reason for the pass through is that this is typically a message delivery failure so sending
- * other messages will likely fail to.
  */
 class CatchError {
     /**
@@ -37,34 +27,17 @@ class CatchError {
      */
     constructor(handler) {
         this.handler = handler;
-        this.key = 'catchErrorCalled:' + CatchError.id++;
     }
-    contextCreated(context, next) {
-        return this.catchError(context, 'contextCreated', next);
-    }
-    receiveActivity(context, next) {
-        return this.catchError(context, 'receiveActivity', next);
-    }
-    postActivity(context, activities, next) {
-        return this.catchError(context, 'postActivity', next);
-    }
-    catchError(context, phase, next) {
+    onProcessRequest(context, next) {
         return next().catch((err) => {
-            try {
-                if (!context.state[this.key]) {
-                    context.state[this.key] = true;
-                    return this.handler(context, phase, err instanceof Error ? err : new Error(err.toString()));
+            return Promise.resolve(this.handler(context, err)).then((e) => {
+                if (e) {
+                    throw e;
                 }
-                else {
-                    return err;
-                }
-            }
-            catch (err) {
-                return err;
-            }
+                ;
+            });
         });
     }
 }
-CatchError.id = 0;
 exports.CatchError = CatchError;
 //# sourceMappingURL=catchError.js.map
