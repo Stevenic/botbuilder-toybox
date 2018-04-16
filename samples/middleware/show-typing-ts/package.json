@@ -1,7 +1,7 @@
 {
-  "name": "show-typing-ts",
+  "name": "middleware-show-typing-ts",
   "version": "1.0.0",
-  "description": "Bot Builder Toubox example to let you test the ShowTyping middleware.",
+  "description": "Bot Builder Toybox example to let you test the ShowTyping middleware.",
   "main": "./lib/app.js",
   "scripts": {
     "build-sample": "tsc",
@@ -12,8 +12,9 @@
   "dependencies": {
     "@types/node": "^9.3.0",
     "@types/restify": "^5.0.7",
-    "botbuilder": "4.0.0-m2.1",
-    "botbuilder-toybox-middleware": "0.1.0-m2.0",
+    "botbuilder": "4.0.0-m3.0",
+    "botbuilder-toybox-middleware": "0.1.0-m3.0",
+    "botbuilder-toybox-memories": "0.1.0-m3.0",
     "restify": "6.3.4"
   }
 }

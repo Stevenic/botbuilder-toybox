@@ -13,9 +13,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * ```JavaScript
  *  bot.use(new ActivityFilter('conversationUpdate', async (context, next) => {
- *      const added = context.request.membersAdded || [];
+ *      const added = context.activity.membersAdded || [];
  *      for (let i = 0; i < added.length; i++) {
- *          if (added[i].id !== context.request.recipient.id) {
+ *          if (added[i].id !== context.activity.recipient.id) {
  *              await context.sendActivity(`Welcome to my bot!`);
  *              break;
  *          }
@@ -33,9 +33,9 @@ class ActivityFilter {
         this.type = type;
         this.handler = handler;
     }
-    onProcessRequest(context, next) {
+    onTurn(context, next) {
         // Call handler if filter matched
-        if (context.request && context.request.type === this.type) {
+        if (context.activity && context.activity.type === this.type) {
             try {
                 return Promise.resolve(this.handler(context, next));
             }

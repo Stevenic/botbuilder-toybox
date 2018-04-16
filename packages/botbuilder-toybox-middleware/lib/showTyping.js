@@ -30,12 +30,12 @@ class ShowTyping {
         this.delay = delay;
         this.frequency = frequency;
     }
-    onProcessRequest(context, next) {
+    onTurn(context, next) {
         let finished = false;
         let hTimeout = undefined;
         function sendTyping() {
             hTimeout = undefined;
-            context.adapter.sendActivity([activity]).then(() => {
+            context.adapter.sendActivities(context, [activity]).then(() => {
                 if (!finished) {
                     hTimeout = setTimeout(sendTyping, frequency);
                 }
@@ -44,9 +44,8 @@ class ShowTyping {
             });
         }
         // Initialize activity
-        const activity = { type: 'typing' };
-        const ref = botbuilder_1.BotContext.getConversationReference(context.request);
-        botbuilder_1.BotContext.applyConversationReference(activity, ref);
+        const ref = botbuilder_1.TurnContext.getConversationReference(context.activity);
+        const activity = botbuilder_1.TurnContext.applyConversationReference({ type: 'typing' }, ref);
         // Start delay timer and call next()
         const { delay, frequency } = this;
         hTimeout = setTimeout(sendTyping, delay);

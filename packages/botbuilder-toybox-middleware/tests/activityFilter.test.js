@@ -26,9 +26,9 @@ describe('ActivityFilter Middleware', function() {
         const adapter = new TestAdapter();
         const bot = new Bot(adapter)
             .use(new ActivityFilter('conversationUpdate', (context, next) => { 
-                const added = context.request.membersAdded || [];
+                const added = context.activity.membersAdded || [];
                 for (let i = 0; i < added.length; i++) {
-                    if (added[i].id !== context.request.recipient.id) {
+                    if (added[i].id !== context.activity.recipient.id) {
                         context.reply(`welcome`);
                         break;
                     }

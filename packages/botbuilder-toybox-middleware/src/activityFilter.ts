@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Promiseable, BotContext } from 'botbuilder';
+import { Middleware, Promiseable, TurnContext } from 'botbuilder';
 
 /**
  * Function that will be called anytime an activity of the specified type is received. Simply avoid 
@@ -10,7 +10,7 @@ import { Middleware, Promiseable, BotContext } from 'botbuilder';
  * @param ActivityFilterHandler.context Context object for the current turn of conversation.
  * @param ActivityFilterHandler.next Function that should be called to continue execution to the next piece of middleware. Omitting this call will effectively filter out the activity.
  */
-export type ActivityFilterHandler = (context: BotContext, next: () => Promise<void>) => Promiseable<void>;
+export type ActivityFilterHandler = (context: TurnContext, next: () => Promise<void>) => Promiseable<void>;
 
 
 /**
@@ -26,9 +26,9 @@ export type ActivityFilterHandler = (context: BotContext, next: () => Promise<vo
  * 
  * ```JavaScript 
  *  bot.use(new ActivityFilter('conversationUpdate', async (context, next) => {
- *      const added = context.request.membersAdded || [];
+ *      const added = context.activity.membersAdded || [];
  *      for (let i = 0; i < added.length; i++) {
- *          if (added[i].id !== context.request.recipient.id) {
+ *          if (added[i].id !== context.activity.recipient.id) {
  *              await context.sendActivity(`Welcome to my bot!`);
  *              break;
  *          }
@@ -44,9 +44,9 @@ export class ActivityFilter implements Middleware {
      */
     constructor(private type: string, private handler: ActivityFilterHandler) { }
 
-    public onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void> {
+    public onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         // Call handler if filter matched
-        if (context.request && context.request.type === this.type) {
+        if (context.activity && context.activity.type === this.type) {
             try {
                 return Promise.resolve(this.handler(context, next));
             } catch (err) {

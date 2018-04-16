@@ -28,7 +28,7 @@ class CatchError {
     constructor(handler) {
         this.handler = handler;
     }
-    onProcessRequest(context, next) {
+    onTurn(context, next) {
         return next().catch((err) => {
             return Promise.resolve(this.handler(context, err)).then((e) => {
                 if (e) {

@@ -36,7 +36,7 @@ class ConversationVersion {
             conversationVersionProperty: 'conversationVersion'
         }, settings);
     }
-    onProcessRequest(context, next) {
+    onTurn(context, next) {
         return this.conversationState.read(context).then((state) => {
             // Get current version
             let version = state[this.settings.conversationVersionProperty];

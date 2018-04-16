@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Promiseable, BotContext, ConversationState } from 'botbuilder';
+import { Middleware, Promiseable, TurnContext, ConversationState } from 'botbuilder';
 /**
  * (Optional) settings passed to `ConversationVersion` middleware.
  */
@@ -20,7 +20,7 @@ export interface ConversationVersionSettings {
  * @param ConversationVersionHandler.version Current conversations version number.
  * @param ConversationVersionHandler.next Function that should be called to continue execution to the next piece of middleware. Calling `next()` will first update the conversations version number to match the latest version and then call the next piece of middleware.
  */
-export declare type ConversationVersionHandler = (context: BotContext, version: number, next: () => Promise<void>) => Promiseable<void>;
+export declare type ConversationVersionHandler = (context: TurnContext, version: number, next: () => Promise<void>) => Promiseable<void>;
 /**
  * Deploying new versions of your bot more often then not should have little
  * to no impact on the current conversations you're having with a user. Sometimes, however, a change
@@ -54,5 +54,5 @@ export declare class ConversationVersion implements Middleware {
      * @param settings (Optional) settings to customize the middleware.
      */
     constructor(conversationState: ConversationState, version: number, handler: ConversationVersionHandler, settings?: Partial<ConversationVersionSettings>);
-    onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void>;
+    onTurn(context: TurnContext, next: () => Promise<void>): Promise<void>;
 }

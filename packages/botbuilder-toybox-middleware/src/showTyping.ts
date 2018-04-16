@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Activity, ConversationResourceResponse, BotContext } from 'botbuilder';
+import { Middleware, Activity, ConversationResourceResponse, TurnContext } from 'botbuilder';
 
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
@@ -27,12 +27,12 @@ export class ShowTyping implements Middleware {
      */
     constructor(private delay = 500, private frequency = 2000) { }
 
-    public onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void> {
+    public onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         let finished = false;
         let hTimeout: any = undefined;
         function sendTyping() {
             hTimeout = undefined;
-            context.adapter.sendActivity([activity]).then(() => {
+            context.adapter.sendActivities(context, [activity]).then(() => {
                 if (!finished) {
                     hTimeout = setTimeout(sendTyping, frequency);
                 }
@@ -42,9 +42,8 @@ export class ShowTyping implements Middleware {
         }
 
         // Initialize activity
-        const activity = { type: 'typing' };
-        const ref = BotContext.getConversationReference(context.request);
-        BotContext.applyConversationReference(activity, ref);
+        const ref = TurnContext.getConversationReference(context.activity);
+        const activity = TurnContext.applyConversationReference({ type: 'typing' }, ref);
 
         // Start delay timer and call next()
         const { delay, frequency } = this;

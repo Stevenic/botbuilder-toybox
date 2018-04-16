@@ -2,14 +2,14 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Promiseable, BotContext } from 'botbuilder';
+import { Middleware, Promiseable, TurnContext } from 'botbuilder';
 /**
  * Function that will be called when the `CatchError` middleware catches an error raised by the
  * bot or another piece of middleware.
  * @param CatchErrorHandler.context Context object for the current turn of conversation.
  * @param CatchErrorHandler.err The error that was caught.
  */
-export declare type CatchErrorHandler = (context: BotContext, err: Error) => Promiseable<void>;
+export declare type CatchErrorHandler = (context: TurnContext, err: Error) => Promiseable<void>;
 /**
  * This middleware gives you a centralized place to catch errors that either bot throws or another
  * piece of middleware throws. The middleware will only invoke your handler once per conversation
@@ -37,5 +37,5 @@ export declare class CatchError implements Middleware {
      * @param handler Function called should an error be raised by the bot or another piece of middleware.
      */
     constructor(handler: CatchErrorHandler);
-    onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void>;
+    onTurn(context: TurnContext, next: () => Promise<void>): Promise<void>;
 }

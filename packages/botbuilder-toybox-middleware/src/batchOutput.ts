@@ -5,7 +5,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-import { BotContext, Middleware, Activity, ActivityTypes, InputHints, EndOfConversationCodes, ResourceResponse } from 'botbuilder-core';
+import { TurnContext, Middleware, Activity, ActivityTypes, InputHints, EndOfConversationCodes, ResourceResponse } from 'botbuilder-core';
 
 const cacheKey = Symbol('batch');
 
@@ -37,11 +37,11 @@ const cacheKey = Symbol('batch');
  *  });
  * ```
  * 
- * For TypeScript users you can use a custom interface that extends the `BotContext` interface to
+ * For TypeScript users you can use a custom interface that extends the `TurnContext` interface to
  * get full intellisense for the added property:
  * 
  * ```javascript
- *  interface MyContext extends BotContext {
+ *  interface MyContext extends TurnContext {
  *      readonly batch: BatchOutput;
  *  }
  * 
@@ -62,10 +62,10 @@ export class BatchOutput implements Middleware {
      * Creates a new BatchOutput instance. 
      * @param context (Optional) context for the current turn of conversation. This can be omitted when creating an instance of the class to use as middleware.  
      */
-    constructor(private context?: BotContext) { }
+    constructor(private context?: TurnContext) { }
     
     /** INTERNAL called by the adapter when used as middleware. */
-    public onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void> {
+    public onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         // Extend context with batch property
         const batch = new BatchOutput(context);
         Object.defineProperties(context, {
@@ -133,7 +133,7 @@ export class BatchOutput implements Middleware {
             const responses = this.batch().slice();
             const count = responses.length;
             if (count > 0) {
-                return BotContext.prototype.sendActivity.apply(this.context, responses).then((responses: ResourceResponse[]) => {
+                return TurnContext.prototype.sendActivity.apply(this.context, responses).then((responses: ResourceResponse[]) => {
                         this.batch().splice(0, count);
                         return responses;
                     });
@@ -171,14 +171,14 @@ export class BatchOutput implements Middleware {
 
     private add(activity: Partial<Activity>): void {
         this.batch().push(activity);
-        (this.context as BotContext).responded = true;
+        (this.context as TurnContext).responded = true;
     }
 
     private batch(): Partial<Activity>[] {
         if (!this.context) { throw new Error(`BatchOutput: no context object. Pass in a context object to use BatchOutput directly, outside of middleware.`) }
-        if (!this.context.has(cacheKey)) {
-            this.context.set(cacheKey, []);
+        if (!this.context.services.has(cacheKey)) {
+            this.context.services.set(cacheKey, []);
         }
-        return this.context.get(cacheKey);
+        return this.context.services.get(cacheKey);
     }
 }

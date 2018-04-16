@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, BotContext } from 'botbuilder';
+import { Middleware, TurnContext } from 'botbuilder';
 /**
  * This middleware lets will automatically send a 'typing' activity if your bot is taking
  * too long to reply to a message. Most channels require you periodically send an additional
@@ -27,5 +27,5 @@ export declare class ShowTyping implements Middleware {
      * @param frequency (Optional) rate at which additional typing indicators will be sent. Defaults to every 2000ms.
      */
     constructor(delay?: number, frequency?: number);
-    onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void>;
+    onTurn(context: TurnContext, next: () => Promise<void>): Promise<void>;
 }

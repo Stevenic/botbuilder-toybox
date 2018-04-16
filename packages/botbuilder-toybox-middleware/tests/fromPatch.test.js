@@ -11,15 +11,15 @@ describe('FromPatch Middleware', function() {
             .use({
                 contextCreated: (context, next) => {
                     // Patch a bug in test adapter :(
-                    delete context.request.from;
-                    context.request.recipient =  { "id": "default-bot", "name": "Bot" }
+                    delete context.activity.from;
+                    context.activity.recipient =  { "id": "default-bot", "name": "Bot" }
                     return next();
                 }
             })
             .use(new FromPatch())
             .onReceive((context) => {
-                assert(context.request.from, `From field missing`);
-                assert(context.request.from.id === 'default-user', `Invalid from.id.`);
+                assert(context.activity.from, `From field missing`);
+                assert(context.activity.from.id === 'default-user', `Invalid from.id.`);
                 assert(context.conversationReference.user, `User field missing`);
                 assert(context.conversationReference.user.id === 'default-user', `Invalid user.id.`);
                 

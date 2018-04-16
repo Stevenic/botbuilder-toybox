@@ -22,13 +22,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * ```
  */
 class FromPatch {
-    onProcessRequest(context, next) {
-        if (context.request && context.request.type !== 'message') {
-            const members = context.request.membersAdded ? context.request.membersAdded : context.request.membersRemoved;
-            const accounts = members && context.request.recipient ? members.filter((m) => m.id !== context.request.recipient) : [];
+    onTurn(context, next) {
+        if (context.activity && context.activity.type !== 'message') {
+            const members = context.activity.membersAdded ? context.activity.membersAdded : context.activity.membersRemoved;
+            const accounts = members && context.activity.recipient ? members.filter((m) => m.id !== context.activity.recipient) : [];
             const l = accounts.length;
-            if (l > 0 && (l === 1 || !context.request.from)) {
-                context.request.from = accounts[0];
+            if (l > 0 && (l === 1 || !context.activity.from)) {
+                context.activity.from = accounts[0];
             }
         }
         return next();

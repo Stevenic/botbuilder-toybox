@@ -2,7 +2,7 @@
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-import { Middleware, Activity, ConversationResourceResponse, Promiseable, BotContext } from 'botbuilder';
+import { Middleware, Activity, ConversationResourceResponse, Promiseable, TurnContext } from 'botbuilder';
 
 /**
  * Function that will be called when the `CatchError` middleware catches an error raised by the
@@ -10,7 +10,7 @@ import { Middleware, Activity, ConversationResourceResponse, Promiseable, BotCon
  * @param CatchErrorHandler.context Context object for the current turn of conversation.
  * @param CatchErrorHandler.err The error that was caught.
  */
-export type CatchErrorHandler = (context: BotContext, err: Error) => Promiseable<void>;
+export type CatchErrorHandler = (context: TurnContext, err: Error) => Promiseable<void>;
 
 /**
  * This middleware gives you a centralized place to catch errors that either bot throws or another 
@@ -39,7 +39,7 @@ export class CatchError implements Middleware {
      */
     constructor(private handler: CatchErrorHandler) { }
 
-    public onProcessRequest(context: BotContext, next: () => Promise<void>): Promise<void> {
+    public onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         return next().catch((err) => {
             return Promise.resolve(this.handler(context, err)).then((e) => {
                 if (e) { throw e };
