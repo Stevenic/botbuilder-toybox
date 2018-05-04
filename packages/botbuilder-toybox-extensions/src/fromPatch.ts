@@ -1,5 +1,5 @@
 /**
- * @module botbuilder-toybox-middleware
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
 import { Middleware, ChannelAccount, TurnContext } from 'botbuilder';

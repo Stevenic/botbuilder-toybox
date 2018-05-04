@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module botbuilder-toybox-memories
  */
 /** Licensed under the MIT License. */
+__export(require("./botStateFragment"));
 __export(require("./memoryFragment"));
 __export(require("./memoryScope"));
 __export(require("./memoryScopeAccessor"));

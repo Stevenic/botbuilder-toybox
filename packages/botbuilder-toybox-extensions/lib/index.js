@@ -7,9 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module botbuilder-toybox-middleware
  */
 /** Licensed under the MIT License. */
-__export(require("./activityFilter"));
+__export(require("./activityFactory"));
 __export(require("./catchError"));
-__export(require("./conversationVersion"));
+__export(require("./checkVersion"));
+__export(require("./filterActivity"));
 __export(require("./fromPatch"));
 __export(require("./showTyping"));
 //# sourceMappingURL=index.js.map

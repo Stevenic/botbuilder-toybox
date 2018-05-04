@@ -1,8 +1,9 @@
 /**
- * @module botbuilder-toybox-memories
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-import { Storage, TurnContext, StoreItems } from 'botbuilder';
+import { TurnContext } from 'botbuilder-core';
+import { Storage, StoreItems } from 'botbuilder-core-extensions';
 import { MemoryFragment } from './memoryFragment';
 
 export class MemoryScope {
@@ -10,6 +11,27 @@ export class MemoryScope {
     public readonly fragments = new Map<string, MemoryFragment<any>>();
 
     constructor(public readonly storage: Storage, public readonly namespace: string, public readonly getKey: (context: TurnContext) => string) { }
+
+    public forgetAll(context: TurnContext): Promise<void> {
+        try {
+            // Overwrite persisted memory
+            const memory = { eTag: '*' };
+            const storageKey = this.getKey(context);
+            const changes = {} as StoreItems;
+            changes[storageKey] = memory;
+            return this.storage.write(changes).then(() => {
+                // Update cached memory 
+                context.services.set(this.cacheKey, {
+                    memory: memory,
+                    hash: JSON.stringify(memory),
+                    accessed: true
+                });
+            });
+        } catch (err) {
+            return Promise.reject(err);
+        }
+
+    }
 
     public fragment<T = any>(name: string, defaultValue?: T): MemoryFragment<T> {
         if (this.fragments.has(name)) { throw new Error(`MemoryScope: duplicate "${name}" fragment.`) }
@@ -56,7 +78,7 @@ export class MemoryScope {
                     const changes = {} as StoreItems;
                     changes[storageKey] = cached.memory;
                     cached.hash = hash;
-                    return this.storage.write(changes)
+                    return this.storage.write(changes);
                 }
             }
             return Promise.resolve();

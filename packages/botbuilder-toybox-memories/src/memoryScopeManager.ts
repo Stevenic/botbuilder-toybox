@@ -1,8 +1,8 @@
 /**
- * @module botbuilder-toybox-memories
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-import { TurnContext, Middleware } from 'botbuilder';
+import { TurnContext, Middleware } from 'botbuilder-core';
 import { MemoryScope } from './memoryScope';
 import { MemoryScopeAccessor } from './memoryScopeAccessor';
 

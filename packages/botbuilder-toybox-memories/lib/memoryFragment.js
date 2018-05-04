@@ -1,5 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * :package: **botbuilder-toybox-memories**
+ *
+ * Common time constants (in seconds) passed to `MemoryFragment.forgetAfter()`.
+ */
 exports.ForgetAfter = {
     never: 0,
     seconds: 1,
@@ -10,7 +15,37 @@ exports.ForgetAfter = {
     months: 2592000,
     years: 31536000
 };
+/**
+ * :package: **botbuilder-toybox-memories**
+ *
+ * Defines a new memory fragment for a given `MemoryScope`. Scopes will typically load all of
+ * their saved fragments on first access within a turn so the fragment itself provides a strongly
+ * typed isolation boundary within a scope.
+ *
+ * Fragments can have a range of data types but need to support serialization to JSON. So if they're
+ * primitives they should be of type `string`, `number`, or `boolean`. And if they're complex types,
+ * like `object` or `array`, they should be comprised of other types that support serialization.
+ * Primitives like `Date` and `RegExp` should be avoided.
+ *
+ * **Usage Example**
+ *
+ * ```JavaScript
+ * const { MemoryStorage } = require('botbuilder');
+ * const { ConversationScope, ForgetAfter } = require('botbuilder-toybox-memories');
+ *
+ * const conversation = new ConversationScope(new MemoryStorage());
+ * const stateFragment = conversation.fragment('state').forgetAfter(5 * ForgetAfter.minutes);
+ * ```
+ * @param T (Optional) Fragments data type.
+ */
 class MemoryFragment {
+    /**
+     * INTERNAL: Creates a new `MemoryFragment` instance. new memory fragments are typically
+     * created by `MemoryScope.fragment()`.
+     * @param scope The memory scope the fragment is being created for.
+     * @param name The name of the scope.  This typically should be unique within the scope.
+     * @param defaultValue (Optional) default value to initialize the scope with.
+     */
     constructor(scope, name, defaultValue) {
         this.scope = scope;
         this.name = name;
@@ -19,6 +54,17 @@ class MemoryFragment {
         this.maxSeconds = 0;
         this.maxTurns = 0;
     }
+    /**
+     * Deletes any current value for the fragment. If the fragment was configured with a "default
+     * value" this will restore the default value.
+     *
+     * **Usage Example**
+     *
+     * ```JavaScript
+     * await fragment.forget(context);
+     * ```
+     * @param context Context for the current turn of conversation.
+     */
     forget(context) {
         return this.scope.load(context).then((memory) => {
             if (memory && this.name in memory) {
@@ -48,7 +94,8 @@ class MemoryFragment {
                 }
                 // Populate with default value.
                 if (v == undefined && this.defaultValue !== undefined) {
-                    v = { value: this.defaultValue, lastAccess: now };
+                    const clone = typeof this.defaultValue == 'object' || Array.isArray(this.defaultValue) ? JSON.parse(JSON.stringify(this.defaultValue)) : this.defaultValue;
+                    v = { value: clone, lastAccess: now };
                     memory[this.name] = v;
                 }
             }
@@ -75,6 +122,29 @@ class MemoryFragment {
                 }
             }
         });
+    }
+    /**
+     * Returns a read-only version of the fragment that only implements `get()` and `has()` and will
+     * clone the fragments value prior to returning it from `get()`. This prevents any modification
+     * of the stored value.
+     */
+    asReadOnly() {
+        return {
+            get: (context) => {
+                return this.get(context).then((value) => {
+                    // Return clone
+                    if (typeof value === 'object' || Array.isArray(value)) {
+                        return JSON.parse(JSON.stringify(value));
+                    }
+                    else {
+                        return value;
+                    }
+                });
+            },
+            has: (context) => {
+                return this.has(context);
+            }
+        };
     }
 }
 exports.MemoryFragment = MemoryFragment;

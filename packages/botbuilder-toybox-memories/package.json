@@ -2,7 +2,7 @@
   "name": "botbuilder-toybox-memories",
   "author": "stevenic@microsoft.com",
   "description": "A memory management system for Bot Builder v4.",
-  "version": "0.1.0-m3.0",
+  "version": "0.1.0-preview1.0",
   "license": "MIT",
   "keywords": [
     "botbuilder",
@@ -18,7 +18,8 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "botbuilder": "4.0.0-m3.0"
+    "botbuilder-core": "4.0.0-preview1.0",
+    "botbuilder-core-extensions": "4.0.0-preview1.0"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "7.2.5",    

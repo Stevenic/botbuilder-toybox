@@ -1,12 +1,13 @@
 {
-  "name": "botbuilder-toybox-middleware",
+  "name": "botbuilder-toybox-extensions",
   "author": "stevenic@microsoft.com",
-  "description": "Useful collection of middleware for Bot Builder v4.",
-  "version": "0.1.0-m3.0",
+  "description": "Useful collection of extensions for Bot Builder v4.",
+  "version": "0.1.0-preview1.0",
   "license": "MIT",
   "keywords": [
     "botbuilder",
-    "botbuilder-extensions"
+    "botbuilder-extensions",
+    "botbuilder-toybox"
   ],
   "bugs": {
     "url": "https://github.com/Stevenic/botbuilder-toybox/issues"
@@ -18,7 +19,9 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "botbuilder": "4.0.0-m3.0"
+    "botbuilder-core": "4.0.0-preview1.0",
+    "botbuilder-core-extensions": "4.0.0-preview1.0",
+    "botbuilder-toybox-memories": "0.1.0-preview1.0"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "7.2.5",    

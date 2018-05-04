@@ -9,6 +9,26 @@ class MemoryScope {
         this.cacheKey = Symbol('state');
         this.fragments = new Map();
     }
+    forgetAll(context) {
+        try {
+            // Overwrite persisted memory
+            const memory = { eTag: '*' };
+            const storageKey = this.getKey(context);
+            const changes = {};
+            changes[storageKey] = memory;
+            return this.storage.write(changes).then(() => {
+                // Update cached memory 
+                context.services.set(this.cacheKey, {
+                    memory: memory,
+                    hash: JSON.stringify(memory),
+                    accessed: true
+                });
+            });
+        }
+        catch (err) {
+            return Promise.reject(err);
+        }
+    }
     fragment(name, defaultValue) {
         if (this.fragments.has(name)) {
             throw new Error(`MemoryScope: duplicate "${name}" fragment.`);

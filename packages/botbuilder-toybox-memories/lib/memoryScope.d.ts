@@ -1,8 +1,9 @@
 /**
- * @module botbuilder-toybox-memories
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-import { Storage, TurnContext } from 'botbuilder';
+import { TurnContext } from 'botbuilder-core';
+import { Storage } from 'botbuilder-core-extensions';
 import { MemoryFragment } from './memoryFragment';
 export declare class MemoryScope {
     readonly storage: Storage;
@@ -11,6 +12,7 @@ export declare class MemoryScope {
     private readonly cacheKey;
     readonly fragments: Map<string, MemoryFragment<any>>;
     constructor(storage: Storage, namespace: string, getKey: (context: TurnContext) => string);
+    forgetAll(context: TurnContext): Promise<void>;
     fragment<T = any>(name: string, defaultValue?: T): MemoryFragment<T>;
     load(context: TurnContext, accessed?: boolean): Promise<object>;
     save(context: TurnContext): Promise<void>;

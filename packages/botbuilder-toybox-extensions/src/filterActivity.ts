@@ -1,31 +1,35 @@
 /**
- * @module botbuilder-toybox-middleware
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
 import { Middleware, Promiseable, TurnContext } from 'botbuilder';
 
 /**
+ * :package: **botbuilder-toybox-middleware**
+ * 
  * Function that will be called anytime an activity of the specified type is received. Simply avoid 
  * calling `next()` to prevent the activity from being further routed.
- * @param ActivityFilterHandler.context Context object for the current turn of conversation.
- * @param ActivityFilterHandler.next Function that should be called to continue execution to the next piece of middleware. Omitting this call will effectively filter out the activity.
+ * @param FilterActivityHandler.context Context object for the current turn of conversation.
+ * @param FilterActivityHandler.next Function that should be called to continue execution to the next piece of middleware. Omitting this call will effectively filter out the activity.
  */
-export type ActivityFilterHandler = (context: TurnContext, next: () => Promise<void>) => Promiseable<void>;
+export type FilterActivityHandler = (context: TurnContext, next: () => Promise<void>) => Promiseable<void>;
 
 
 /**
+ * :package: **botbuilder-toybox-middleware**
+ * 
  * This middleware lets you easily filter out activity types your bot doesn't care about. For
  * example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
  * 
  * ```JavaScript
- *  bot.use(new ActivityFilter('contactRelationUpdate', (context, next) => { })
- *     .use(new ActivityFilter('conversationUpdate', (context, next) => { }));
+ *  adapter.use(new FilterActivity('contactRelationUpdate', (context, next) => { })
+ *         .use(new FilterActivity('conversationUpdate', (context, next) => { }));
  * ``` 
  * 
  * You can also use an activity filter to greet a user as they join a conversation:
  * 
  * ```JavaScript 
- *  bot.use(new ActivityFilter('conversationUpdate', async (context, next) => {
+ *  adapter.use(new FilterActivity('conversationUpdate', async (context, next) => {
  *      const added = context.activity.membersAdded || [];
  *      for (let i = 0; i < added.length; i++) {
  *          if (added[i].id !== context.activity.recipient.id) {
@@ -36,13 +40,13 @@ export type ActivityFilterHandler = (context: TurnContext, next: () => Promise<v
  *  }));
  * ```
  */
-export class ActivityFilter implements Middleware {
+export class FilterActivity implements Middleware {
     /**
-     * Creates a new instance of an `ActivityFilter` middleware.
+     * Creates a new instance of an `FilterActivity` middleware.
      * @param type Type of activity to trigger on.
      * @param handler Function that will be called anytime an activity of the specified type is received. Simply avoid calling `next()` to prevent the activity from being further routed.
      */
-    constructor(private type: string, private handler: ActivityFilterHandler) { }
+    constructor(private type: string, private handler: FilterActivityHandler) { }
 
     public onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         // Call handler if filter matched

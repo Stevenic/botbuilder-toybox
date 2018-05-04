@@ -1,10 +1,10 @@
 /**
- * @module botbuilder-toybox-middleware
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
 import { Middleware, TurnContext } from 'botbuilder';
 /**
- * This middleware lets will automatically send a 'typing' activity if your bot is taking
+ * This middleware lets you automatically send a 'typing' activity if your bot is taking
  * too long to reply to a message. Most channels require you periodically send an additional
  * 'typing' activity in order to keep the typing indicator lite so the middleware plugin will
  * automatically send additional messages at a given rate until it sees the bot send a reply.
