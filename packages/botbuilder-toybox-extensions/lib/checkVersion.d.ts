@@ -55,5 +55,6 @@ export declare class CheckVersion implements Middleware {
      * @param handler Handler that will be invoked anytime an existing conversations version number doesn't match. New conversations will just be initialized to the new version number.
      */
     constructor(versionFragment: ReadWriteFragment<number>, version: number, handler: VersionChangedHandler);
+    /** @private */
     onTurn(context: TurnContext, next: () => Promise<void>): Promise<void>;
 }

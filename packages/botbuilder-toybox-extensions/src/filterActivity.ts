@@ -50,6 +50,7 @@ export class FilterActivity implements Middleware {
      */
     constructor(private type: string, private handler: FilterActivityHandler) { }
 
+    /** @private */
     public async onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         // Call handler if filter matched
         if (context.activity && context.activity.type === this.type) {

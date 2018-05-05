@@ -30,6 +30,8 @@ import { Middleware, ChannelAccount, TurnContext } from 'botbuilder';
  * ```
  */
 export class PatchFrom implements Middleware {
+
+    /** @private */
     public async onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         if (context.activity && context.activity.type !== 'message') {
             const members = context.activity.membersAdded ? context.activity.membersAdded : context.activity.membersRemoved;

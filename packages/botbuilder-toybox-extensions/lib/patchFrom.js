@@ -34,6 +34,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * ```
  */
 class PatchFrom {
+    /** @private */
     onTurn(context, next) {
         return __awaiter(this, void 0, void 0, function* () {
             if (context.activity && context.activity.type !== 'message') {

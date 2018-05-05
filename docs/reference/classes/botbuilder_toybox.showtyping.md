@@ -28,11 +28,6 @@ This middleware lets you automatically send a 'typing' activity if your bot is t
 * [constructor](botbuilder_toybox.showtyping.md#constructor)
 
 
-### Methods
-
-* [onTurn](botbuilder_toybox.showtyping.md#onturn)
-
-
 
 ---
 ## Constructors
@@ -42,7 +37,7 @@ This middleware lets you automatically send a 'typing' activity if your bot is t
 ### ⊕ **new ShowTyping**(delay?: *`number`*, frequency?: *`number`*): [ShowTyping](botbuilder_toybox.showtyping.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:27](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L27)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:27](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L27)*
 
 
 
@@ -64,37 +59,5 @@ Creates a new instance of `ShowTyping` middleware.
 
 ---
 
-
-## Methods
-<a id="onturn"></a>
-
-###  onTurn
-
-► **onTurn**(context: *`TurnContext`*, next: *`function`*): `Promise`.<`void`>
-
-
-
-*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:34](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L34)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| context | `TurnContext`   |  - |
-| next | `function`   |  - |
-
-
-
-
-
-**Returns:** `Promise`.<`void`>
-
-
-
-
-
-___
 
 

@@ -44,5 +44,6 @@ export declare class CatchError implements Middleware {
      * @param handler Function called should an error be raised by the bot or another piece of middleware.
      */
     constructor(handler: CatchErrorHandler);
+    /** @private */
     onTurn(context: TurnContext, next: () => Promise<void>): Promise<void>;
 }

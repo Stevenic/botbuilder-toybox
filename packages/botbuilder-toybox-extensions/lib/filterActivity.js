@@ -45,6 +45,7 @@ class FilterActivity {
         this.type = type;
         this.handler = handler;
     }
+    /** @private */
     onTurn(context, next) {
         return __awaiter(this, void 0, void 0, function* () {
             // Call handler if filter matched

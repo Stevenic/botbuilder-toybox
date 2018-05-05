@@ -33,11 +33,6 @@ The example catches the error and reports it to the user then clears the convers
 * [constructor](botbuilder_toybox.catcherror.md#constructor)
 
 
-### Methods
-
-* [onTurn](botbuilder_toybox.catcherror.md#onturn)
-
-
 
 ---
 ## Constructors
@@ -47,7 +42,7 @@ The example catches the error and reports it to the user then clears the convers
 ### ⊕ **new CatchError**(handler: *[CatchErrorHandler](../#catcherrorhandler)*): [CatchError](botbuilder_toybox.catcherror.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L41)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L41)*
 
 
 
@@ -68,37 +63,5 @@ Creates a new CatchError instance.
 
 ---
 
-
-## Methods
-<a id="onturn"></a>
-
-###  onTurn
-
-► **onTurn**(context: *`TurnContext`*, next: *`function`*): `Promise`.<`void`>
-
-
-
-*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L47)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| context | `TurnContext`   |  - |
-| next | `function`   |  - |
-
-
-
-
-
-**Returns:** `Promise`.<`void`>
-
-
-
-
-
-___
 
 

@@ -29,7 +29,7 @@
 ### ⊕ **new MemoryScopeManager**(...scopes: *[MemoryScope](botbuilder_toybox.memoryscope.md)[]*): [MemoryScopeManager](botbuilder_toybox.memoryscopemanager.md)
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeManager.d.ts:9](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-memories/lib/memoryScopeManager.d.ts#L9)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeManager.d.ts:9](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryScopeManager.d.ts#L9)*
 
 
 
@@ -57,7 +57,7 @@
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeManager.d.ts:11](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-memories/lib/memoryScopeManager.d.ts#L11)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeManager.d.ts:11](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryScopeManager.d.ts#L11)*
 
 
 

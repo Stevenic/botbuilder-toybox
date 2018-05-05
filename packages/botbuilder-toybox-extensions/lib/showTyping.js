@@ -34,6 +34,7 @@ class ShowTyping {
         this.delay = delay;
         this.frequency = frequency;
     }
+    /** @private */
     onTurn(context, next) {
         let finished = false;
         let hTimeout = undefined;

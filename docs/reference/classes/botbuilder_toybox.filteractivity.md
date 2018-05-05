@@ -37,11 +37,6 @@ You can also use an activity filter to greet a user as they join a conversation:
 * [constructor](botbuilder_toybox.filteractivity.md#constructor)
 
 
-### Methods
-
-* [onTurn](botbuilder_toybox.filteractivity.md#onturn)
-
-
 
 ---
 ## Constructors
@@ -51,7 +46,7 @@ You can also use an activity filter to greet a user as they join a conversation:
 ### ⊕ **new FilterActivity**(type: *`string`*, handler: *[FilterActivityHandler](../#filteractivityhandler)*): [FilterActivity](botbuilder_toybox.filteractivity.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:44](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L44)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:44](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L44)*
 
 
 
@@ -73,37 +68,5 @@ Creates a new instance of an `FilterActivity` middleware.
 
 ---
 
-
-## Methods
-<a id="onturn"></a>
-
-###  onTurn
-
-► **onTurn**(context: *`TurnContext`*, next: *`function`*): `Promise`.<`void`>
-
-
-
-*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:51](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L51)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| context | `TurnContext`   |  - |
-| next | `function`   |  - |
-
-
-
-
-
-**Returns:** `Promise`.<`void`>
-
-
-
-
-
-___
 
 

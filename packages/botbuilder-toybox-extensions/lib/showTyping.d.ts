@@ -31,5 +31,6 @@ export declare class ShowTyping implements Middleware {
      * @param frequency (Optional) rate at which additional typing indicators will be sent. Defaults to every 2000ms.
      */
     constructor(delay?: number, frequency?: number);
+    /** @private */
     onTurn(context: TurnContext, next: () => Promise<void>): Promise<void>;
 }

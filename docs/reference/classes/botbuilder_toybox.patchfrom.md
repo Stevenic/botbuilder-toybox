@@ -23,43 +23,6 @@ This plugin does it's best to patch the issue by ensuring that the `from` accoun
 
 ## Index
 
-### Methods
-
-* [onTurn](botbuilder_toybox.patchfrom.md#onturn)
-
-
 
 ---
-## Methods
-<a id="onturn"></a>
-
-###  onTurn
-
-► **onTurn**(context: *`TurnContext`*, next: *`function`*): `Promise`.<`void`>
-
-
-
-*Defined in [packages/botbuilder-toybox-extensions/lib/patchFrom.d.ts:32](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/patchFrom.d.ts#L32)*
-
-
-
-**Parameters:**
-
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| context | `TurnContext`   |  - |
-| next | `function`   |  - |
-
-
-
-
-
-**Returns:** `Promise`.<`void`>
-
-
-
-
-
-___
-
 

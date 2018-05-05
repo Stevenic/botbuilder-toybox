@@ -48,5 +48,6 @@ export declare class FilterActivity implements Middleware {
      * @param handler Function that will be called anytime an activity of the specified type is received. Simply avoid calling `next()` to prevent the activity from being further routed.
      */
     constructor(type: string, handler: FilterActivityHandler);
+    /** @private */
     onTurn(context: TurnContext, next: () => Promise<void>): Promise<void>;
 }

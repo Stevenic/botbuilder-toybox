@@ -29,5 +29,6 @@ import { Middleware, TurnContext } from 'botbuilder';
  * ```
  */
 export declare class PatchFrom implements Middleware {
+    /** @private */
     onTurn(context: TurnContext, next: () => Promise<void>): Promise<void>;
 }

@@ -31,6 +31,7 @@ export class ShowTyping implements Middleware {
      */
     constructor(private delay = 500, private frequency = 2000) { }
 
+    /** @private */
     public onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         let finished = false;
         let hTimeout: any = undefined;

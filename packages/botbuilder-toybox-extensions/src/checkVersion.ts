@@ -55,6 +55,7 @@ export class CheckVersion implements Middleware {
      */
     constructor(private versionFragment: ReadWriteFragment<number>, private version: number, private handler: VersionChangedHandler) { }
 
+    /** @private */
     public async onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         // Get current version
         let version = await this.versionFragment.get(context);
