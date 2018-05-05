@@ -58,10 +58,10 @@ class CheckVersion {
             }
             // Check for change
             if (version !== this.version) {
-                yield this.handler(context, version, () => __awaiter(this, void 0, void 0, function* () {
+                yield Promise.resolve(this.handler(context, version, () => __awaiter(this, void 0, void 0, function* () {
                     yield this.versionFragment.set(context, this.version);
                     yield next();
-                }));
+                })));
             }
             else {
                 yield next();

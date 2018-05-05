@@ -8,8 +8,17 @@
 import { Activity, ActivityTypes, InputHints, EndOfConversationCodes } from 'botbuilder-core';
 
 /** 
- * :package: **botbuilder-toybox-middleware**
+ * :package: **botbuilder-toybox-extensions**
  * 
+ * A set of utility functions to assist with formatting various activity types the bot can send the
+ * user.
+ * 
+ * ```JavaScript
+ * const { ActivityFilter } = require('botbuilder-toybox-extensions');
+ * 
+ * const activity = ActivityFilter.typing();
+ * await context.sendActivity(activity);
+ * ```
  */
 export class ActivityFactory {
     /**
@@ -19,7 +28,7 @@ export class ActivityFactory {
      * Most chat clients download any images sent by the bot to a CDN which can delay the showing
      * of the message to the user.  If a bot sends a message with only text immediately after 
      * sending a message with images, the messages could end up being shown to the user out of 
-     * order. To help prevent this you can insert a delay of 2 seconds or so in between replies.     
+     * order. To help prevent this you can insert a delay of 2 seconds or so in between replies.  
      * @param ms Number of milliseconds to pause before delivering the next activity in the batch. 
      */
     static delay(ms: number): Partial<Activity> {

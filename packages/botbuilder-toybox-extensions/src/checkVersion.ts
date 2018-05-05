@@ -63,10 +63,10 @@ export class CheckVersion implements Middleware {
 
         // Check for change
         if (version !== this.version) {
-            await this.handler(context, version, async () => {
+            await Promise.resolve(this.handler(context, version, async () => {
                 await this.versionFragment.set(context, this.version);
                 await next();
-            });
+            }));
         } else {
             await next();
         }

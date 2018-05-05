@@ -6,15 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /** Licensed under the MIT License. */
 const botbuilder_1 = require("botbuilder");
 /**
+ * :package: **botbuilder-toybox-extensions**
+ *
  * This middleware lets you automatically send a 'typing' activity if your bot is taking
  * too long to reply to a message. Most channels require you periodically send an additional
  * 'typing' activity in order to keep the typing indicator lite so the middleware plugin will
  * automatically send additional messages at a given rate until it sees the bot send a reply.
  *
  * ```JavaScript
- * const { FromPatch } = require('botbuilder-toybox-middleware');
+ * const { ShowTyping } = require('botbuilder-toybox-extensions');
  *
- * bot.use(new ShowTyping());
+ * adapter.use(new ShowTyping());
  * ```
  *
  * It should be noted that the plugin sends 'typing' activities directly through the bots

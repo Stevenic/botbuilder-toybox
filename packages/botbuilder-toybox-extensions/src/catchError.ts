@@ -44,10 +44,12 @@ export class CatchError implements Middleware {
      */
     constructor(private handler: CatchErrorHandler) { }
 
-    public onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
-        return next().catch((err) => {
-            return Promise.resolve(this.handler(context, err));
-        });
+    public async onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
+        try {
+            await next();
+        } catch (err) {
+            await Promise.resolve(this.handler(context, err));
+        }
     }
 }
 

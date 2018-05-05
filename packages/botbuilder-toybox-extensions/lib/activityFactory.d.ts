@@ -7,8 +7,17 @@
  */
 import { Activity, EndOfConversationCodes } from 'botbuilder-core';
 /**
- * :package: **botbuilder-toybox-middleware**
+ * :package: **botbuilder-toybox-extensions**
  *
+ * A set of utility functions to assist with formatting various activity types the bot can send the
+ * user.
+ *
+ * ```JavaScript
+ * const { ActivityFilter } = require('botbuilder-toybox-extensions');
+ *
+ * const activity = ActivityFilter.typing();
+ * await context.sendActivity(activity);
+ * ```
  */
 export declare class ActivityFactory {
     /**

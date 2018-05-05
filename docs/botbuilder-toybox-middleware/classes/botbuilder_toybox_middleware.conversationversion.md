@@ -9,7 +9,7 @@ Deploying new versions of your bot more often then not should have little to no 
 
 This middleware lets you track a version number for the conversations your bot is having so that you can automatically delete the conversation state anytime a major version number difference is detected. Example:
 
-    const { ConversationVersion } = require('botbuilder-toybox-middleware');
+    const { ConversationVersion } = require('botbuilder-toybox-extensions');
 
     bot.use(new ConversationVersion(2.0, (context, version, next) => {
          if (version < 2.0) {
@@ -44,7 +44,7 @@ This middleware lets you track a version number for the conversations your bot i
 ### ⊕ **new ConversationVersion**(version: *`number`*, handler: *[ConversationVersionHandler](../#conversationversionhandler)*, settings?: *[Partial]()[ConversationVersionSettings](../interfaces/botbuilder_toybox_middleware.conversationversionsettings.md)*): [ConversationVersion](botbuilder_toybox_middleware.conversationversion.md)
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L49)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/conversationVersion.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-extensions/lib/conversationVersion.d.ts#L49)*
 
 
 
@@ -77,7 +77,7 @@ Creates a new instance of `CoversationVersion` middleware.
 
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/conversationVersion.d.ts#L57)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/conversationVersion.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-extensions/lib/conversationVersion.d.ts#L57)*
 
 
 

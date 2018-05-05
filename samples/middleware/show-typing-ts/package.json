@@ -13,7 +13,7 @@
     "@types/node": "^9.3.0",
     "@types/restify": "^5.0.7",
     "botbuilder": "4.0.0-m3.0",
-    "botbuilder-toybox-middleware": "0.1.0-m3.0",
+    "botbuilder-toybox-extensions": "0.1.0-m3.0",
     "botbuilder-toybox-memories": "0.1.0-m3.0",
     "restify": "6.3.4"
   }

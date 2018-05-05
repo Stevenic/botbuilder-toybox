@@ -19,8 +19,8 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "botbuilder-core": "4.0.0-preview1.0",
-    "botbuilder-core-extensions": "4.0.0-preview1.0",
+    "botbuilder-core": "4.0.0-preview1.1",
+    "botbuilder-core-extensions": "4.0.0-preview1.1",
     "botbuilder-toybox-memories": "0.1.0-preview1.0"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
   "scripts": {
     "test": "tsc && nyc mocha tests/",
     "build": "tsc",
-    "build-docs": "typedoc --theme markdown --entryPoint botbuilder-toybox-middleware --excludePrivate --includeDeclarations --ignoreCompilerErrors --module amd --out ..\\..\\docs\\botbuilder-toybox-middleware .\\lib\\index.d.ts --hideGenerator --name \"Bot Builder Toybox - Middleware\" --readme none",
+    "build-docs": "typedoc --theme markdown --entryPoint botbuilder-toybox-extensions --excludePrivate --includeDeclarations --ignoreCompilerErrors --module amd --out ..\\..\\docs\\botbuilder-toybox-extensions .\\lib\\index.d.ts --hideGenerator --name \"Bot Builder Toybox - Middleware\" --readme none",
     "clean": "erase /q lib\\*.*"
   }
 }

@@ -1,6 +1,6 @@
 import { BotFrameworkAdapter, MemoryStorage, TurnContext } from 'botbuilder';
 import { ConversationScope, MemoryScopeManager, MemoryScopeAccessor } from 'botbuilder-toybox-memories';
-import { ShowTyping } from 'botbuilder-toybox-middleware';
+import { ShowTyping } from 'botbuilder-toybox-extensions';
 import * as restify from 'restify';
 
 // Create server

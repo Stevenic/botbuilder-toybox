@@ -1,28 +1,36 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * :package: **botbuilder-toybox-middleware**
+ * :package: **botbuilder-toybox-extensions**
  *
  * This middleware lets you easily filter out activity types your bot doesn't care about. For
  * example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
  *
  * ```JavaScript
- *  adapter.use(new FilterActivity('contactRelationUpdate', (context, next) => { })
- *         .use(new FilterActivity('conversationUpdate', (context, next) => { }));
+ * adapter.use(new FilterActivity('contactRelationUpdate', (context, next) => { })
+ *        .use(new FilterActivity('conversationUpdate', (context, next) => { }));
  * ```
  *
  * You can also use an activity filter to greet a user as they join a conversation:
  *
  * ```JavaScript
- *  adapter.use(new FilterActivity('conversationUpdate', async (context, next) => {
- *      const added = context.activity.membersAdded || [];
- *      for (let i = 0; i < added.length; i++) {
- *          if (added[i].id !== context.activity.recipient.id) {
- *              await context.sendActivity(`Welcome to my bot!`);
- *              break;
- *          }
- *      }
- *  }));
+ * adapter.use(new FilterActivity('conversationUpdate', async (context, next) => {
+ *     const added = context.activity.membersAdded || [];
+ *     for (let i = 0; i < added.length; i++) {
+ *         if (added[i].id !== context.activity.recipient.id) {
+ *             await context.sendActivity(`Welcome to my bot!`);
+ *             break;
+ *         }
+ *     }
+ * }));
  * ```
  */
 class FilterActivity {
@@ -36,18 +44,15 @@ class FilterActivity {
         this.handler = handler;
     }
     onTurn(context, next) {
-        // Call handler if filter matched
-        if (context.activity && context.activity.type === this.type) {
-            try {
-                return Promise.resolve(this.handler(context, next));
+        return __awaiter(this, void 0, void 0, function* () {
+            // Call handler if filter matched
+            if (context.activity && context.activity.type === this.type) {
+                yield Promise.resolve(this.handler(context, next));
             }
-            catch (err) {
-                return Promise.reject(err);
+            else {
+                yield next();
             }
-        }
-        else {
-            return next();
-        }
+        });
     }
 }
 exports.FilterActivity = FilterActivity;

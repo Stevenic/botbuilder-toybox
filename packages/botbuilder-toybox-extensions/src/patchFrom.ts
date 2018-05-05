@@ -5,6 +5,8 @@
 import { Middleware, ChannelAccount, TurnContext } from 'botbuilder';
 
 /**
+ * :package: **botbuilder-toybox-extensions**
+ * 
  * This middleware patches an issue where for some channels, including the emulator, the initial 
  * `from` field for a `conversationUpdate` activity is either missing or not correct. The issue is
  * this ends up causing state management plugins to load/save state for the wrong (or no) user from 
@@ -22,11 +24,13 @@ import { Middleware, ChannelAccount, TurnContext } from 'botbuilder';
  * To use the plugin add it to your middleware stack before any state management middleware:
  * 
  * ```JavaScript
- *  bot.use(new FromPatch());
+ * const { PatchFrom } = require('botbuilder-toybox-extensions');
+ *
+ * adapter.use(new PatchFrom());
  * ```
  */
-export class FromPatch implements Middleware {
-    public onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
+export class PatchFrom implements Middleware {
+    public async onTurn(context: TurnContext, next: () => Promise<void>): Promise<void> {
         if (context.activity && context.activity.type !== 'message') {
             const members = context.activity.membersAdded ? context.activity.membersAdded : context.activity.membersRemoved;
             const accounts = members && context.activity.recipient ? members.filter((m) => m.id !== (context.activity as any).recipient) : [];
@@ -35,6 +39,6 @@ export class FromPatch implements Middleware {
                 context.activity.from = accounts[0];
             }
         }
-        return next();
+        await next();
     }
 }

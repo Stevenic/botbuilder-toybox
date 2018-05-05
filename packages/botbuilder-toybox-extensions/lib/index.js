@@ -4,13 +4,13 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @module botbuilder-toybox-middleware
+ * @module botbuilder-toybox-extensions
  */
 /** Licensed under the MIT License. */
 __export(require("./activityFactory"));
 __export(require("./catchError"));
 __export(require("./checkVersion"));
 __export(require("./filterActivity"));
-__export(require("./fromPatch"));
+__export(require("./patchFrom"));
 __export(require("./showTyping"));
 //# sourceMappingURL=index.js.map

@@ -11,7 +11,7 @@ This plugin does it's best to patch the issue by ensuring that the `from` accoun
 
 To use the plugin add it to your middleware stack before any state management middleware:
 
-    const { FromPatch } = require('botbuilder-toybox-middleware');
+    const { FromPatch } = require('botbuilder-toybox-extensions');
 
     bot.use(new FromPatch());
 
@@ -37,7 +37,7 @@ To use the plugin add it to your middleware stack before any state management mi
 
 
 
-*Defined in packages/botbuilder-toybox-middleware/lib/fromPatch.d.ts:30*
+*Defined in packages/botbuilder-toybox-extensions/lib/fromPatch.d.ts:30*
 
 
 

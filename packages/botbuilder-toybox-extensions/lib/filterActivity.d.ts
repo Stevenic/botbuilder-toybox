@@ -4,7 +4,7 @@
 /** Licensed under the MIT License. */
 import { Middleware, Promiseable, TurnContext } from 'botbuilder';
 /**
- * :package: **botbuilder-toybox-middleware**
+ * :package: **botbuilder-toybox-extensions**
  *
  * Function that will be called anytime an activity of the specified type is received. Simply avoid
  * calling `next()` to prevent the activity from being further routed.
@@ -13,28 +13,28 @@ import { Middleware, Promiseable, TurnContext } from 'botbuilder';
  */
 export declare type FilterActivityHandler = (context: TurnContext, next: () => Promise<void>) => Promiseable<void>;
 /**
- * :package: **botbuilder-toybox-middleware**
+ * :package: **botbuilder-toybox-extensions**
  *
  * This middleware lets you easily filter out activity types your bot doesn't care about. For
  * example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
  *
  * ```JavaScript
- *  adapter.use(new FilterActivity('contactRelationUpdate', (context, next) => { })
- *         .use(new FilterActivity('conversationUpdate', (context, next) => { }));
+ * adapter.use(new FilterActivity('contactRelationUpdate', (context, next) => { })
+ *        .use(new FilterActivity('conversationUpdate', (context, next) => { }));
  * ```
  *
  * You can also use an activity filter to greet a user as they join a conversation:
  *
  * ```JavaScript
- *  adapter.use(new FilterActivity('conversationUpdate', async (context, next) => {
- *      const added = context.activity.membersAdded || [];
- *      for (let i = 0; i < added.length; i++) {
- *          if (added[i].id !== context.activity.recipient.id) {
- *              await context.sendActivity(`Welcome to my bot!`);
- *              break;
- *          }
- *      }
- *  }));
+ * adapter.use(new FilterActivity('conversationUpdate', async (context, next) => {
+ *     const added = context.activity.membersAdded || [];
+ *     for (let i = 0; i < added.length; i++) {
+ *         if (added[i].id !== context.activity.recipient.id) {
+ *             await context.sendActivity(`Welcome to my bot!`);
+ *             break;
+ *         }
+ *     }
+ * }));
  * ```
  */
 export declare class FilterActivity implements Middleware {

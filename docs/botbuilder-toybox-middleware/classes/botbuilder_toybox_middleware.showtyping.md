@@ -7,7 +7,7 @@
 
 This middleware lets will automatically send a 'typing' activity if your bot is taking too long to reply to a message. Most channels require you periodically send an additional 'typing' activity in order to keep the typing indicator lite so the middleware plugin will automatically send additional messages at a given rate until it sees the bot send a reply.
 
-    const { FromPatch } = require('botbuilder-toybox-middleware');
+    const { FromPatch } = require('botbuilder-toybox-extensions');
 
     bot.use(new ShowTyping());
 
@@ -44,7 +44,7 @@ It should be noted that the plugin sends 'typing' activities directly through th
 ### ⊕ **new ShowTyping**(delay?: *`undefined`⎮`number`*, frequency?: *`undefined`⎮`number`*): [ShowTyping](botbuilder_toybox_middleware.showtyping.md)
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/showTyping.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/showTyping.d.ts#L25)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L25)*
 
 
 
@@ -74,7 +74,7 @@ Creates a new instance of `ShowTyping` middleware.
 
 **●  id**:  *`number`* 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/showTyping.d.ts:24](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/showTyping.d.ts#L24)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:24](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L24)*
 
 
 
@@ -92,7 +92,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/showTyping.d.ts:33](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/showTyping.d.ts#L33)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:33](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L33)*
 
 
 
@@ -124,7 +124,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-middleware/lib/showTyping.d.ts:32](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-middleware/lib/showTyping.d.ts#L32)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:32](https://github.com/Stevenic/botbuilder-toybox/blob/2272f9b/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L32)*
 
 
 

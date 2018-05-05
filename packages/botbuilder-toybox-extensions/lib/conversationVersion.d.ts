@@ -1,5 +1,5 @@
 /**
- * @module botbuilder-toybox-middleware
+ * @module botbuilder-toybox-extensions
  */
 /** Licensed under the MIT License. */
 import { Middleware, Promiseable, TurnContext, ConversationState } from 'botbuilder';

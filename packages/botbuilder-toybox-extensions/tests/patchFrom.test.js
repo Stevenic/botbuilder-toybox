@@ -1,30 +1,33 @@
 const assert = require('assert');
-const { Bot, TestAdapter } = require('botbuilder');
-const { FromPatch } = require('../lib');
+const { TestAdapter } = require('botbuilder-core-extensions');
+const { TurnContext } = require('botbuilder-core');
+const { PatchFrom } = require('../lib');
 
-describe('FromPatch Middleware', function() {
+describe('PatchFrom Middleware', function() {
     this.timeout(5000);
 
     it('should patch activity.', function (done) {
-        const adapter = new TestAdapter();
-        const bot = new Bot(adapter)
+        const adapter = new TestAdapter(async (context) => {
+            assert(context.activity.from, `From field missing`);
+            assert(context.activity.from.id === 'default-user', `Invalid from.id.`);
+
+            const ref = TurnContext.getConversationReference(context.activity);
+            assert(ref.user, `User field missing`);
+            assert(ref.user.id === 'default-user', `Invalid user.id.`);
+            
+            await context.sendActivity(`valid`);
+        });
+        
+        adapter
             .use({
-                contextCreated: (context, next) => {
+                async onTurn(context, next) {
                     // Patch a bug in test adapter :(
                     delete context.activity.from;
                     context.activity.recipient =  { "id": "default-bot", "name": "Bot" }
-                    return next();
+                    await next();
                 }
             })
-            .use(new FromPatch())
-            .onReceive((context) => {
-                assert(context.activity.from, `From field missing`);
-                assert(context.activity.from.id === 'default-user', `Invalid from.id.`);
-                assert(context.conversationReference.user, `User field missing`);
-                assert(context.conversationReference.user.id === 'default-user', `Invalid user.id.`);
-                
-                context.reply(`valid`);
-            });
+            .use(new PatchFrom());
                 
         adapter
             .test({

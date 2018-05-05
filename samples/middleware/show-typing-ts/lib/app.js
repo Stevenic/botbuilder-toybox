@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const botbuilder_1 = require("botbuilder");
 const botbuilder_toybox_memories_1 = require("botbuilder-toybox-memories");
-const botbuilder_toybox_middleware_1 = require("botbuilder-toybox-middleware");
+const botbuilder_toybox_middleware_1 = require("botbuilder-toybox-extensions");
 const restify = require("restify");
 // Create server
 let server = restify.createServer();
