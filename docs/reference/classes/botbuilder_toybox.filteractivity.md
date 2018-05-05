@@ -1,0 +1,107 @@
+[Bot Builder Toybox](../README.md) > [FilterActivity](../classes/botbuilder_toybox.filteractivity.md)
+
+
+
+# Class: FilterActivity
+
+
+:package: **botbuilder-toybox-extensions**
+
+This middleware lets you easily filter out activity types your bot doesn't care about. For example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
+
+    adapter.use(new FilterActivity('contactRelationUpdate', (context, next) => { })
+           .use(new FilterActivity('conversationUpdate', (context, next) => { }));
+
+You can also use an activity filter to greet a user as they join a conversation:
+
+    adapter.use(new FilterActivity('conversationUpdate', async (context, next) => {
+        const added = context.activity.membersAdded || [];
+        for (let i = 0; i < added.length; i++) {
+            if (added[i].id !== context.activity.recipient.id) {
+                await context.sendActivity(`Welcome to my bot!`);
+                break;
+            }
+        }
+    }));
+
+## Implements
+
+* `any`
+
+## Index
+
+### Constructors
+
+* [constructor](botbuilder_toybox.filteractivity.md#constructor)
+
+
+### Methods
+
+* [onTurn](botbuilder_toybox.filteractivity.md#onturn)
+
+
+
+---
+## Constructors
+<a id="constructor"></a>
+
+
+### ⊕ **new FilterActivity**(type: *`string`*, handler: *[FilterActivityHandler](../#filteractivityhandler)*): [FilterActivity](botbuilder_toybox.filteractivity.md)
+
+
+*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:42](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L42)*
+
+
+
+Creates a new instance of an `FilterActivity` middleware.
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| type | `string`   |  Type of activity to trigger on. |
+| handler | [FilterActivityHandler](../#filteractivityhandler)   |  Function that will be called anytime an activity of the specified type is received. Simply avoid calling `next()` to prevent the activity from being further routed. |
+
+
+
+
+
+**Returns:** [FilterActivity](botbuilder_toybox.filteractivity.md)
+
+---
+
+
+## Methods
+<a id="onturn"></a>
+
+###  onTurn
+
+► **onTurn**(context: *`TurnContext`*, next: *`function`*): `Promise`.<`void`>
+
+
+
+*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L49)*
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| context | `TurnContext`   |  - |
+| next | `function`   |  - |
+
+
+
+
+
+**Returns:** `Promise`.<`void`>
+
+
+
+
+
+___
+
+

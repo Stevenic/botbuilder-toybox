@@ -1,9 +1,11 @@
-[Bot Builder Toybox - Middleware](../README.md) > [FromPatch](../classes/botbuilder_toybox_middleware.frompatch.md)
+[Bot Builder Toybox](../README.md) > [PatchFrom](../classes/botbuilder_toybox.patchfrom.md)
 
 
 
-# Class: FromPatch
+# Class: PatchFrom
 
+
+:package: **botbuilder-toybox-extensions**
 
 This middleware patches an issue where for some channels, including the emulator, the initial `from` field for a `conversationUpdate` activity is either missing or not correct. The issue is this ends up causing state management plugins to load/save state for the wrong (or no) user from the bots perspective and can cause you to pull your hair out when debugging. Unfortunately, this issue apparently isn't an easy issue for the channels to fix as they don't often know who the correct user is. Especially, in group conversations.
 
@@ -11,33 +13,33 @@ This plugin does it's best to patch the issue by ensuring that the `from` accoun
 
 To use the plugin add it to your middleware stack before any state management middleware:
 
-    const { FromPatch } = require('botbuilder-toybox-extensions');
+    const { PatchFrom } = require('botbuilder-toybox-extensions');
 
-    bot.use(new FromPatch());
+    adapter.use(new PatchFrom());
 
 ## Implements
 
-* [Middleware]()
+* `any`
 
 ## Index
 
 ### Methods
 
-* [contextCreated](botbuilder_toybox_middleware.frompatch.md#contextcreated)
+* [onTurn](botbuilder_toybox.patchfrom.md#onturn)
 
 
 
 ---
 ## Methods
-<a id="contextcreated"></a>
+<a id="onturn"></a>
 
-###  contextCreated
+###  onTurn
 
-► **contextCreated**(context: *[BotContext]()*, next: *`function`*): `Promise`.<`void`>
+► **onTurn**(context: *`TurnContext`*, next: *`function`*): `Promise`.<`void`>
 
 
 
-*Defined in packages/botbuilder-toybox-extensions/lib/fromPatch.d.ts:30*
+*Defined in [packages/botbuilder-toybox-extensions/lib/patchFrom.d.ts:32](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/patchFrom.d.ts#L32)*
 
 
 
@@ -45,7 +47,7 @@ To use the plugin add it to your middleware stack before any state management mi
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| context | [BotContext]()   |  - |
+| context | `TurnContext`   |  - |
 | next | `function`   |  - |
 
 

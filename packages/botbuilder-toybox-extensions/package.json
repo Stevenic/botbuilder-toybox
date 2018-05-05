@@ -36,7 +36,6 @@
   "scripts": {
     "test": "tsc && nyc mocha tests/",
     "build": "tsc",
-    "build-docs": "typedoc --theme markdown --entryPoint botbuilder-toybox-extensions --excludePrivate --includeDeclarations --ignoreCompilerErrors --module amd --out ..\\..\\docs\\botbuilder-toybox-extensions .\\lib\\index.d.ts --hideGenerator --name \"Bot Builder Toybox - Middleware\" --readme none",
     "clean": "erase /q lib\\*.*"
   }
 }
