@@ -12,6 +12,8 @@ import { Activity, EndOfConversationCodes } from 'botbuilder-core';
  * A set of utility functions to assist with formatting various activity types the bot can send the
  * user.
  *
+ * **Usage Example**
+ *
  * ```JavaScript
  * const { ActivityFilter } = require('botbuilder-toybox-extensions');
  *

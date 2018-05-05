@@ -11,6 +11,8 @@ Deploying new versions of your bot more often then not should have little to no 
 
 This middleware lets you track a version number for the conversations your bot is having so that you can automatically delete the conversation state anytime a major version number difference is detected. Example:
 
+**Usage Example**
+
     const { CheckVersion } = require('botbuilder-toybox-extensions');
     const { ConversationScope } = require('botbuilder-toybox-memories');
 
@@ -50,7 +52,7 @@ This middleware lets you track a version number for the conversations your bot i
 ### ⊕ **new CheckVersion**(versionFragment: *[ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md)`number`*, version: *`number`*, handler: *[VersionChangedHandler](../#versionchangedhandler)*): [CheckVersion](botbuilder_toybox.checkversion.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:48](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L48)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:50](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L50)*
 
 
 
@@ -83,7 +85,7 @@ Creates a new CheckVersion instance.
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:56](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L56)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:58](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L58)*
 
 
 

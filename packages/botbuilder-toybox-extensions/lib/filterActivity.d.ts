@@ -18,6 +18,8 @@ export declare type FilterActivityHandler = (context: TurnContext, next: () => P
  * This middleware lets you easily filter out activity types your bot doesn't care about. For
  * example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
  *
+ * **Usage Example**
+ *
  * ```JavaScript
  * adapter.use(new FilterActivity('contactRelationUpdate', (context, next) => { })
  *        .use(new FilterActivity('conversationUpdate', (context, next) => { }));

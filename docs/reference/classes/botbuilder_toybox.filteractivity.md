@@ -9,6 +9,8 @@
 
 This middleware lets you easily filter out activity types your bot doesn't care about. For example here's how to filter out 'contactRelationUpdate' and 'conversationUpdate' activities:
 
+**Usage Example**
+
     adapter.use(new FilterActivity('contactRelationUpdate', (context, next) => { })
            .use(new FilterActivity('conversationUpdate', (context, next) => { }));
 
@@ -49,7 +51,7 @@ You can also use an activity filter to greet a user as they join a conversation:
 ### ⊕ **new FilterActivity**(type: *`string`*, handler: *[FilterActivityHandler](../#filteractivityhandler)*): [FilterActivity](botbuilder_toybox.filteractivity.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:42](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L42)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:44](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L44)*
 
 
 
@@ -81,7 +83,7 @@ Creates a new instance of an `FilterActivity` middleware.
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L49)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:51](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L51)*
 
 
 

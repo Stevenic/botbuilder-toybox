@@ -9,6 +9,8 @@
 
 This middleware gives you a centralized place to catch errors that either the bot or another piece of middleware throws. The middleware will only invoke your handler once per conversation so while you may want to use other middleware to log errors that occur this provides a perfect place to notify the user that an error occurred:
 
+**Usage Example**
+
     const { CatchError } from 'botbuilder-toybox-extensions';
 
     const conversationState = new ConversationState(new MemoryStorage());
@@ -45,7 +47,7 @@ The example catches the error and reports it to the user then clears the convers
 ### ⊕ **new CatchError**(handler: *[CatchErrorHandler](../#catcherrorhandler)*): [CatchError](botbuilder_toybox.catcherror.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:39](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L39)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L41)*
 
 
 
@@ -76,7 +78,7 @@ Creates a new CatchError instance.
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L45)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L47)*
 
 
 

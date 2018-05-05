@@ -12,14 +12,16 @@ import { Middleware, Activity, ConversationResourceResponse, TurnContext } from 
  * 'typing' activity in order to keep the typing indicator lite so the middleware plugin will
  * automatically send additional messages at a given rate until it sees the bot send a reply. 
  * 
+ * **Usage Example**
+ * 
  * ```JavaScript
  * const { ShowTyping } = require('botbuilder-toybox-extensions');
  *
  * adapter.use(new ShowTyping());
  * ``` 
  * 
- * It should be noted that the plugin sends 'typing' activities directly through the bots 
- * adapter so these additional activities will not go through middleware or be logged.
+ * > It should be noted that the plugin sends 'typing' activities directly through the bots 
+ * > adapter so these additional activities will not go through middleware or be logged.
  */
 export class ShowTyping implements Middleware {
     /**

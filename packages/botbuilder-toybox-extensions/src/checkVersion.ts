@@ -28,6 +28,8 @@ export type VersionChangedHandler = (context: TurnContext, version: number, next
  * you can automatically delete the conversation state anytime a major version number difference is 
  * detected. Example:
  * 
+ * **Usage Example**
+ * 
  * ```JavaScript
  * const { CheckVersion } = require('botbuilder-toybox-extensions');
  * const { ConversationScope } = require('botbuilder-toybox-memories');

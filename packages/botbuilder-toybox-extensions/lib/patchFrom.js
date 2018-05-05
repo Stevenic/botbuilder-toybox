@@ -25,7 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * get added to the conversation at the same time we leave the `from` field alone unless its missing.
  * Then we just assign the first member from the group as the sender.
  *
- * To use the plugin add it to your middleware stack before any state management middleware:
+ * **Usage Example**
  *
  * ```JavaScript
  * const { PatchFrom } = require('botbuilder-toybox-extensions');

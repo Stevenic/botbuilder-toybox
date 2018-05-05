@@ -22,6 +22,8 @@ export type CatchErrorHandler = (context: TurnContext, err: Error) => Promiseabl
  * so while you may want to use other middleware to log errors that occur this provides a perfect 
  * place to notify the user that an error occurred:
  * 
+ * **Usage Example**
+ * 
  * ```JavaScript
  * const { CatchError } from 'botbuilder-toybox-extensions';
  * 

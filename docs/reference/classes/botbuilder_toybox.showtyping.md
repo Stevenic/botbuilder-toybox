@@ -9,11 +9,13 @@
 
 This middleware lets you automatically send a 'typing' activity if your bot is taking too long to reply to a message. Most channels require you periodically send an additional 'typing' activity in order to keep the typing indicator lite so the middleware plugin will automatically send additional messages at a given rate until it sees the bot send a reply.
 
+**Usage Example**
+
     const { ShowTyping } = require('botbuilder-toybox-extensions');
 
     adapter.use(new ShowTyping());
 
-It should be noted that the plugin sends 'typing' activities directly through the bots adapter so these additional activities will not go through middleware or be logged.
+> It should be noted that the plugin sends 'typing' activities directly through the bots adapter so these additional activities will not go through middleware or be logged.
 
 ## Implements
 
@@ -40,7 +42,7 @@ It should be noted that the plugin sends 'typing' activities directly through th
 ### ⊕ **new ShowTyping**(delay?: *`number`*, frequency?: *`number`*): [ShowTyping](botbuilder_toybox.showtyping.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:25](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L25)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:27](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L27)*
 
 
 
@@ -72,7 +74,7 @@ Creates a new instance of `ShowTyping` middleware.
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:32](https://github.com/Stevenic/botbuilder-toybox/blob/2944006/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L32)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:34](https://github.com/Stevenic/botbuilder-toybox/blob/81fc6e8/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L34)*
 
 
 
