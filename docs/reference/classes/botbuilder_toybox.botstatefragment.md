@@ -5,7 +5,25 @@
 # Class: BotStateFragment
 
 
+:package: **botbuilder-toybox-memories**
+
 Creates a `MemoryFragment` wrapper for an individual property on a `BotState`, `ConversationState`, or `UserState` instance. This makes for a handy adapter when you're wanting to use a ToyBox component that supports `MemoryFragment` bindings but your bot is using one of the stock state management components.
+
+**Usage Example**
+
+    const { ConversationState, MemoryStorage } = require('botbuilder');
+    const { BotStateFragment } = require('botbuilder-toybox-memories');
+    const { CheckVersion } = require('botbuilder-toybox-extensions');
+
+    const convoState = new ConversationState(new MemoryStorage());
+    const convoVersion = new BotStateFragment(convoState, 'convoVersion');
+
+    // Add middleware to check the version and clear the scope on change.
+    adapter.use(new CheckVersion(convoVersion, 2.0, async (context, version, next) => {
+        await convoScope.forgetAll(context);
+        await context.sendActivity(`I'm sorry. My service has been upgraded and we need to start over.`);
+        await next();
+    }));
 
 ## Type parameters
 #### T 
@@ -38,16 +56,19 @@ Creates a `MemoryFragment` wrapper for an individual property on a `BotState`, `
 ### ⊕ **new BotStateFragment**(state: *`BotState`*, property: *`string`*): [BotStateFragment](botbuilder_toybox.botstatefragment.md)
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:16](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L16)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:36](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L36)*
 
+
+
+Creates a new BotStateFragment instance.
 
 
 **Parameters:**
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| state | `BotState`   |  - |
-| property | `string`   |  - |
+| state | `BotState`   |  State object to wrap. |
+| property | `string`   |  Name of the fragments property on the state object. |
 
 
 
@@ -67,7 +88,7 @@ Creates a `MemoryFragment` wrapper for an individual property on a `BotState`, `
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:27](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L27)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L52)*
 
 
 
@@ -94,7 +115,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[forget](../interfaces/botbuilder_toybox.readwritefragment.md#forget)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:18](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L18)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:43](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L43)*
 
 
 
@@ -126,7 +147,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[get](../interfaces/botbuilder_toybox.readwritefragment.md#get)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:19](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L19)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:44](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L44)*
 
 
 
@@ -158,7 +179,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[has](../interfaces/botbuilder_toybox.readwritefragment.md#has)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:20](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L20)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L45)*
 
 
 
@@ -190,7 +211,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[set](../interfaces/botbuilder_toybox.readwritefragment.md#set)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:21](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L21)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L46)*
 
 
 

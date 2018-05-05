@@ -61,7 +61,7 @@ Fragments can have a range of data types but need to support serialization to JS
 ### ⊕ **new MemoryFragment**(scope: *[MemoryScope](botbuilder_toybox.memoryscope.md)*, name: *`string`*, defaultValue?: *`T`⎮`undefined`*): [MemoryFragment](botbuilder_toybox.memoryfragment.md)
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:117](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L117)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:117](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L117)*
 
 
 
@@ -92,7 +92,7 @@ INTERNAL: Creates a new `MemoryFragment` instance. new memory fragments are typi
 
 **●  defaultValue**:  *`T`⎮`undefined`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:114](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L114)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:114](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L114)*
 
 
 
@@ -106,7 +106,7 @@ ___
 
 **●  name**:  *`string`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:113](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L113)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:113](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L113)*
 
 
 
@@ -120,7 +120,7 @@ ___
 
 **●  scope**:  *[MemoryScope](botbuilder_toybox.memoryscope.md)* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:112](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L112)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:112](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L112)*
 
 
 
@@ -138,7 +138,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:147](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L147)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:147](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L147)*
 
 
 
@@ -165,7 +165,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[forget](../interfaces/botbuilder_toybox.readwritefragment.md#forget)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:137](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L137)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:137](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L137)*
 
 
 
@@ -202,7 +202,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:138](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L138)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:138](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L138)*
 
 
 
@@ -234,7 +234,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[get](../interfaces/botbuilder_toybox.readwritefragment.md#get)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:139](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L139)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:139](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L139)*
 
 
 
@@ -266,7 +266,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[has](../interfaces/botbuilder_toybox.readwritefragment.md#has)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:140](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L140)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:140](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L140)*
 
 
 
@@ -298,7 +298,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[set](../interfaces/botbuilder_toybox.readwritefragment.md#set)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:141](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L141)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:141](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L141)*
 
 
 

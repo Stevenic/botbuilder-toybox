@@ -28,7 +28,7 @@
 ### ⊕ **new MemoryScopeAccessor**(context: *`TurnContext`*, scope: *[MemoryScope](botbuilder_toybox.memoryscope.md)*): [MemoryScopeAccessor](botbuilder_toybox.memoryscopeaccessor.md)
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:9](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L9)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:9](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L9)*
 
 
 
@@ -57,7 +57,7 @@
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:11](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L11)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:11](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L11)*
 
 
 
@@ -87,7 +87,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L12)*
 
 
 
@@ -120,7 +120,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:13](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L13)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:13](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L13)*
 
 
 
@@ -150,7 +150,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/0903278/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryScopeAccessor.d.ts#L14)*
 
 
 
