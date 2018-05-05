@@ -36,6 +36,10 @@ class BotStateFragment {
         this.state = state;
         this.property = property;
     }
+    /**
+     * Deletes any current value for the fragment. **see interface for details**
+     * @param context Context for the current turn of conversation.
+     */
     forget(context) {
         return this.state.read(context).then((value) => {
             if (this.property in value) {
@@ -43,16 +47,29 @@ class BotStateFragment {
             }
         });
     }
+    /**
+     * Returns the fragments current/default value. **see interface for details**
+     * @param context Context for the current turn of conversation.
+     */
     get(context) {
         return this.state.read(context).then((value) => {
             return this.property in value ? value[this.property] : undefined;
         });
     }
+    /**
+     * Returns `true` if the fragment currently has a value. **see interface for details**
+     * @param context Context for the current turn of conversation.
+     */
     has(context) {
         return this.state.read(context).then((value) => {
             return this.property in value;
         });
     }
+    /**
+     * Assigns a new value to the fragment. **see interface for details**
+     * @param context Context for the current turn of conversation.
+     * @param value The new value to assign.
+     */
     set(context, value) {
         return this.state.read(context).then((value) => {
             value[this.property] = value;

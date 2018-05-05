@@ -40,9 +40,26 @@ export declare class BotStateFragment<T = any> implements ReadWriteFragment<T> {
      * @param property Name of the fragments property on the state object.
      */
     constructor(state: BotState, property: string);
+    /**
+     * Deletes any current value for the fragment. **see interface for details**
+     * @param context Context for the current turn of conversation.
+     */
     forget(context: TurnContext): Promise<void>;
+    /**
+     * Returns the fragments current/default value. **see interface for details**
+     * @param context Context for the current turn of conversation.
+     */
     get(context: TurnContext): Promise<T | undefined>;
+    /**
+     * Returns `true` if the fragment currently has a value. **see interface for details**
+     * @param context Context for the current turn of conversation.
+     */
     has(context: TurnContext): Promise<boolean>;
+    /**
+     * Assigns a new value to the fragment. **see interface for details**
+     * @param context Context for the current turn of conversation.
+     * @param value The new value to assign.
+     */
     set(context: TurnContext, value: T): Promise<void>;
     /**
      * Returns a read-only version of the fragment that only implements `get()` and `has()` and will

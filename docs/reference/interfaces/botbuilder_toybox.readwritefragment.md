@@ -29,7 +29,7 @@ Component binding to a `MemoryFragment` that can be both read and written to.
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:59](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L59)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:59](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L59)*
 
 
 
@@ -62,7 +62,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:71](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L71)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:71](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L71)*
 
 
 
@@ -99,7 +99,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:77](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L77)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:77](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L77)*
 
 
 
@@ -132,7 +132,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:86](https://github.com/Stevenic/botbuilder-toybox/blob/a5e4e7e/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L86)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:86](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L86)*
 
 
 
