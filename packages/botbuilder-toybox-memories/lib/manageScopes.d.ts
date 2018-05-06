@@ -12,9 +12,9 @@ import { MemoryScope } from './memoryScope';
  * The middleware quickly learns which scopes a bot accesses for a given activity type and will
  * pre-load in parallel the most likely needed scopes for the activity type received.
  *
- * The middleware extends adds to the context object a `ScopeAccessor` instance for every scope
- * that its managing. The name of the property added to the context object matches the unique
- * `namespace` for the scope.
+ * For each turn, the context object is extended to include a `ScopeAccessor` for each of the
+ * scopes being managed by the middleware. These accessors are added as properties that are named
+ * to match the `namespace` of each scope.
  *
  * **Usage Example**
  *

@@ -37,13 +37,17 @@ A set of static helper methods to assist with formatting various activity types 
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:35](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L35)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L41)*
 
 
 
 Returns a `delay` activity which can be used to pause after sending a typing indicator or after sending a card with image(s).
 
 Most chat clients download any images sent by the bot to a CDN which can delay the showing of the message to the user. If a bot sends a message with only text immediately after sending a message with images, the messages could end up being shown to the user out of order. To help prevent this you can insert a delay of 2 seconds or so in between replies.
+
+**Usage Example**
+
+    const activity = ActivityFilter.delay(1000);
 
 
 **Parameters:**
@@ -72,11 +76,15 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:43](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L43)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:55](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L55)*
 
 
 
 Returns an `endOfConversation` activity indicating that the bot has completed it's current task or skill. For channels like Cortana this is used to tell Cortana that the skill has completed and the skills window should close.
+
+**Usage Example**
+
+    const activity = ActivityFilter.endOfConversation();
 
 
 **Parameters:**
@@ -105,11 +113,15 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:50](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L50)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:68](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L68)*
 
 
 
 Return an `event` activity. This is most useful for DirectLine and WebChat channels as a way of sending a custom named event to the client from the bot.
+
+**Usage Example**
+
+    const activity = ActivityFilter.event('refreshUi', updatedState);
 
 
 **Parameters:**
@@ -139,11 +151,15 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L57)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:81](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L81)*
 
 
 
 Returns a `typing` activity which causes some channels to show a visual indicator that the bot is typing a reply. This indicator typically will be presented to the user for either a few seconds or until another message is received. That means that for longer running operations it may be necessary to send additional typing indicators every few seconds.
+
+**Usage Example**
+
+    const activity = ActivityFilter.typing();
 
 
 

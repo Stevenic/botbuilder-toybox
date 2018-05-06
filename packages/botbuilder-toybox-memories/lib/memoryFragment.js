@@ -37,7 +37,7 @@ exports.ForgetAfter = {
  * const conversation = new ConversationScope(new MemoryStorage());
  * const stateFragment = conversation.fragment('state').forgetAfter(5 * ForgetAfter.minutes);
  * ```
- * @param T (Optional) Fragments data type.
+ * @param T (Optional) fragments data type. Defaults to a value of `any`.
  */
 class MemoryFragment {
     /**

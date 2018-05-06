@@ -26,7 +26,7 @@ export const ForgetAfter = {
  * 
  * Component binding to a `MemoryFragment` that can only be read from. The binding will typically clone the value 
  * returned by `get()` as to avoid any tampering.
- * @param T (Optional) Fragments data type.
+ * @param T (Optional) fragments data type. Defaults to a value of `any`.
  */
 export interface ReadOnlyFragment<T = any> {
     /**
@@ -70,7 +70,7 @@ export interface ReadOnlyFragment<T = any> {
  * :package: **botbuilder-toybox-memories**
  * 
  * Component binding to a `MemoryFragment` that can be both read and written to. 
- * @param T (Optional) Fragments data type.
+ * @param T (Optional) fragments data type. Defaults to a value of `any`.
  */
 export interface ReadWriteFragment<T = any> {
     /**
@@ -166,7 +166,7 @@ export interface ReadWriteFragment<T = any> {
  * const conversation = new ConversationScope(new MemoryStorage());
  * const stateFragment = conversation.fragment('state').forgetAfter(5 * ForgetAfter.minutes);
  * ```
- * @param T (Optional) Fragments data type.
+ * @param T (Optional) fragments data type. Defaults to a value of `any`.
  */
 export class MemoryFragment<T = any> implements ReadWriteFragment<T> {
     private valueKey = Symbol('value');

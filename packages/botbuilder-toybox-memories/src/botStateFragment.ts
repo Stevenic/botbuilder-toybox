@@ -9,10 +9,11 @@ import { ReadWriteFragment, ReadOnlyFragment } from './memoryFragment';
 /**
  * :package: **botbuilder-toybox-memories**
  * 
- * Creates a `MemoryFragment` wrapper for an individual property on a `BotState`, `ConversationState`, 
- * or `UserState` instance.  This makes for a handy adapter when you're wanting to use a ToyBox 
- * component that supports `MemoryFragment` bindings but your bot is using one of the stock state
- * management components. 
+ * Creates a `MemoryFragment` wrapper for an individual property on a `BotState`, 
+ * `ConversationState`, or `UserState` instance.  
+ * 
+ * This makes for a handy adapter when you're wanting to use a Toybox component that supports 
+ * `MemoryFragment` bindings but your bot is using one of the stock state management components. 
  * 
  * **Usage Example**
  * 
@@ -31,6 +32,7 @@ import { ReadWriteFragment, ReadOnlyFragment } from './memoryFragment';
  *     await next();
  * }));
  * ```
+ * @param T (Optional) fragments data type. Defaults to a value of `any`.
  */
 export class BotStateFragment<T = any> implements ReadWriteFragment<T> {
     /**
@@ -85,8 +87,9 @@ export class BotStateFragment<T = any> implements ReadWriteFragment<T> {
 
     /** 
      * Returns a read-only version of the fragment that only implements `get()` and `has()` and will 
-     * clone the fragments value prior to returning it from `get()`. This prevents any modification 
-     * of the stored value.
+     * clone the fragments value prior to returning it from `get()`. 
+     * 
+     * This prevents any modification of the stored value.
      * 
      * **Usage Example**
      * 

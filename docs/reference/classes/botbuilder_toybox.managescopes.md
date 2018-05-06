@@ -11,7 +11,7 @@ Middleware that manages the automatic loading and saving of one or more scopes t
 
 The middleware quickly learns which scopes a bot accesses for a given activity type and will pre-load in parallel the most likely needed scopes for the activity type received.
 
-The middleware extends adds to the context object a `ScopeAccessor` instance for every scope that its managing. The name of the property added to the context object matches the unique `namespace` for the scope.
+For each turn, the context object is extended to include a `ScopeAccessor` for each of the scopes being managed by the middleware. These accessors are added as properties that are named to match the `namespace` of each scope.
 
 **Usage Example**
 
@@ -79,7 +79,7 @@ If you're using TypeScript you'll need to extend the `TurnContext` interface to 
 ### ⊕ **new ManageScopes**(...scopes: *[MemoryScope](botbuilder_toybox.memoryscope.md)[]*): [ManageScopes](botbuilder_toybox.managescopes.md)
 
 
-*Defined in packages/botbuilder-toybox-memories/lib/manageScopes.d.ts:71*
+*Defined in [packages/botbuilder-toybox-memories/lib/manageScopes.d.ts:71](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/manageScopes.d.ts#L71)*
 
 
 

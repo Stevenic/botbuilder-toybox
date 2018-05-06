@@ -33,7 +33,7 @@ The `ManageScopes` middleware adds any instance of this to the `TurnContext` for
 
 
 
-*Defined in packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts:32*
+*Defined in [packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts:32](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts#L32)*
 
 
 
@@ -72,7 +72,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts:53*
+*Defined in [packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts:53](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts#L53)*
 
 
 
@@ -121,7 +121,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts:68*
+*Defined in [packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts:68](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts#L68)*
 
 
 
@@ -162,7 +162,7 @@ ___
 
 
 
-*Defined in packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts:85*
+*Defined in [packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts:85](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/scopeAccessor.d.ts#L85)*
 
 
 
