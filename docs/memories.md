@@ -14,7 +14,7 @@ In many ways scopes are similar to `UserState` and `ConversationState` in the st
 
 - Ability to automatically forget things at the fragment level.
 - Intelligent pre-loading of the bots scopes. It watches the scopes used for a given activity type and automatically learns which scopes it should pre-load in parallel for a given activity.
-- Data binding of fragments to the bots components. You can grant a 3rd party components access to just the information they need to function.  If you're using TypeScript these bindings acan even be strongly typed.
+- Data binding of fragments to the bots components. You can grant a 3rd party components access to just the information they need to function.  If you're using TypeScript these bindings can even be strongly typed.
 - Read-only fragment bindings. Many components only need the ability to read something from the bots memory so read-only bindings let you pass the component a tamper resistant copy of the fragments value.
 
 Features coming soon:
