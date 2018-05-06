@@ -21,3 +21,14 @@ While the v4 SDK is in "preview" status the packages here will also remain in pr
 npm install --save botbuilder-toybox-memories@preview
 npm install --save botbuilder-toybox-extensions@preview
 ```
+While these package is in preview it's possible for updates to include build breaks. To avoid having any updates break your bot it's recommended that you update the dependency table of your bots `package.json` file to lock down the specific version of the package you're using:
+
+```JSON
+{
+    "dependencies": {
+        "botbuilder": "4.0.0-preview1.1",
+        "botbuilder-toybox-memories": "0.1.0-preview1.0",
+        "botbuilder-toybox-extensions": "0.1.0-preview1.0"
+    }
+}
+```
