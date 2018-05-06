@@ -152,7 +152,14 @@ export class CheckVersion implements Middleware {
 
 The component can simply call `get()` and `set()` with the current context object to read & write the fragments value.
 
-While the CheckVersion middleware needs a version of the fragment that it can read and write to, it's possible to define components that only want read access to the fragment.  You can call `convoVersion.asReadOnly()` to get a read-only binding.  This binding will clone the fragments underlying value to avoid any tampering whatsoever.
+While the CheckVersion middleware needs a version of the fragment that it can read and write to, it's possible to define components that only want read access to a fragment.  You can call `convoVersion.asReadOnly()` to get a read-only binding.  This binding will clone the fragments underlying value to avoid any tampering whatsoever.
 
 ## Forgetting Things
+Another strength of Memories is its ability to forget things.  All state management frameworks include the ability to delete state but with Memories you can configure a fragment to automatically delete itself after some period of inactivity. The code below will define a 'state' fragment that automatically deletes itself after 1 day of inactivity:
 
+```JavaScript
+const convoState = convoScope.fragment('state', {}).forgetAfter(1 * ForgetAfter.days);
+```
+
+In addition to automatically forgetting fragments the developer can manually forget things at the fragment level by calling `forget()` or at the scope level by calling `forgetAll()`.  Fragments that were defined to have a default value will automatically revert to their defaults once forgotten.
+ 
