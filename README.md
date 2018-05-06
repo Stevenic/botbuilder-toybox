@@ -4,7 +4,7 @@ A collection of npm packages that provide useful extensions for the JavaScript v
 - [Overview](./docs/README.md#overview)
 - [Installing](./docs/README.md#installing-packages)
 - [Building](https://github.com/Stevenic/botbuilder-toybox/wiki/Building)
-- [Package Refernces](./docs/reference/README.md)
+- [Package References](./docs/reference/README.md)
 
 ## Contributing
 
