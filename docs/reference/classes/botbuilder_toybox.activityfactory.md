@@ -7,7 +7,7 @@
 
 :package: **botbuilder-toybox-extensions**
 
-A set of utility functions to assist with formatting various activity types the bot can send the user.
+A set of static helper methods to assist with formatting various activity types the bot can send the user.
 
 **Usage Example**
 
@@ -37,7 +37,7 @@ A set of utility functions to assist with formatting various activity types the 
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:35](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L35)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:35](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L35)*
 
 
 
@@ -72,7 +72,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:43](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L43)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:43](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L43)*
 
 
 
@@ -105,7 +105,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:50](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L50)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:50](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L50)*
 
 
 
@@ -139,7 +139,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L57)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L57)*
 
 
 

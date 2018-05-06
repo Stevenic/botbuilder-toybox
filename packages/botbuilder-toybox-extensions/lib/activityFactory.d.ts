@@ -9,7 +9,7 @@ import { Activity, EndOfConversationCodes } from 'botbuilder-core';
 /**
  * :package: **botbuilder-toybox-extensions**
  *
- * A set of utility functions to assist with formatting various activity types the bot can send the
+ * A set of static helper methods to assist with formatting various activity types the bot can send the
  * user.
  *
  * **Usage Example**

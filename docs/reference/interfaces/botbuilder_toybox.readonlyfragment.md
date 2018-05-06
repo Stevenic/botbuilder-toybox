@@ -24,13 +24,19 @@ Component binding to a `MemoryFragment` that can only be read from. The binding 
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:39](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L39)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L47)*
 
 
 
-Returns the fragments current/default value and will typically clone the value as to avoid any tampering with the underlying value. A value of `undefined` will be returned if the fragment has never been `set()` and no "default value" has been configured.
+Returns the fragments current/default value and will typically clone the value as to avoid any tampering with the underlying value.
+
+A value of `undefined` will be returned if the fragment has never been `set()` and no "default value" has been configured.
 
 The fragments value should be read in on first access and cached such that future calls to `get()` are fast and relatively inexpensive.
+
+**Usage Example**
+
+    const value = await fragment.get(context);
 
 
 **Parameters:**
@@ -59,11 +65,19 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L45)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:63](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L63)*
 
 
 
-Returns `true` if the fragment currently has a value. Be aware that this will always return `true` if the fragment has a "default value" configured.
+Returns `true` if the fragment currently has a value.
+
+Be aware that this will always return `true` if the fragment has a "default value" configured.
+
+**Usage Example**
+
+    if (fragment.has(context)) {
+        await fragment.forget(context);
+    }
 
 
 **Parameters:**

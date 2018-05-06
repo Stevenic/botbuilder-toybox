@@ -15,11 +15,11 @@
 * [ConversationMemberScope](classes/botbuilder_toybox.conversationmemberscope.md)
 * [ConversationScope](classes/botbuilder_toybox.conversationscope.md)
 * [FilterActivity](classes/botbuilder_toybox.filteractivity.md)
+* [ManageScopes](classes/botbuilder_toybox.managescopes.md)
 * [MemoryFragment](classes/botbuilder_toybox.memoryfragment.md)
 * [MemoryScope](classes/botbuilder_toybox.memoryscope.md)
-* [MemoryScopeAccessor](classes/botbuilder_toybox.memoryscopeaccessor.md)
-* [MemoryScopeManager](classes/botbuilder_toybox.memoryscopemanager.md)
 * [PatchFrom](classes/botbuilder_toybox.patchfrom.md)
+* [ScopeAccessor](classes/botbuilder_toybox.scopeaccessor.md)
 * [ShowTyping](classes/botbuilder_toybox.showtyping.md)
 * [UserScope](classes/botbuilder_toybox.userscope.md)
 
@@ -51,7 +51,7 @@
 
 **Τ CatchErrorHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L14)*
 
 
 
@@ -90,7 +90,7 @@ ___
 
 **Τ FilterActivityHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L14)*
 
 
 
@@ -129,7 +129,7 @@ ___
 
 **Τ VersionChangedHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:16](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L16)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:16](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L16)*
 
 
 
@@ -171,7 +171,7 @@ ___
 
 **●  ForgetAfter**:  *`object`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L12)*
 
 
 

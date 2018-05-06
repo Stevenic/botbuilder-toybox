@@ -18,9 +18,10 @@ exports.ForgetAfter = {
 /**
  * :package: **botbuilder-toybox-memories**
  *
- * Defines a new memory fragment for a given `MemoryScope`. Scopes will typically load all of
- * their saved fragments on first access within a turn so the fragment itself provides a strongly
- * typed isolation boundary within a scope.
+ * Defines a new memory fragment for a given `MemoryScope`.
+ *
+ * Scopes will typically load all of their saved fragments on first access within a turn so the
+ * fragment itself provides a strongly typed isolation boundary within a scope.
  *
  * Fragments can have a range of data types but need to support serialization to JSON. So if they're
  * primitives they should be of type `string`, `number`, or `boolean`. And if they're complex types,
@@ -55,14 +56,7 @@ class MemoryFragment {
         this.maxTurns = 0;
     }
     /**
-     * Deletes any current value for the fragment. If the fragment was configured with a "default
-     * value" this will restore the default value.
-     *
-     * **Usage Example**
-     *
-     * ```JavaScript
-     * await fragment.forget(context);
-     * ```
+     * Deletes any current value for the fragment (**see interface for more details**.)
      * @param context Context for the current turn of conversation.
      */
     forget(context) {
@@ -72,10 +66,30 @@ class MemoryFragment {
             }
         });
     }
+    /**
+     * Adds a policy to automatically forget the fragments value after a period of time.
+     *
+     * The time is relative to the fragments last access so a fragment value that's regularly
+     * accessed will not be forgotten.
+     *
+     * If a forgotten fragment was configured with a default value, the fragment will revert to
+     * this value.
+     *
+     * **Usage Example**
+     *
+     * ```JavaScript
+     * const stateFragment = conversation.fragment('state').forgetAfter(5 * ForgetAfter.minutes);
+     * ```
+     * @param seconds Number of seconds to wait after the fragments last access before forgetting the value.
+     */
     forgetAfter(seconds) {
         this.maxSeconds = seconds;
         return this;
     }
+    /**
+     * Returns the fragments current/default value (**see interface for more details**.)
+     * @param context Context for the current turn of conversation.
+     */
     get(context) {
         return this.scope.load(context).then((memory) => {
             let v;
@@ -102,11 +116,20 @@ class MemoryFragment {
             return v ? v.value : undefined;
         });
     }
+    /**
+     * Returns `true` if the fragment currently has a value (**see interface for more details**.)
+     * @param context Context for the current turn of conversation.
+     */
     has(context) {
         return this.get(context).then((value) => {
             return value !== undefined;
         });
     }
+    /**
+     * Assigns a new value to the fragment (**see interface for more details**.)
+     * @param context Context for the current turn of conversation.
+     * @param value The new value to assign.
+     */
     set(context, value) {
         return this.scope.load(context).then((memory) => {
             if (memory) {
@@ -127,6 +150,12 @@ class MemoryFragment {
      * Returns a read-only version of the fragment that only implements `get()` and `has()` and will
      * clone the fragments value prior to returning it from `get()`. This prevents any modification
      * of the stored value.
+     *
+     * **Usage Example**
+     *
+     * ```JavaScript
+     * const profileAccessor = await profileFragment.asReadOnly();
+     * ```
      */
     asReadOnly() {
         return {

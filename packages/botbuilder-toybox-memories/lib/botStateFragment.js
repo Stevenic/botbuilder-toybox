@@ -37,7 +37,7 @@ class BotStateFragment {
         this.property = property;
     }
     /**
-     * Deletes any current value for the fragment. **see interface for details**
+     * Deletes any current value for the fragment (**see interface for more details**.)
      * @param context Context for the current turn of conversation.
      */
     forget(context) {
@@ -48,7 +48,7 @@ class BotStateFragment {
         });
     }
     /**
-     * Returns the fragments current/default value. **see interface for details**
+     * Returns the fragments current/default value (**see interface for more details**.)
      * @param context Context for the current turn of conversation.
      */
     get(context) {
@@ -57,7 +57,7 @@ class BotStateFragment {
         });
     }
     /**
-     * Returns `true` if the fragment currently has a value. **see interface for details**
+     * Returns `true` if the fragment currently has a value (**see interface for more details**.)
      * @param context Context for the current turn of conversation.
      */
     has(context) {
@@ -66,7 +66,7 @@ class BotStateFragment {
         });
     }
     /**
-     * Assigns a new value to the fragment. **see interface for details**
+     * Assigns a new value to the fragment (**see interface for more details**.)
      * @param context Context for the current turn of conversation.
      * @param value The new value to assign.
      */
@@ -79,6 +79,12 @@ class BotStateFragment {
      * Returns a read-only version of the fragment that only implements `get()` and `has()` and will
      * clone the fragments value prior to returning it from `get()`. This prevents any modification
      * of the stored value.
+     *
+     * **Usage Example**
+     *
+     * ```JavaScript
+     * const profileAccessor = await profileFragment.asReadOnly();
+     * ```
      */
     asReadOnly() {
         return {

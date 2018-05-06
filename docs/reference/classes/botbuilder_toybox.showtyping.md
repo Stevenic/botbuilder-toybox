@@ -37,7 +37,7 @@ This middleware lets you automatically send a 'typing' activity if your bot is t
 ### ⊕ **new ShowTyping**(delay?: *`number`*, frequency?: *`number`*): [ShowTyping](botbuilder_toybox.showtyping.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:27](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L27)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/showTyping.d.ts:27](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-extensions/lib/showTyping.d.ts#L27)*
 
 
 

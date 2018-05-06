@@ -31,18 +31,36 @@ export const ForgetAfter = {
 export interface ReadOnlyFragment<T = any> {
     /**
      * Returns the fragments current/default value and will typically clone the value as to avoid 
-     * any tampering with the underlying value. A value of `undefined` will be returned if the
-     * fragment has never been `set()` and no "default value" has been configured.  
+     * any tampering with the underlying value. 
+     * 
+     * A value of `undefined` will be returned if the fragment has never been `set()` and no 
+     * "default value" has been configured.  
      * 
      * The fragments value should be read in on first access and cached such that future calls to
      * `get()` are fast and relatively inexpensive.
+     * 
+     * **Usage Example**
+     * 
+     * ```JavaScript
+     * const value = await fragment.get(context);
+     * ```
      * @param context Context for the current turn of conversation.
      */
     get(context: TurnContext): Promise<T|undefined>;
 
     /**
-     * Returns `true` if the fragment currently has a value. Be aware that this will always return
-     * `true` if the fragment has a "default value" configured.
+     * Returns `true` if the fragment currently has a value. 
+     * 
+     * Be aware that this will always return `true` if the fragment has a "default value" 
+     * configured.
+     * 
+     * **Usage Example**
+     * 
+     * ```JavaScript
+     * if (fragment.has(context)) {
+     *     await fragment.forget(context);
+     * }
+     * ```
      * @param context Context for the current turn of conversation.
      */
     has(context: TurnContext): Promise<boolean>;
@@ -56,37 +74,70 @@ export interface ReadOnlyFragment<T = any> {
  */
 export interface ReadWriteFragment<T = any> {
     /**
-     * Deletes any current value for the fragment. If the fragment was configured with a "default
-     * value" this will restore the default value.
+     * Deletes any current value for the fragment. 
+     * 
+     * If the fragment was configured with a "default value" this will restore the default value.
+     * 
+     * **Usage Example**
+     * 
+     * ```JavaScript
+     * await fragment.forget(context);
+     * ```
      * @param context Context for the current turn of conversation.
      */
     forget(context: TurnContext): Promise<void>;
 
     /**
-     * Returns the fragments current/default value. A value of `undefined` will be returned if the
-     * fragment has never been `set()` and no "default value" has been configured.  
+     * Returns the fragments current/default value. 
+     * 
+     * A value of `undefined` will be returned if the fragment has never been `set()` and no 
+     * "default value" has been configured.  
      * 
      * The fragments value should be read in on first access and cached such that future calls to
      * `get()` are fast and relatively inexpensive.
      * 
      * The fragments value is passed by reference so any changes by the caller to fragments of 
      * type `object` or `array` will result in the stored value being updated.
+     * 
+     * **Usage Example**
+     * 
+     * ```JavaScript
+     * const value = await fragment.get(context);
+     * ```
      * @param context Context for the current turn of conversation.
      */
     get(context: TurnContext): Promise<T|undefined>;
 
     /**
-     * Returns `true` if the fragment currently has a value. Be aware that this will always return
-     * `true` if the fragment has a "default value" configured.
+     * Returns `true` if the fragment currently has a value. 
+     * 
+     * Be aware that this will always return `true` if the fragment has a "default value" 
+     * configured.
+     * 
+     * **Usage Example**
+     * 
+     * ```JavaScript
+     * if (fragment.has(context)) {
+     *     await fragment.forget(context);
+     * }
+     * ```
      * @param context Context for the current turn of conversation.
      */
     has(context: TurnContext): Promise<boolean>;
 
     /**
-     * Assigns a new value to the fragment. The call to `set()` is required for fragments with 
-     * primitive data types like `string`, `number`, and `boolean` but optional for reference types
-     * like `object` and `array`. Complex types are passed by value such that any modifications by
-     * the caller will get automatically persisted when the backing `MemoryScope` is saved.
+     * Assigns a new value to the fragment. 
+     * 
+     * The call to `set()` is required for fragments with primitive data types like `string`, 
+     * `number`, and `boolean` but optional for reference types like `object` and `array`. Complex 
+     * types are passed by value such that any modifications by the caller will get automatically 
+     * persisted when the backing `MemoryScope` is saved.
+     * 
+     * **Usage Example**
+     * 
+     * ```JavaScript
+     * await fragment.set(context, 12345);
+     * ```
      * @param context Context for the current turn of conversation.
      * @param value The new value to assign.
      */
@@ -96,9 +147,10 @@ export interface ReadWriteFragment<T = any> {
 /**
  * :package: **botbuilder-toybox-memories**
  * 
- * Defines a new memory fragment for a given `MemoryScope`. Scopes will typically load all of 
- * their saved fragments on first access within a turn so the fragment itself provides a strongly
- * typed isolation boundary within a scope.
+ * Defines a new memory fragment for a given `MemoryScope`. 
+ * 
+ * Scopes will typically load all of their saved fragments on first access within a turn so the 
+ * fragment itself provides a strongly typed isolation boundary within a scope.
  * 
  * Fragments can have a range of data types but need to support serialization to JSON. So if they're 
  * primitives they should be of type `string`, `number`, or `boolean`. And if they're complex types,
@@ -131,14 +183,7 @@ export class MemoryFragment<T = any> implements ReadWriteFragment<T> {
     constructor(public readonly scope: MemoryScope, public readonly name: string, public readonly defaultValue?: T) { }
 
     /**
-     * Deletes any current value for the fragment. If the fragment was configured with a "default
-     * value" this will restore the default value.
-     * 
-     * **Usage Example**
-     * 
-     * ```JavaScript
-     * await fragment.forget(context);
-     * ```
+     * Deletes any current value for the fragment (**see interface for more details**.)
      * @param context Context for the current turn of conversation.
      */
     public forget(context: TurnContext): Promise<void> {
@@ -149,11 +194,31 @@ export class MemoryFragment<T = any> implements ReadWriteFragment<T> {
         });
     }
 
+    /**
+     * Adds a policy to automatically forget the fragments value after a period of time. 
+     * 
+     * The time is relative to the fragments last access so a fragment value that's regularly
+     * accessed will not be forgotten.
+     * 
+     * If a forgotten fragment was configured with a default value, the fragment will revert to 
+     * this value.
+     * 
+     * **Usage Example**
+     * 
+     * ```JavaScript
+     * const stateFragment = conversation.fragment('state').forgetAfter(5 * ForgetAfter.minutes);
+     * ```
+     * @param seconds Number of seconds to wait after the fragments last access before forgetting the value. 
+     */
     public forgetAfter(seconds: number): this {
         this.maxSeconds = seconds;
         return this;
     }
 
+    /**
+     * Returns the fragments current/default value (**see interface for more details**.)
+     * @param context Context for the current turn of conversation.
+     */
     public get(context: TurnContext): Promise<T|undefined> {
         return this.scope.load(context).then((memory: any) => {
             let v: FragmentValue<T>|undefined;
@@ -181,12 +246,21 @@ export class MemoryFragment<T = any> implements ReadWriteFragment<T> {
         });
     }
 
+    /**
+     * Returns `true` if the fragment currently has a value (**see interface for more details**.)
+     * @param context Context for the current turn of conversation.
+     */
     public has(context: TurnContext): Promise<boolean> {
         return this.get(context).then((value) => {
             return value !== undefined;
         });
     }
     
+    /**
+     * Assigns a new value to the fragment (**see interface for more details**.)
+     * @param context Context for the current turn of conversation.
+     * @param value The new value to assign.
+     */
     public set(context: TurnContext, value: T): Promise<void> {
         return this.scope.load(context).then((memory: any) => {
             if (memory) {
@@ -207,6 +281,12 @@ export class MemoryFragment<T = any> implements ReadWriteFragment<T> {
      * Returns a read-only version of the fragment that only implements `get()` and `has()` and will 
      * clone the fragments value prior to returning it from `get()`. This prevents any modification 
      * of the stored value.
+     * 
+     * **Usage Example**
+     * 
+     * ```JavaScript
+     * const profileAccessor = await profileFragment.asReadOnly();
+     * ```
      */
     public asReadOnly(): ReadOnlyFragment<T> {
         return {
@@ -227,6 +307,7 @@ export class MemoryFragment<T = any> implements ReadWriteFragment<T> {
     }
 }
 
+/** @private */
 interface FragmentValue<T> {
     value: T;
     lastAccess: number;

@@ -8,8 +8,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 /** Licensed under the MIT License. */
 __export(require("./botStateFragment"));
+__export(require("./manageScopes"));
 __export(require("./memoryFragment"));
 __export(require("./memoryScope"));
-__export(require("./memoryScopeAccessor"));
-__export(require("./memoryScopeManager"));
+__export(require("./scopeAccessor"));
 //# sourceMappingURL=index.js.map

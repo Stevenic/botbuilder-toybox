@@ -18,8 +18,8 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "botbuilder-core": "4.0.0-preview1.0",
-    "botbuilder-core-extensions": "4.0.0-preview1.0"
+    "botbuilder-core": "4.0.0-preview1.1",
+    "botbuilder-core-extensions": "4.0.0-preview1.1"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "7.2.5",    

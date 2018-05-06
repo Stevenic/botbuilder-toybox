@@ -29,11 +29,17 @@ Component binding to a `MemoryFragment` that can be both read and written to.
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:59](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L59)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:84](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L84)*
 
 
 
-Deletes any current value for the fragment. If the fragment was configured with a "default value" this will restore the default value.
+Deletes any current value for the fragment.
+
+If the fragment was configured with a "default value" this will restore the default value.
+
+**Usage Example**
+
+    await fragment.forget(context);
 
 
 **Parameters:**
@@ -62,15 +68,21 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:71](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L71)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:104](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L104)*
 
 
 
-Returns the fragments current/default value. A value of `undefined` will be returned if the fragment has never been `set()` and no "default value" has been configured.
+Returns the fragments current/default value.
+
+A value of `undefined` will be returned if the fragment has never been `set()` and no "default value" has been configured.
 
 The fragments value should be read in on first access and cached such that future calls to `get()` are fast and relatively inexpensive.
 
 The fragments value is passed by reference so any changes by the caller to fragments of type `object` or `array` will result in the stored value being updated.
+
+**Usage Example**
+
+    const value = await fragment.get(context);
 
 
 **Parameters:**
@@ -99,11 +111,19 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:77](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L77)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:120](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L120)*
 
 
 
-Returns `true` if the fragment currently has a value. Be aware that this will always return `true` if the fragment has a "default value" configured.
+Returns `true` if the fragment currently has a value.
+
+Be aware that this will always return `true` if the fragment has a "default value" configured.
+
+**Usage Example**
+
+    if (fragment.has(context)) {
+        await fragment.forget(context);
+    }
 
 
 **Parameters:**
@@ -132,11 +152,17 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:86](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L86)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:137](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L137)*
 
 
 
-Assigns a new value to the fragment. The call to `set()` is required for fragments with primitive data types like `string`, `number`, and `boolean` but optional for reference types like `object` and `array`. Complex types are passed by value such that any modifications by the caller will get automatically persisted when the backing `MemoryScope` is saved.
+Assigns a new value to the fragment.
+
+The call to `set()` is required for fragments with primitive data types like `string`, `number`, and `boolean` but optional for reference types like `object` and `array`. Complex types are passed by value such that any modifications by the caller will get automatically persisted when the backing `MemoryScope` is saved.
+
+**Usage Example**
+
+    await fragment.set(context, 12345);
 
 
 **Parameters:**

@@ -56,7 +56,7 @@ Creates a `MemoryFragment` wrapper for an individual property on a `BotState`, `
 ### ⊕ **new BotStateFragment**(state: *`BotState`*, property: *`string`*): [BotStateFragment](botbuilder_toybox.botstatefragment.md)
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:36](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L36)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:36](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L36)*
 
 
 
@@ -88,11 +88,15 @@ Creates a new BotStateFragment instance.
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:69](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L69)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:75](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L75)*
 
 
 
 Returns a read-only version of the fragment that only implements `get()` and `has()` and will clone the fragments value prior to returning it from `get()`. This prevents any modification of the stored value.
+
+**Usage Example**
+
+    const profileAccessor = await profileFragment.asReadOnly();
 
 
 
@@ -115,11 +119,11 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[forget](../interfaces/botbuilder_toybox.readwritefragment.md#forget)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L47)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L47)*
 
 
 
-Deletes any current value for the fragment. **see interface for details**
+Deletes any current value for the fragment (**see interface for more details**.)
 
 
 **Parameters:**
@@ -150,11 +154,11 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[get](../interfaces/botbuilder_toybox.readwritefragment.md#get)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L52)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L52)*
 
 
 
-Returns the fragments current/default value. **see interface for details**
+Returns the fragments current/default value (**see interface for more details**.)
 
 
 **Parameters:**
@@ -185,11 +189,11 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[has](../interfaces/botbuilder_toybox.readwritefragment.md#has)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L57)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:57](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L57)*
 
 
 
-Returns `true` if the fragment currently has a value. **see interface for details**
+Returns `true` if the fragment currently has a value (**see interface for more details**.)
 
 
 **Parameters:**
@@ -220,11 +224,11 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[set](../interfaces/botbuilder_toybox.readwritefragment.md#set)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:63](https://github.com/Stevenic/botbuilder-toybox/blob/5d9ea6c/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L63)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:63](https://github.com/Stevenic/botbuilder-toybox/blob/793fe8d/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L63)*
 
 
 
-Assigns a new value to the fragment. **see interface for details**
+Assigns a new value to the fragment (**see interface for more details**.)
 
 
 **Parameters:**
