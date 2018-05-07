@@ -4,7 +4,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @module botbuilder-toybox-extensions
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
 __export(require("./activityFactory"));

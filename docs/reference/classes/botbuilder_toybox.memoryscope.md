@@ -84,7 +84,7 @@ Developers will typically use one of the pre-defined `UserScope`, `ConversationS
 ### ⊕ **new MemoryScope**(storage: *`Storage`*, namespace: *`string`*, getKey: *`function`*): [MemoryScope](botbuilder_toybox.memoryscope.md)
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L52)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L52)*
 
 
 
@@ -115,7 +115,7 @@ Creates a new MemoryScope instance.
 
 **●  fragments**:  *[Map]()`string`, [MemoryFragment](botbuilder_toybox.memoryfragment.md)`any`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L52)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L52)*
 
 
 
@@ -132,7 +132,7 @@ ___
 
 **●  getKey**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L47)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L47)*
 
 
 #### Type declaration
@@ -165,7 +165,7 @@ ___
 
 **●  namespace**:  *`string`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L46)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L46)*
 
 
 
@@ -179,7 +179,7 @@ ___
 
 **●  storage**:  *`Storage`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L45)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L45)*
 
 
 
@@ -197,7 +197,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:72](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L72)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:72](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L72)*
 
 
 
@@ -236,7 +236,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:85](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L85)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:85](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L85)*
 
 
 
@@ -280,7 +280,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:101](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L101)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:101](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L101)*
 
 
 
@@ -320,7 +320,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:112](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L112)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:112](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L112)*
 
 
 
@@ -357,7 +357,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:127](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L127)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:127](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L127)*
 
 
 

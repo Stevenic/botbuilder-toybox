@@ -1,5 +1,5 @@
 /**
- * @module botbuilder-toybox-memories
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
 export * from './botStateFragment';

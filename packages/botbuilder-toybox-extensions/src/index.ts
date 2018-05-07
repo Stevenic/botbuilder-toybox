@@ -1,5 +1,5 @@
 /**
- * @module botbuilder-toybox-extensions
+ * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
 export * from './activityFactory';

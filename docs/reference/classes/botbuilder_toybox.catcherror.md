@@ -42,7 +42,7 @@ The example catches the error and reports it to the user then clears the convers
 ### ⊕ **new CatchError**(handler: *[CatchErrorHandler](../#catcherrorhandler)*): [CatchError](botbuilder_toybox.catcherror.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L41)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L41)*
 
 
 

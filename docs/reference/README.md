@@ -15,6 +15,7 @@
 * [ConversationMemberScope](classes/botbuilder_toybox.conversationmemberscope.md)
 * [ConversationScope](classes/botbuilder_toybox.conversationscope.md)
 * [FilterActivity](classes/botbuilder_toybox.filteractivity.md)
+* [ListControl](classes/botbuilder_toybox.listcontrol.md)
 * [ManageScopes](classes/botbuilder_toybox.managescopes.md)
 * [MemoryFragment](classes/botbuilder_toybox.memoryfragment.md)
 * [MemoryScope](classes/botbuilder_toybox.memoryscope.md)
@@ -26,6 +27,9 @@
 
 ### Interfaces
 
+* [ListControlOptions](interfaces/botbuilder_toybox.listcontroloptions.md)
+* [ListControlResult](interfaces/botbuilder_toybox.listcontrolresult.md)
+* [ListPagerResult](interfaces/botbuilder_toybox.listpagerresult.md)
 * [ReadOnlyFragment](interfaces/botbuilder_toybox.readonlyfragment.md)
 * [ReadWriteFragment](interfaces/botbuilder_toybox.readwritefragment.md)
 
@@ -34,6 +38,7 @@
 
 * [CatchErrorHandler](#catcherrorhandler)
 * [FilterActivityHandler](#filteractivityhandler)
+* [ListPager](#listpager)
 * [VersionChangedHandler](#versionchangedhandler)
 
 
@@ -51,7 +56,7 @@
 
 **Τ CatchErrorHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L14)*
 
 
 
@@ -90,7 +95,7 @@ ___
 
 **Τ FilterActivityHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L14)*
 
 
 
@@ -123,13 +128,59 @@ Function that will be called anytime an activity of the specified type is receiv
 
 ___
 
+<a id="listpager"></a>
+
+###  ListPager
+
+**Τ ListPager**:  *`function`* 
+
+*Defined in packages/botbuilder-toybox-controls/lib/listControl.d.ts:21*
+
+
+
+:package: **botbuilder-toybox-controls**
+
+Function that will be called by a `ListControl` to load individual pages of results.
+
+*   Returning a ListPagerResult with both `results` and a `continueToken` will cause the results to be rendered and a "more" button included to trigger rendering of the next page. The ListControl will remain active.
+*   Returning a ListPagerResult with just `results` will cause the results to be rendered and the ListControl to end.
+*   Returning an empty ListPagerResult will cause the ListControl to just immediately end.
+*__param__*: Type of context object passed to pager.
+
+
+#### Type declaration
+►(context: *`C`*, filter?: *`any`*, continueToken?: *`any`*): `Promiseable`.<[ListPagerResult](interfaces/botbuilder_toybox.listpagerresult.md)>
+
+
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| context | `C`   |  Context for the current turn of conversation with the user. |
+| filter | `any`   |  (Optional) filter passed in by caller to pager. |
+| continueToken | `any`   |  (Optional) continuation token passed by ListControl to fetch the next page of results. |
+
+
+
+
+
+**Returns:** `Promiseable`.<[ListPagerResult](interfaces/botbuilder_toybox.listpagerresult.md)>
+
+
+
+
+
+
+___
+
 <a id="versionchangedhandler"></a>
 
 ###  VersionChangedHandler
 
 **Τ VersionChangedHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:16](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L16)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:16](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L16)*
 
 
 
@@ -171,7 +222,7 @@ ___
 
 **●  ForgetAfter**:  *`object`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/fa71e81/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L12)*
 
 
 
