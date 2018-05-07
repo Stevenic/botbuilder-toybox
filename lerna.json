@@ -2,8 +2,7 @@
   "lerna": "2.8.0",
   "packages": [
     "packages/*",
-    "samples/memories/*",
-    "samples/middleware/*"
+    "samples/*"
   ],
   "version": "independent",
   "commands": {

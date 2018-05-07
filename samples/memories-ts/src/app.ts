@@ -1,4 +1,5 @@
 import { BotFrameworkAdapter, MemoryStorage, TurnContext } from 'botbuilder';
+import { ConversationScope, ManageScopes, ScopeAccessor } from 'botbuilder-toybox-memories';
 import * as restify from 'restify';
 
 // Create server
@@ -13,18 +14,17 @@ const adapter = new BotFrameworkAdapter({
     appPassword: process.env.MICROSOFT_APP_PASSWORD 
 });
 
-import { ConversationScope, MemoryScopeManager, MemoryScopeAccessor } from 'botbuilder-toybox-memories';
-
-// Define memory scopes add memory manager middleware
-const conversation = new ConversationScope(new MemoryStorage());
-adapter.use(new MemoryScopeManager(conversation));
+// Define scopes and add to adapter
+const storage = new MemoryStorage();
+const convoScope = new ConversationScope(storage);
+adapter.use(new ManageScopes(convoScope));
 
 // Define memory fragments
-conversation.fragment('count', 0).forgetAfter(10);
+convoScope.fragment('count', 0).forgetAfter(10);
 
 // Extend TurnContext interface
 interface MyContext extends TurnContext {
-    conversation: MemoryScopeAccessor;
+    conversation: ScopeAccessor;
 }
 
 // Listen for incoming requests 

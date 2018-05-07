@@ -9,6 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const botbuilder_1 = require("botbuilder");
+const botbuilder_toybox_memories_1 = require("botbuilder-toybox-memories");
+const botbuilder_toybox_extensions_1 = require("botbuilder-toybox-extensions");
 const restify = require("restify");
 // Create server
 let server = restify.createServer();
@@ -20,17 +22,20 @@ const adapter = new botbuilder_1.BotFrameworkAdapter({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
-const botbuilder_toybox_memories_1 = require("botbuilder-toybox-memories");
-// Define memory scopes add memory manager middleware
-const conversation = new botbuilder_toybox_memories_1.ConversationScope(new botbuilder_1.MemoryStorage());
-adapter.use(new botbuilder_toybox_memories_1.MemoryScopeManager(conversation));
+// Define scopes and add to adapter
+const storage = new botbuilder_1.MemoryStorage();
+const convoScope = new botbuilder_toybox_memories_1.ConversationScope(storage);
+adapter.use(new botbuilder_toybox_memories_1.ManageScopes(convoScope));
 // Define memory fragments
-conversation.fragment('count', 0).forgetAfter(10);
+convoScope.fragment('count', 0).forgetAfter(10);
+// Add ShowTyping middleware
+adapter.use(new botbuilder_toybox_extensions_1.ShowTyping());
 // Listen for incoming requests 
 server.post('/api/messages', (req, res) => {
     // Route received request to adapter for processing
     adapter.processActivity(req, res, (context) => __awaiter(this, void 0, void 0, function* () {
         if (context.activity.type === 'message') {
+            yield longRequest(3000);
             let count = yield context.conversation.get('count');
             yield context.sendActivity(`${++count}: You said "${context.activity.text}"`);
             yield context.conversation.set('count', count);
@@ -40,3 +45,8 @@ server.post('/api/messages', (req, res) => {
         }
     }));
 });
+function longRequest(delay) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(), delay);
+    });
+}
