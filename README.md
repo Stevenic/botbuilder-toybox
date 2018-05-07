@@ -4,7 +4,7 @@ A collection of npm packages that provide useful extensions for the JavaScript v
 - [Overview](./docs/README.md#overview)
 - [Installing](./docs/README.md#installing-packages)
 - [Conceptual Docs](./docs/README.md)
-- [Package References](./docs/reference/README.md)
+- [Reference Docs](./docs/reference/README.md)
 - [Building Packages](./docs/building.md)
 
 ## Contributing
