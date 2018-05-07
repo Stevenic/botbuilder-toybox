@@ -1,9 +1,11 @@
 # botbuilder-toybox
 A collection of npm packages that provide useful extensions for the JavaScript version of [Bot Builder v4](https://github.com/Microsoft/botbuilder-js).  See the sections below to get started:
 
-- [Overview](https://github.com/Stevenic/botbuilder-toybox/wiki#overview)
-- [Building](https://github.com/Stevenic/botbuilder-toybox/wiki/Building)
-- [Installing](https://github.com/Stevenic/botbuilder-toybox/blob/master/docs/README.md)
+- [Overview](./docs/README.md#overview)
+- [Installing](./docs/README.md#installing-packages)
+- [Conceptual Docs](./docs/README.md)
+- [Package References](./docs/reference/README.md)
+- [Building Packages](./docs/building.md)
 
 ## Contributing
 
