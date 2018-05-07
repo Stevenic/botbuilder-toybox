@@ -200,7 +200,7 @@ export interface ListControlResult {
  * @param C Type of context object passed to the controls ListPager.
  */
 export declare class ListControl<C extends TurnContext> extends Dialog<C, ListControlResult, ListControlOptions> {
-    protected pager: ListPager<C>;
+    private pager;
     private readonly actions;
     /**
      * Creates a new ListControl instance.

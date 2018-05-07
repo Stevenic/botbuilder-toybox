@@ -56,7 +56,7 @@
 
 **Τ CatchErrorHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/catchError.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-extensions/lib/catchError.d.ts#L14)*
 
 
 
@@ -95,7 +95,7 @@ ___
 
 **Τ FilterActivityHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L14)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts:14](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-extensions/lib/filterActivity.d.ts#L14)*
 
 
 
@@ -134,7 +134,7 @@ ___
 
 **Τ ListPager**:  *`function`* 
 
-*Defined in packages/botbuilder-toybox-controls/lib/listControl.d.ts:21*
+*Defined in [packages/botbuilder-toybox-controls/lib/listControl.d.ts:21](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-controls/lib/listControl.d.ts#L21)*
 
 
 
@@ -180,7 +180,7 @@ ___
 
 **Τ VersionChangedHandler**:  *`function`* 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:16](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L16)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:16](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L16)*
 
 
 
@@ -222,7 +222,7 @@ ___
 
 **●  ForgetAfter**:  *`object`* 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L12)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:12](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L12)*
 
 
 

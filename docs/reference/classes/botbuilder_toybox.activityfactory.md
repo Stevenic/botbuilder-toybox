@@ -37,7 +37,7 @@ A set of static helper methods to assist with formatting various activity types 
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L41)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:41](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L41)*
 
 
 
@@ -76,7 +76,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:55](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L55)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:55](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L55)*
 
 
 
@@ -113,7 +113,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:68](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L68)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:68](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L68)*
 
 
 
@@ -151,7 +151,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:81](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L81)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts:81](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-extensions/lib/activityFactory.d.ts#L81)*
 
 
 

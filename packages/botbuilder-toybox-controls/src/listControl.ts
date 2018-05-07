@@ -102,7 +102,7 @@ export interface ListControlResult {
  * 
  * dialogs.add('imageList', new ListControl(async (context, filter, continueToken) => {
  *     // Render a page of images to hero cards 
- *     const start = filter && 'start' in filter ? filter.start : 0;
+ *     const start = filter && typeof filter.start === 'number' ? filter.start : 0;
  *     const page = typeof continueToken === 'number' ? continueToken : 0;
  *     const cards: Attachment[] = [];
  *     for (let i = 0; i < 10; i++) {
@@ -217,7 +217,7 @@ export class ListControl<C extends TurnContext> extends Dialog<C, ListControlRes
      * @param pager Function used to page in results when the control is activated.
      * @param actions (Optional) custom suggested actions to display when the control is active and has more results to display. Defaults to showing a single "Show More" button.
      */
-    constructor(protected pager: ListPager<C>, actions?: (string|CardAction)[]) { 
+    constructor(private pager: ListPager<C>, actions?: (string|CardAction)[]) { 
         super();
         this.actions = actions || [{ type: 'imBack', title: 'Show More', value: 'more' }];
     }

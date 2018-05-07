@@ -47,7 +47,7 @@ This middleware lets you track a version number for the conversations your bot i
 ### ⊕ **new CheckVersion**(versionFragment: *[ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md)`number`*, version: *`number`*, handler: *[VersionChangedHandler](../#versionchangedhandler)*): [CheckVersion](botbuilder_toybox.checkversion.md)
 
 
-*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:50](https://github.com/Stevenic/botbuilder-toybox/blob/c5d0e84/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L50)*
+*Defined in [packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts:50](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-extensions/lib/checkVersion.d.ts#L50)*
 
 
 

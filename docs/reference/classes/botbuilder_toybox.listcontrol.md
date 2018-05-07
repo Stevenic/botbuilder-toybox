@@ -133,11 +133,6 @@ Type of context object passed to the controls ListPager.
 * [constructor](botbuilder_toybox.listcontrol.md#constructor)
 
 
-### Properties
-
-* [pager](botbuilder_toybox.listcontrol.md#pager)
-
-
 
 ---
 ## Constructors
@@ -147,7 +142,7 @@ Type of context object passed to the controls ListPager.
 ### ⊕ **new ListControl**(pager: *[ListPager](../#listpager)`C`*, actions?: *`any`[]*): [ListControl](botbuilder_toybox.listcontrol.md)
 
 
-*Defined in packages/botbuilder-toybox-controls/lib/listControl.d.ts:204*
+*Defined in [packages/botbuilder-toybox-controls/lib/listControl.d.ts:204](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-controls/lib/listControl.d.ts#L204)*
 
 
 
@@ -168,22 +163,6 @@ Creates a new ListControl instance.
 **Returns:** [ListControl](botbuilder_toybox.listcontrol.md)
 
 ---
-
-
-## Properties
-<a id="pager"></a>
-
-### «Protected» pager
-
-**●  pager**:  *[ListPager](../#listpager)`C`* 
-
-*Defined in packages/botbuilder-toybox-controls/lib/listControl.d.ts:203*
-
-
-
-
-
-___
 
 
 
