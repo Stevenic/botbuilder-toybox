@@ -4,10 +4,10 @@ A collection of npm packages that provide useful extensions for the JavaScript v
 - [Overview](#overview)
 - [Installing](#installing-packages)
 - Conceptual Docs
-> - [Memories](./memories.md)
-> - [Controls](./controls.md)
-> - [Middleware](./middleware.md)
-> - [Utilities](./utilities.md)
+  - [Memories](./memories.md)
+  - [Controls](./controls.md)
+  - [Middleware](./middleware.md)
+  - [Utilities](./utilities.md)
 - [Reference Docs](./reference/README.md)
 - [Building Packages](./building.md)
 
