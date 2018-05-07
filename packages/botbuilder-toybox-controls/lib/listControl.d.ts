@@ -92,7 +92,7 @@ export interface ListControlResult {
  *
  * dialogs.add('imageList', new ListControl(async (context, filter, continueToken) => {
  *     // Render a page of images to hero cards
- *     const start = filter && 'start' in filter ? filter.start : 0;
+ *     const start = filter && typeof filter.start === 'number' ? filter.start : 0;
  *     const page = typeof continueToken === 'number' ? continueToken : 0;
  *     const cards: Attachment[] = [];
  *     for (let i = 0; i < 10; i++) {

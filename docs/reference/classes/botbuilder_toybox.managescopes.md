@@ -79,7 +79,7 @@ If you're using TypeScript you'll need to extend the `TurnContext` interface to 
 ### ⊕ **new ManageScopes**(...scopes: *[MemoryScope](botbuilder_toybox.memoryscope.md)[]*): [ManageScopes](botbuilder_toybox.managescopes.md)
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/manageScopes.d.ts:71](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/manageScopes.d.ts#L71)*
+*Defined in [packages/botbuilder-toybox-memories/lib/manageScopes.d.ts:71](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/manageScopes.d.ts#L71)*
 
 
 

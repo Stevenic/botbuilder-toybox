@@ -61,7 +61,7 @@ This makes for a handy adapter when you're wanting to use a Toybox component tha
 ### ⊕ **new BotStateFragment**(state: *`BotState`*, property: *`string`*): [BotStateFragment](botbuilder_toybox.botstatefragment.md)
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:38](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L38)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:38](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L38)*
 
 
 
@@ -93,7 +93,7 @@ Creates a new BotStateFragment instance.
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:78](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L78)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:78](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L78)*
 
 
 
@@ -126,7 +126,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[forget](../interfaces/botbuilder_toybox.readwritefragment.md#forget)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L49)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:49](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L49)*
 
 
 
@@ -161,7 +161,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[get](../interfaces/botbuilder_toybox.readwritefragment.md#get)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:54](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L54)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:54](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L54)*
 
 
 
@@ -196,7 +196,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[has](../interfaces/botbuilder_toybox.readwritefragment.md#has)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:59](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L59)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:59](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L59)*
 
 
 
@@ -231,7 +231,7 @@ ___
 
 *Implementation of [ReadWriteFragment](../interfaces/botbuilder_toybox.readwritefragment.md).[set](../interfaces/botbuilder_toybox.readwritefragment.md#set)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:65](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L65)*
+*Defined in [packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts:65](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/botStateFragment.d.ts#L65)*
 
 
 

@@ -24,7 +24,7 @@ Component binding to a `MemoryFragment` that can only be read from. The binding 
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L47)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L47)*
 
 
 
@@ -65,7 +65,7 @@ ___
 
 
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:63](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L63)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts:63](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryFragment.d.ts#L63)*
 
 
 

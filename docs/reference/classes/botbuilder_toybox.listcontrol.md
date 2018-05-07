@@ -19,7 +19,7 @@ To create a list you can add a new ListControl instance as a named dialog to you
 
     dialogs.add('imageList', new ListControl(async (context, filter, continueToken) => {
         // Render a page of images to hero cards
-        const start = filter && 'start' in filter ? filter.start : 0;
+        const start = filter && typeof filter.start === 'number' ? filter.start : 0;
         const page = typeof continueToken === 'number' ? continueToken : 0;
         const cards: Attachment[] = [];
         for (let i = 0; i < 10; i++) {
@@ -142,7 +142,7 @@ Type of context object passed to the controls ListPager.
 ### ⊕ **new ListControl**(pager: *[ListPager](../#listpager)`C`*, actions?: *`any`[]*): [ListControl](botbuilder_toybox.listcontrol.md)
 
 
-*Defined in [packages/botbuilder-toybox-controls/lib/listControl.d.ts:204](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-controls/lib/listControl.d.ts#L204)*
+*Defined in [packages/botbuilder-toybox-controls/lib/listControl.d.ts:204](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-controls/lib/listControl.d.ts#L204)*
 
 
 

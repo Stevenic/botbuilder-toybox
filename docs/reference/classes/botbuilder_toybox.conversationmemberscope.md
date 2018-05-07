@@ -65,7 +65,7 @@ Scope for persisting a set of related memory fragments that are remembered for a
 
 *Overrides [MemoryScope](botbuilder_toybox.memoryscope.md).[constructor](botbuilder_toybox.memoryscope.md#constructor)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:197](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L197)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:197](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L197)*
 
 
 
@@ -97,7 +97,7 @@ Creates a new ConversationMemberScope instance.
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[fragments](botbuilder_toybox.memoryscope.md#fragments)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L52)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:52](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L52)*
 
 
 
@@ -116,7 +116,7 @@ ___
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[getKey](botbuilder_toybox.memoryscope.md#getkey)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L47)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:47](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L47)*
 
 
 #### Type declaration
@@ -151,7 +151,7 @@ ___
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[namespace](botbuilder_toybox.memoryscope.md#namespace)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L46)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:46](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L46)*
 
 
 
@@ -167,7 +167,7 @@ ___
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[storage](botbuilder_toybox.memoryscope.md#storage)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L45)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:45](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L45)*
 
 
 
@@ -187,7 +187,7 @@ ___
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[forgetAll](botbuilder_toybox.memoryscope.md#forgetall)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:72](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L72)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:72](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L72)*
 
 
 
@@ -228,7 +228,7 @@ ___
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[fragment](botbuilder_toybox.memoryscope.md#fragment)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:85](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L85)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:85](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L85)*
 
 
 
@@ -274,7 +274,7 @@ ___
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[load](botbuilder_toybox.memoryscope.md#load)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:101](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L101)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:101](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L101)*
 
 
 
@@ -316,7 +316,7 @@ ___
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[save](botbuilder_toybox.memoryscope.md#save)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:112](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L112)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:112](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L112)*
 
 
 
@@ -355,7 +355,7 @@ ___
 
 *Inherited from [MemoryScope](botbuilder_toybox.memoryscope.md).[wasAccessed](botbuilder_toybox.memoryscope.md#wasaccessed)*
 
-*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:127](https://github.com/Stevenic/botbuilder-toybox/blob/cbc02d3/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L127)*
+*Defined in [packages/botbuilder-toybox-memories/lib/memoryScope.d.ts:127](https://github.com/Stevenic/botbuilder-toybox/blob/dd57c76/packages/botbuilder-toybox-memories/lib/memoryScope.d.ts#L127)*
 
 
 
