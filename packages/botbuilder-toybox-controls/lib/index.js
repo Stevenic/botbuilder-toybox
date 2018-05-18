@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
+__export(require("./dialogSet"));
 __export(require("./ensureTerms"));
 __export(require("./listControl"));
 __export(require("./termsControl"));
