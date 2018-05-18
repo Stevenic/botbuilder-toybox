@@ -2,7 +2,7 @@
  * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-import { Middleware, TurnContext } from 'botbuilder';
+import { Middleware, TurnContext } from 'botbuilder-core';
 /**
  * :package: **botbuilder-toybox-extensions**
  *

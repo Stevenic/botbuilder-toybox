@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-const botbuilder_1 = require("botbuilder");
+const botbuilder_core_1 = require("botbuilder-core");
 /**
  * :package: **botbuilder-toybox-extensions**
  *
@@ -49,8 +49,8 @@ class ShowTyping {
             });
         }
         // Initialize activity
-        const ref = botbuilder_1.TurnContext.getConversationReference(context.activity);
-        const activity = botbuilder_1.TurnContext.applyConversationReference({ type: 'typing' }, ref);
+        const ref = botbuilder_core_1.TurnContext.getConversationReference(context.activity);
+        const activity = botbuilder_core_1.TurnContext.applyConversationReference({ type: 'typing' }, ref);
         // Start delay timer and call next()
         const { delay, frequency } = this;
         hTimeout = setTimeout(sendTyping, delay);
