@@ -50,12 +50,20 @@ export interface HttpAdapterSettings {
      */
     outgoingHeaders?: object;
 
+    /**
+     * (Optional) path to append to the `serviceUrl` when deleting an existing activity.
+     */
     deletePath?: string;
 
+    /**
+     * (Optional) path to append to the `serviceUrl` when sending a new activity.
+     */
     sendPath?: string;
 
+    /**
+     * (Optional) path to append to the `serviceUrl` when updating an existing activity.
+     */
     updateActivity?: string;
-
 }
 
 const RESPONSE_ACTIVITIES_KEY = Symbol('responseActivities');

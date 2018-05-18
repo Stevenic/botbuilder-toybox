@@ -41,8 +41,17 @@ export interface HttpAdapterSettings {
      * (Optional) headers to send with outgoing requests.
      */
     outgoingHeaders?: object;
+    /**
+     * (Optional) path to append to the `serviceUrl` when deleting an existing activity.
+     */
     deletePath?: string;
+    /**
+     * (Optional) path to append to the `serviceUrl` when sending a new activity.
+     */
     sendPath?: string;
+    /**
+     * (Optional) path to append to the `serviceUrl` when updating an existing activity.
+     */
     updateActivity?: string;
 }
 /**
