@@ -21,13 +21,12 @@ server.post('/api/messages', (req, res) => {
         // Copy activity and remove 'serviceUrl'
         const activity = Object.assign({}, context.activity);
         delete activity.serviceUrl;
-        const body = JSON.stringify(activity);
         
         // Forward activity to child bot
         const childUrl = process.env.CHILD_URL || 'http://localhost:4000/activities';
         const res = await fetch(childUrl, {
             method: 'POST',
-            body: body,
+            body: JSON.stringify(activity),
             headers: { 'Content-Type': 'application/json' }
         });
         const activities = await res.json() as Activity[];
