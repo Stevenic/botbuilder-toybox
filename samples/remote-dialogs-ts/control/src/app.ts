@@ -34,12 +34,12 @@ const createProfile = new CreateProfileControl();
 server.post('/controls/createProfile', (req, res) => dispatchActivity(createProfile, req, res));
 
 // ChangeName Endpoint
-const changeName = new ChangeNameControl;
+const changeName = new ChangeNameControl();
 server.post('/controls/changeName', (req, res) => dispatchActivity(changeName, req, res));
 
 
 // ChangeEmail Endpoint
-const changeEmail = new ChangeEmailControl;
+const changeEmail = new ChangeEmailControl();
 server.post('/controls/changeEmail', (req, res) => dispatchActivity(changeEmail, req, res));
 
 
