@@ -1,0 +1,20 @@
+{
+  "name": "federation-child-ts",
+  "version": "1.0.0",
+  "description": "Child bot for Bot Builder Toybox federation sample.",
+  "main": "./lib/app.js",
+  "scripts": {
+    "build-sample": "tsc",
+    "start": "tsc && node ./lib/app.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^9.3.0",
+    "@types/restify": "^5.0.7",
+    "botbuilder": "4.0.0-preview1.2",
+    "botbuilder-toybox-memories": "0.1.0-preview1.2",
+    "botbuilder-toybox-extensions": "0.1.0-preview1.2",
+    "restify": "6.3.4"
+  }
+}

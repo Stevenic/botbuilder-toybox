@@ -160,7 +160,7 @@ class HttpAdapter extends botbuilder_core_1.BotAdapter {
                         throw new Error(`HttpAdapter.processActivity(): bot failed to return a valid 'invokeResponse' activity.`);
                     }
                 }
-                else if (context.activity.serviceUrl) {
+                else if (!context.activity.serviceUrl) {
                     // Return cached array of response activities
                     const activities = context.services.get(RESPONSE_ACTIVITIES_KEY) || [];
                     res.send(200, activities);
