@@ -1,0 +1,22 @@
+{
+  "name": "federation-parent-ts",
+  "version": "1.0.0",
+  "description": "Bot Builder Toybox example to show simple usage of memory fragments.",
+  "main": "./lib/app.js",
+  "scripts": {
+    "build-sample": "tsc",
+    "start": "tsc && node ./lib/app.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^9.3.0",
+    "@types/node-fetch": "^1.6.9",
+    "@types/restify": "^5.0.7",
+    "botbuilder": "4.0.0-preview1.2",
+    "botbuilder-toybox-memories": "0.1.0-preview1.2",
+    "botbuilder-toybox-extensions": "0.1.0-preview1.2",
+    "node-fetch": "^2.1.2",
+    "restify": "6.3.4"
+  }
+}
