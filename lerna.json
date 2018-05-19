@@ -3,7 +3,8 @@
   "packages": [
     "packages/*",
     "samples/*",
-    "samples/federation-ts/*"
+    "samples/federation-ts/*",
+    "samples/remote-dialogs-ts/*"
   ],
   "version": "independent",
   "commands": {

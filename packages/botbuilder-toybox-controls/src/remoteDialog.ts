@@ -5,6 +5,7 @@
 import { TurnContext, Promiseable, Activity, ActivityTypes } from 'botbuilder';
 import { DialogContext, Dialog } from 'botbuilder-dialogs';
 import { ActivityFactory } from 'botbuilder-toybox-extensions';
+import fetch from 'node-fetch';
 
 export interface RemoteDialogSettings {
     outgoingHeaders?: object;

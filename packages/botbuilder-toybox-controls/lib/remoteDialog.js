@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const botbuilder_1 = require("botbuilder");
 const botbuilder_dialogs_1 = require("botbuilder-dialogs");
 const botbuilder_toybox_extensions_1 = require("botbuilder-toybox-extensions");
+const node_fetch_1 = require("node-fetch");
 /**
  * :package: **botbuilder-toybox-controls**
  *
@@ -59,7 +60,7 @@ class RemoteDialog extends botbuilder_dialogs_1.Dialog {
                 headers['Content-Type'] = 'application/json';
             }
             // Forward activity to remote dialogs server
-            const res = yield fetch(remoteUrl, {
+            const res = yield node_fetch_1.default(remoteUrl, {
                 method: 'POST',
                 body: body,
                 headers: headers
