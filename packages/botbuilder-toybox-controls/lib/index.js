@@ -10,6 +10,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./dialogSet"));
 __export(require("./ensureTerms"));
 __export(require("./listControl"));
+__export(require("./manageMenus"));
+__export(require("./menu"));
+__export(require("./menuManager"));
 __export(require("./remoteDialog"));
 __export(require("./termsControl"));
 //# sourceMappingURL=index.js.map

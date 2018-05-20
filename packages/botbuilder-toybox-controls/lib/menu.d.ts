@@ -2,15 +2,31 @@
  * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-import { TurnContext, Promiseable } from 'botbuilder';
+import { TurnContext } from 'botbuilder';
 import { Choice, FoundChoice, FindChoicesOptions } from 'botbuilder-choices';
-export declare type MenuChoiceHandler<T = any> = (context: TurnContext, data: T | undefined, next: () => Promise<void>) => Promiseable<void>;
+export declare type MenuChoiceHandler<T = any, C extends TurnContext = TurnContext> = (context: C, data: T | undefined, next: () => Promise<void>) => Promise<any>;
+export declare enum MenuStyle {
+    /**
+     * The menu is the default menu and will always be displayed unless a context menu is shown.
+     */
+    defaultMenu = "default",
+    /**
+     * The menu is the default menu but will be displayed to the user as a single button to
+     * conserve space.  Pressing the button will cause all of menus choices to be rendered as a
+     * carousel of hero cards.
+     */
+    defaultButtonMenu = "defaultButton",
+    /**
+     * The menu is a context menu that will only be displayed by calling `context.menus.show()`.
+     * Additionally, the context menus choices will only be recognized while the menu is shown.
+     */
+    contextMenu = "contextMenu",
+}
 export interface MenuSettings {
     /**
-     * If `true` the menu will start off in a state where it can be actively recognized against.
-     * This is independent of the menus current visibility status.
+     * (Optional) style of menu to render. Defaults to a value of `MenuStyle.contextMenu`.
      */
-    activeByDefault: boolean;
+    style: MenuStyle;
     /**
      * (Optional) set of options used to customize the way choices for the menu are recognized.
      */
@@ -19,6 +35,14 @@ export interface MenuSettings {
      * (Optional) title or choice to use when a menu is displayed as a button on another menu.
      */
     buttonTitleOrChoice?: string | Choice;
+    /**
+     * (Optional) minimum score, on a scale from `0.0` to `1.0`, that's needed for the menus choices to be
+     * considered recognized. Defaults to a value of `1.0` meaning that an exact match is required.
+     *
+     * Lower values allow for a fuzzier match of the users input but increase the chance of a menu
+     * choice being accidentally triggered.
+     */
+    minRecognizeScore: number;
 }
 export interface MenuChoiceOptions {
     /**
@@ -27,7 +51,7 @@ export interface MenuChoiceOptions {
      */
     category?: string;
 }
-export declare class Menu {
+export declare class Menu<C extends TurnContext = TurnContext> {
     name: string;
     private readonly handlers;
     private readonly options;
@@ -35,11 +59,11 @@ export declare class Menu {
     readonly choices: Choice[];
     readonly settings: MenuSettings;
     constructor(name: string, settings?: Partial<MenuSettings>);
-    addChoice(titleOrChoice: string | Choice, handlerOrOptions: MenuChoiceHandler): this;
-    addChoice(titleOrChoice: string | Choice, handlerOrOptions: MenuChoiceOptions, handler: MenuChoiceHandler): this;
-    addMenu(childMenu: Menu, handlerOrOptions?: MenuChoiceHandler): this;
-    addMenu(childMenu: Menu, handlerOrOptions: MenuChoiceOptions, handler?: MenuChoiceHandler): this;
+    addChoice(titleOrChoice: string | Choice, handlerOrOptions?: MenuChoiceHandler<any, C>): this;
+    addChoice(titleOrChoice: string | Choice, handlerOrOptions: MenuChoiceOptions, handler?: MenuChoiceHandler<any, C>): this;
+    addMenu(childMenu: Menu, handlerOrOptions?: MenuChoiceHandler<any, C>): this;
+    addMenu(childMenu: Menu, handlerOrOptions: MenuChoiceOptions, handler?: MenuChoiceHandler<any, C>): this;
     invokeChoice(context: TurnContext, value: string, data: any, next: () => Promise<void>): Promise<void>;
     recognizeChoice(utterance: string): FoundChoice | undefined;
-    renderMenu(context: TurnContext): Promise<void>;
+    renderMenu(context: C): Promise<void>;
 }

@@ -14,20 +14,50 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /** Licensed under the MIT License. */
 const botbuilder_1 = require("botbuilder");
 const botbuilder_choices_1 = require("botbuilder-choices");
+var MenuStyle;
+(function (MenuStyle) {
+    /**
+     * The menu is the default menu and will always be displayed unless a context menu is shown.
+     */
+    MenuStyle["defaultMenu"] = "default";
+    /**
+     * The menu is the default menu but will be displayed to the user as a single button to
+     * conserve space.  Pressing the button will cause all of menus choices to be rendered as a
+     * carousel of hero cards.
+     */
+    MenuStyle["defaultButtonMenu"] = "defaultButton";
+    /**
+     * The menu is a context menu that will only be displayed by calling `context.menus.show()`.
+     * Additionally, the context menus choices will only be recognized while the menu is shown.
+     */
+    MenuStyle["contextMenu"] = "contextMenu";
+})(MenuStyle = exports.MenuStyle || (exports.MenuStyle = {}));
 class Menu {
     constructor(name, settings) {
         this.name = name;
         this.handlers = {};
         this.options = {};
         this.children = {};
+        this.choices = [];
         this.settings = Object.assign({
-            activeByDefault: false
+            style: MenuStyle.contextMenu,
+            minRecognizeScore: 1.0
         }, settings);
     }
     addChoice(titleOrChoice, handlerOrOptions, handler) {
+        let options;
         if (typeof handlerOrOptions === 'function') {
             handler = handlerOrOptions;
-            handlerOrOptions = {};
+            options = {};
+        }
+        else if (typeof handlerOrOptions === 'object') {
+            options = handlerOrOptions;
+        }
+        else {
+            options = {};
+        }
+        if (!handler) {
+            handler = (context, data, next) => next();
         }
         // Format choice 
         const choice = typeof titleOrChoice === 'string' ? { value: titleOrChoice } : titleOrChoice;
@@ -41,7 +71,7 @@ class Menu {
         // Append to collections
         this.choices.push(choice);
         this.handlers[choice.value] = handler;
-        this.options[choice.value] = handlerOrOptions;
+        this.options[choice.value] = options;
         return this;
     }
     addMenu(childMenu, handlerOrOptions, handler) {
@@ -103,7 +133,7 @@ class Menu {
                 top = c.resolution;
             }
         });
-        return top;
+        return top && top.score >= this.settings.minRecognizeScore ? top : undefined;
     }
     renderMenu(context) {
         return __awaiter(this, void 0, void 0, function* () {

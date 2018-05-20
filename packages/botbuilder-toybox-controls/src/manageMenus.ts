@@ -4,7 +4,7 @@
 /** Licensed under the MIT License. */
 import { TurnContext, Middleware, ActivityTypes, Activity } from 'botbuilder';
 import { ReadWriteFragment } from 'botbuilder-toybox-memories';
-import { Menu } from './menu';
+import { Menu, MenuStyle } from './menu';
 import { MenuManager, MenuMap } from './menuManager';
 
 export class ManageMenus implements Middleware {
@@ -12,8 +12,13 @@ export class ManageMenus implements Middleware {
 
     constructor(private menuState: ReadWriteFragment<object>, ...menus: Menu[]) { 
         // Ensure all menu names unique
+        let hasDefault = false;
         menus.forEach((m) => {
+            const style = m.settings.style;
+            const isDefault = style === MenuStyle.defaultMenu || style === MenuStyle.defaultButtonMenu;
             if (this.menus.hasOwnProperty(m.name)) { throw new Error(`ManageMenus: duplicate menu named '${m.name}' detected.`) }
+            if (isDefault && hasDefault) { throw new Error(`ManageMenus: only one default menu allowed.`) }
+            hasDefault = isDefault;
             this.menus[m.name] = m;
         });
     }

@@ -2,17 +2,36 @@
  * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-import { TurnContext, Promiseable, ActionTypes, CardAction, MessageFactory } from 'botbuilder';
+import { TurnContext, ActionTypes, CardAction, MessageFactory } from 'botbuilder';
 import { Choice, findChoices, FoundChoice, FindChoicesOptions } from 'botbuilder-choices';
 
-export type MenuChoiceHandler<T = any> = (context: TurnContext, data: T|undefined, next: () => Promise<void>) => Promiseable<void>;
+export type MenuChoiceHandler<T = any, C extends TurnContext = TurnContext> = (context: C, data: T|undefined, next: () => Promise<void>) => Promise<any>;
+
+export enum MenuStyle {
+    /**
+     * The menu is the default menu and will always be displayed unless a context menu is shown. 
+     */
+    defaultMenu = 'default',
+
+    /**
+     * The menu is the default menu but will be displayed to the user as a single button to 
+     * conserve space.  Pressing the button will cause all of menus choices to be rendered as a
+     * carousel of hero cards. 
+     */
+    defaultButtonMenu = 'defaultButton',
+
+    /**
+     * The menu is a context menu that will only be displayed by calling `context.menus.show()`.
+     * Additionally, the context menus choices will only be recognized while the menu is shown. 
+     */
+    contextMenu = 'contextMenu'
+}
 
 export interface MenuSettings {
     /**
-     * If `true` the menu will start off in a state where it can be actively recognized against. 
-     * This is independent of the menus current visibility status. 
+     * (Optional) style of menu to render. Defaults to a value of `MenuStyle.contextMenu`.
      */
-    activeByDefault: boolean;
+    style: MenuStyle;
 
     /**
      * (Optional) set of options used to customize the way choices for the menu are recognized.
@@ -23,6 +42,15 @@ export interface MenuSettings {
      * (Optional) title or choice to use when a menu is displayed as a button on another menu.
      */
     buttonTitleOrChoice?: string|Choice;
+
+    /**
+     * (Optional) minimum score, on a scale from `0.0` to `1.0`, that's needed for the menus choices to be 
+     * considered recognized. Defaults to a value of `1.0` meaning that an exact match is required.
+     * 
+     * Lower values allow for a fuzzier match of the users input but increase the chance of a menu 
+     * choice being accidentally triggered.
+     */
+    minRecognizeScore: number;
 }
 
 export interface MenuChoiceOptions {
@@ -33,27 +61,36 @@ export interface MenuChoiceOptions {
     category?: string;
 }
 
-export class Menu {
+export class Menu<C extends TurnContext = TurnContext> {
     private readonly handlers: { [value: string]: MenuChoiceHandler; } = {};
     private readonly options: { [name: string]: MenuChoiceOptions; } = {};
     private readonly children: { [name: string]: Menu; } = {};
 
-    public readonly choices: Choice[];
+    public readonly choices: Choice[] = [];
 
     public readonly settings: MenuSettings;
 
     constructor(public name: string, settings?: Partial<MenuSettings>) { 
         this.settings = Object.assign({
-            activeByDefault: false
+            style: MenuStyle.contextMenu,
+            minRecognizeScore: 1.0
         } as MenuSettings, settings);
     }
 
-    public addChoice(titleOrChoice: string|Choice, handlerOrOptions: MenuChoiceHandler): this;
-    public addChoice(titleOrChoice: string|Choice, handlerOrOptions: MenuChoiceOptions, handler: MenuChoiceHandler): this;
-    public addChoice(titleOrChoice: string|Choice, handlerOrOptions: MenuChoiceOptions|MenuChoiceHandler, handler?: MenuChoiceHandler): this {
+    public addChoice(titleOrChoice: string|Choice, handlerOrOptions?: MenuChoiceHandler<any, C>): this;
+    public addChoice(titleOrChoice: string|Choice, handlerOrOptions: MenuChoiceOptions, handler?: MenuChoiceHandler<any, C>): this;
+    public addChoice(titleOrChoice: string|Choice, handlerOrOptions?: MenuChoiceOptions|MenuChoiceHandler, handler?: MenuChoiceHandler<any, C>): this {
+        let options: MenuChoiceOptions;
         if (typeof handlerOrOptions === 'function') {
             handler = handlerOrOptions;
-            handlerOrOptions = {};
+            options = {};
+        } else if (typeof handlerOrOptions === 'object') {
+            options = handlerOrOptions;
+        } else {
+            options = {};
+        }
+        if (!handler) {
+            handler = (context, data, next) => next();
         }
      
         // Format choice 
@@ -66,13 +103,13 @@ export class Menu {
         // Append to collections
         this.choices.push(choice);
         this.handlers[choice.value] = handler;
-        this.options[choice.value] = handlerOrOptions;
+        this.options[choice.value] = options;
         return this;
     }
 
-    public addMenu(childMenu: Menu, handlerOrOptions?: MenuChoiceHandler): this;
-    public addMenu(childMenu: Menu, handlerOrOptions: MenuChoiceOptions, handler?: MenuChoiceHandler): this;
-    public addMenu(childMenu: Menu, handlerOrOptions?: MenuChoiceOptions|MenuChoiceHandler, handler?: MenuChoiceHandler): this {
+    public addMenu(childMenu: Menu, handlerOrOptions?: MenuChoiceHandler<any, C>): this;
+    public addMenu(childMenu: Menu, handlerOrOptions: MenuChoiceOptions, handler?: MenuChoiceHandler<any, C>): this;
+    public addMenu(childMenu: Menu, handlerOrOptions?: MenuChoiceOptions|MenuChoiceHandler, handler?: MenuChoiceHandler<any, C>): this {
         if (typeof handlerOrOptions === 'function') {
             handler = handlerOrOptions;
             handlerOrOptions = {};
@@ -124,10 +161,10 @@ export class Menu {
                 top = c.resolution;
             }
         });
-        return top;
+        return top && top.score >= this.settings.minRecognizeScore ? top : undefined;
     }
 
-    public async renderMenu(context: TurnContext): Promise<void> {
+    public async renderMenu(context: C): Promise<void> {
         // Organize menus by category
         const categories: { [name:string]: CardAction[]; } = {};
         this.choices.forEach((c) => {
