@@ -6,5 +6,6 @@ export * from './activityFactory';
 export * from './catchError';
 export * from './checkVersion';
 export * from './filterActivity';
+export * from './httpAdapter';
 export * from './patchFrom';
 export * from './showTyping';

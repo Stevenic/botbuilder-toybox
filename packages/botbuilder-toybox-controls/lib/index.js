@@ -10,5 +10,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./dialogSet"));
 __export(require("./ensureTerms"));
 __export(require("./listControl"));
+__export(require("./remoteDialog"));
 __export(require("./termsControl"));
 //# sourceMappingURL=index.js.map

@@ -11,6 +11,7 @@ __export(require("./activityFactory"));
 __export(require("./catchError"));
 __export(require("./checkVersion"));
 __export(require("./filterActivity"));
+__export(require("./httpAdapter"));
 __export(require("./patchFrom"));
 __export(require("./showTyping"));
 //# sourceMappingURL=index.js.map
