@@ -7,10 +7,22 @@ import { DialogContext, Dialog } from 'botbuilder-dialogs';
 import { ActivityFactory } from 'botbuilder-toybox-extensions';
 import fetch from 'node-fetch';
 
+/**
+ * :package: **botbuilder-toybox-controls**
+ *
+ * Settings used to configure a `RemoteDialog` instance.  
+ */
 export interface RemoteDialogSettings {
+    /**
+     * (Optional) additional headers to assign for the outgoing request sent to the remote server.
+     * This can be used to pass things like service access tokens if needed. 
+     */
     outgoingHeaders?: object;
 }
 
+/**
+ * 
+ */
 export type UrlFactory<C extends TurnContext = TurnContext> = (context: C) => string;
 
 /**

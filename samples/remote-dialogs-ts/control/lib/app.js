@@ -32,10 +32,10 @@ convoScope.fragment('controlState');
 const createProfile = new createProfileControl_1.CreateProfileControl();
 server.post('/controls/createProfile', (req, res) => dispatchActivity(createProfile, req, res));
 // ChangeName Endpoint
-const changeName = new changeNameControl_1.ChangeNameControl;
+const changeName = new changeNameControl_1.ChangeNameControl();
 server.post('/controls/changeName', (req, res) => dispatchActivity(changeName, req, res));
 // ChangeEmail Endpoint
-const changeEmail = new changeEmailControl_1.ChangeEmailControl;
+const changeEmail = new changeEmailControl_1.ChangeEmailControl();
 server.post('/controls/changeEmail', (req, res) => dispatchActivity(changeEmail, req, res));
 function dispatchActivity(control, req, res) {
     // Route received activity to control
