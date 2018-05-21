@@ -23,9 +23,9 @@ class MenuManager {
         // Identify default menu
         for (const key in menus) {
             const m = menus[key];
-            switch (m.settings.style) {
+            switch (m.settings.menuStyle) {
                 case menu_1.MenuStyle.defaultMenu:
-                case menu_1.MenuStyle.defaultButtonMenu:
+                case menu_1.MenuStyle.defaultButton:
                     this.defaultMenu = m;
                     break;
             }
@@ -41,7 +41,23 @@ class MenuManager {
                     activity.suggestedActions = { actions: [] };
                 }
                 if (menu) {
-                    menu.choices.forEach((choice) => { activity.suggestedActions.actions.push(toAction(choice)); });
+                    // Identify type of merge to do
+                    // - If there are no existing actions we'll always just do a right merge
+                    let style = menu.settings.mergeStyle;
+                    if (activity.suggestedActions.actions.length === 0) {
+                        style = menu_1.MergeStyle.right;
+                    }
+                    // Merge actions with existing 
+                    switch (style) {
+                        case menu_1.MergeStyle.left:
+                            // Insert before existing actions
+                            menu.choices.reverse().forEach((choice) => { activity.suggestedActions.actions.unshift(toAction(choice)); });
+                            break;
+                        case menu_1.MergeStyle.right:
+                            // Append after existing actions
+                            menu.choices.forEach((choice) => { activity.suggestedActions.actions.push(toAction(choice)); });
+                            break;
+                    }
                 }
                 if (button) {
                     const choice = typeof button === 'string' ? { value: button } : button;
@@ -49,22 +65,12 @@ class MenuManager {
                 }
             }
             const state = yield this.loadMenuState();
-            const hasActions = activity.suggestedActions && activity.suggestedActions.actions && activity.suggestedActions.actions.length > 0;
             const contextMenu = state.contextMenu && this.menus.hasOwnProperty(state.contextMenu) ? this.menus[state.contextMenu] : undefined;
-            const button = this.defaultMenu && this.defaultMenu.settings.style === menu_1.MenuStyle.defaultButtonMenu ? this.defaultMenu.settings.buttonTitleOrChoice || this.defaultMenu.name : undefined;
+            const button = this.defaultMenu && this.defaultMenu.settings.menuStyle === menu_1.MenuStyle.defaultButton ? this.defaultMenu.settings.buttonTitleOrChoice || this.defaultMenu.name : undefined;
             // Append menu
-            if (hasActions) {
-                if (button) {
-                    appendMenu(button);
-                }
-            }
-            else if (contextMenu) {
-                if (this.defaultMenu && this.defaultMenu.name === contextMenu.name) {
-                    appendMenu(undefined, contextMenu);
-                }
-                else {
-                    appendMenu(button, contextMenu);
-                }
+            if (contextMenu) {
+                const defaultShown = this.defaultMenu && this.defaultMenu.name === contextMenu.name;
+                appendMenu(!defaultShown ? button : undefined, contextMenu);
             }
             else if (button) {
                 appendMenu(button);

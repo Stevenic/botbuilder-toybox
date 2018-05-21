@@ -5,7 +5,7 @@
 import { TurnContext, Activity, SuggestedActions, CardAction, ActionTypes } from 'botbuilder';
 import { FoundChoice, Choice } from 'botbuilder-choices';
 import { ReadWriteFragment } from 'botbuilder-toybox-memories';
-import { Menu, MenuStyle } from './menu';
+import { Menu, MenuStyle, MergeStyle } from './menu';
 
 /** @private */
 export interface MenuMap {
@@ -20,9 +20,9 @@ export class MenuManager {
         // Identify default menu
         for (const key in menus) {
             const m = menus[key];
-            switch (m.settings.style) {
+            switch (m.settings.menuStyle) {
                 case MenuStyle.defaultMenu:
-                case MenuStyle.defaultButtonMenu:
+                case MenuStyle.defaultButton:
                     this.defaultMenu = m;
                     break;
             }
@@ -37,10 +37,24 @@ export class MenuManager {
         function appendMenu(button: string|Choice|undefined, menu?: Menu) {
             if (!activity.suggestedActions || !activity.suggestedActions.actions) { 
                 activity.suggestedActions = { actions: [] } as SuggestedActions;
-
             }
             if (menu) {
-                menu.choices.forEach((choice) => { activity.suggestedActions.actions.push(toAction(choice)) });
+                // Identify type of merge to do
+                // - If there are no existing actions we'll always just do a right merge
+                let style = menu.settings.mergeStyle;
+                if (activity.suggestedActions.actions.length === 0) { style = MergeStyle.right }
+
+                // Merge actions with existing 
+                switch (style) {
+                    case MergeStyle.left:
+                        // Insert before existing actions
+                        menu.choices.reverse().forEach((choice) => { activity.suggestedActions.actions.unshift(toAction(choice)) })
+                        break;
+                    case MergeStyle.right:
+                        // Append after existing actions
+                        menu.choices.forEach((choice) => { activity.suggestedActions.actions.push(toAction(choice)) });
+                        break;
+                }
             }
             if (button) {
                 const choice = typeof button === 'string' ? { value: button } : button;
@@ -49,21 +63,13 @@ export class MenuManager {
         }
 
         const state = await this.loadMenuState();
-        const hasActions = activity.suggestedActions && activity.suggestedActions.actions && activity.suggestedActions.actions.length > 0;
         const contextMenu = state.contextMenu && this.menus.hasOwnProperty(state.contextMenu) ? this.menus[state.contextMenu] : undefined;
-        const button = this.defaultMenu && this.defaultMenu.settings.style === MenuStyle.defaultButtonMenu ? this.defaultMenu.settings.buttonTitleOrChoice || this.defaultMenu.name : undefined;
+        const button = this.defaultMenu && this.defaultMenu.settings.menuStyle === MenuStyle.defaultButton ? this.defaultMenu.settings.buttonTitleOrChoice || this.defaultMenu.name : undefined;
 
         // Append menu
-        if (hasActions) {
-            if (button) {
-                appendMenu(button)
-            }
-        } else if (contextMenu) {
-            if (this.defaultMenu && this.defaultMenu.name === contextMenu.name) {
-                appendMenu(undefined, contextMenu);
-            } else {
-                appendMenu(button, contextMenu);
-            }
+        if (contextMenu) {
+            const defaultShown = this.defaultMenu && this.defaultMenu.name === contextMenu.name;
+            appendMenu(!defaultShown ? button : undefined, contextMenu);
         } else if (button) {
             appendMenu(button);
         } else if (this.defaultMenu) {

@@ -1,8 +1,8 @@
 import { TurnContext } from 'botbuilder';
-import { Menu, MenuStyle, MenuManager, DialogSet } from 'botbuilder-toybox-controls';
+import { Menu, MenuStyle, MergeStyle, MenuManager, DialogSet } from 'botbuilder-toybox-controls';
 
 export function createAlarmMenu(name: string, dialogs: DialogSet): Menu {
-    const menu = new Menu<MenuContext>(name, { style: MenuStyle.defaultMenu });
+    const menu = new Menu<MenuContext>(name, { menuStyle: MenuStyle.defaultMenu });
     menu.addChoice('add alarm', (context) => beginDialog(context, dialogs, 'addAlarm'))
         .addChoice('delete alarm', (context) => beginDialog(context, dialogs, 'deleteAlarm'))
         .addChoice('show alarms', (context) => beginDialog(context, dialogs, 'showAlarms'));
@@ -10,7 +10,7 @@ export function createAlarmMenu(name: string, dialogs: DialogSet): Menu {
 }
 
 export function createCancelMenu(name: string, dialogs: DialogSet): Menu {
-    const menu = new Menu<MenuContext>(name);
+    const menu = new Menu<MenuContext>(name, { mergeStyle: MergeStyle.right });
     menu.addChoice('cancel', async (context) => {
         await context.menus.hideMenu();
         const dc = await dialogs.createContext(context);

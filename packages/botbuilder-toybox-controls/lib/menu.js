@@ -19,19 +19,34 @@ var MenuStyle;
     /**
      * The menu is the default menu and will always be displayed unless a context menu is shown.
      */
-    MenuStyle["defaultMenu"] = "default";
+    MenuStyle["defaultMenu"] = "defaultMenu";
     /**
      * The menu is the default menu but will be displayed to the user as a single button to
      * conserve space.  Pressing the button will cause all of menus choices to be rendered as a
      * carousel of hero cards.
      */
-    MenuStyle["defaultButtonMenu"] = "defaultButton";
+    MenuStyle["defaultButton"] = "defaultButton";
     /**
      * The menu is a context menu that will only be displayed by calling `context.menus.show()`.
      * Additionally, the context menus choices will only be recognized while the menu is shown.
      */
     MenuStyle["contextMenu"] = "contextMenu";
 })(MenuStyle = exports.MenuStyle || (exports.MenuStyle = {}));
+var MergeStyle;
+(function (MergeStyle) {
+    /**
+     * Do not merge menu choices with any existing suggested actions.
+     */
+    MergeStyle["none"] = "none";
+    /**
+     * Prepend the menus choices to the left of any existing suggested actions.
+     */
+    MergeStyle["left"] = "left";
+    /**
+     * Append the menus choices to the right of any existing suggested actions.
+     */
+    MergeStyle["right"] = "right";
+})(MergeStyle = exports.MergeStyle || (exports.MergeStyle = {}));
 class Menu {
     constructor(name, settings) {
         this.name = name;
@@ -40,7 +55,8 @@ class Menu {
         this.children = {};
         this.choices = [];
         this.settings = Object.assign({
-            style: MenuStyle.contextMenu,
+            menuStyle: MenuStyle.contextMenu,
+            mergeStyle: MergeStyle.none,
             minRecognizeScore: 1.0
         }, settings);
     }

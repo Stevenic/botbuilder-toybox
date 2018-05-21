@@ -14,8 +14,8 @@ export class ManageMenus implements Middleware {
         // Ensure all menu names unique
         let hasDefault = false;
         menus.forEach((m) => {
-            const style = m.settings.style;
-            const isDefault = style === MenuStyle.defaultMenu || style === MenuStyle.defaultButtonMenu;
+            const style = m.settings.menuStyle;
+            const isDefault = style === MenuStyle.defaultMenu || style === MenuStyle.defaultButton;
             if (this.menus.hasOwnProperty(m.name)) { throw new Error(`ManageMenus: duplicate menu named '${m.name}' detected.`) }
             if (isDefault && hasDefault) { throw new Error(`ManageMenus: only one default menu allowed.`) }
             hasDefault = isDefault;

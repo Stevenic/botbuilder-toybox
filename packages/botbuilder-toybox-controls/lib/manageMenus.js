@@ -22,8 +22,8 @@ class ManageMenus {
         // Ensure all menu names unique
         let hasDefault = false;
         menus.forEach((m) => {
-            const style = m.settings.style;
-            const isDefault = style === menu_1.MenuStyle.defaultMenu || style === menu_1.MenuStyle.defaultButtonMenu;
+            const style = m.settings.menuStyle;
+            const isDefault = style === menu_1.MenuStyle.defaultMenu || style === menu_1.MenuStyle.defaultButton;
             if (this.menus.hasOwnProperty(m.name)) {
                 throw new Error(`ManageMenus: duplicate menu named '${m.name}' detected.`);
             }
