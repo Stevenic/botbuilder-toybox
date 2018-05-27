@@ -11,8 +11,13 @@ export class ManageMenus implements Middleware {
     private readonly menus: MenuMap = {};
 
     constructor(private menuState: ReadWriteFragment<object>, ...menus: Menu[]) { 
-        // Ensure all menu names unique
+        // Ensure all menu names unique and only one default menu exists
+        let defaultMenu = '';
         menus.forEach((m) => {
+            if (m.settings.isDefaultMenu) {
+                if (defaultMenu.length > 0) { throw new Error(`ManageMenus: can't add default menu named '${m.name}' because a default menu name '${defaultMenu}' has already been added.`) }
+                defaultMenu = m.name;
+            }
             if (this.menus.hasOwnProperty(m.name)) { throw new Error(`ManageMenus: duplicate menu named '${m.name}' detected.`) }
             this.menus[m.name] = m;
         });
