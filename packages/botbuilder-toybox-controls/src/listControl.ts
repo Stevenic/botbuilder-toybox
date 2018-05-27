@@ -207,9 +207,9 @@ export interface ListControlResult {
  * > While the list of custom actions supported by an instance of a ListControl is static you can
  * > display a dynamic subset of those actions to the user by simply including `suggestedActions`
  * > on the `result` activity returned by your pager. 
- * @param C Type of context object passed to the controls ListPager.
+ * @param C (Optional) type of context object passed to the controls ListPager.
  */
-export class ListControl<C extends TurnContext> extends Dialog<C, ListControlResult, ListControlOptions> {
+export class ListControl<C extends TurnContext = TurnContext> extends Dialog<C, ListControlResult, ListControlOptions> {
     private readonly actions: (string|CardAction)[];
 
     /**
