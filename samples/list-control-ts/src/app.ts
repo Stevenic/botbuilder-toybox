@@ -2,6 +2,7 @@ import { BotFrameworkAdapter, MemoryStorage, TurnContext, Attachment, MessageFac
 import { UserScope, ConversationScope, ManageScopes, ForgetAfter, ScopeAccessor } from 'botbuilder-toybox-memories';
 import { DialogSet } from 'botbuilder-dialogs';
 import { ListControl } from 'botbuilder-toybox-controls';
+import { CardTemplate } from 'botbuilder-toybox-extensions';
 import * as restify from 'restify';
 
 // Create server
@@ -61,6 +62,11 @@ server.post('/api/messages', (req, res) => {
 
 const dialogs = new DialogSet();
 
+const resultTmpl = CardTemplate.heroCard({
+    title: 'Image ${imageNum}',
+    images: [{ url: 'https://picsum.photos/100/100/?image=${imageIndex}' }]
+});
+
 dialogs.add('imageList', new ListControl(async (context, filter, continueToken) => {
     // Render a page of images to hero cards 
     const start = filter && typeof filter.start === 'number' ? filter.start : 0;
@@ -68,10 +74,7 @@ dialogs.add('imageList', new ListControl(async (context, filter, continueToken) 
     const cards: Attachment[] = [];
     for (let i = 0; i < 10; i++) {
         const imageNum = i + (page * 10) + 1;
-        const card = CardFactory.heroCard(
-            `Image ${imageNum}`, 
-            [`https://picsum.photos/100/100/?image=${start + imageNum}`]
-        );
+        const card = resultTmpl.render({ imageNum: imageNum, imageIndex: start + imageNum });
         cards.push(card);
     }
     

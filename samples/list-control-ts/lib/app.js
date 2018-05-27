@@ -12,6 +12,7 @@ const botbuilder_1 = require("botbuilder");
 const botbuilder_toybox_memories_1 = require("botbuilder-toybox-memories");
 const botbuilder_dialogs_1 = require("botbuilder-dialogs");
 const botbuilder_toybox_controls_1 = require("botbuilder-toybox-controls");
+const botbuilder_toybox_extensions_1 = require("botbuilder-toybox-extensions");
 const restify = require("restify");
 // Create server
 let server = restify.createServer();
@@ -56,6 +57,10 @@ server.post('/api/messages', (req, res) => {
     }));
 });
 const dialogs = new botbuilder_dialogs_1.DialogSet();
+const resultTmpl = botbuilder_toybox_extensions_1.CardTemplate.heroCard({
+    title: 'Image ${imageNum}',
+    images: [{ url: 'https://picsum.photos/100/100/?image=${imageIndex}' }]
+});
 dialogs.add('imageList', new botbuilder_toybox_controls_1.ListControl((context, filter, continueToken) => __awaiter(this, void 0, void 0, function* () {
     // Render a page of images to hero cards 
     const start = filter && typeof filter.start === 'number' ? filter.start : 0;
@@ -63,7 +68,7 @@ dialogs.add('imageList', new botbuilder_toybox_controls_1.ListControl((context, 
     const cards = [];
     for (let i = 0; i < 10; i++) {
         const imageNum = i + (page * 10) + 1;
-        const card = botbuilder_1.CardFactory.heroCard(`Image ${imageNum}`, [`https://picsum.photos/100/100/?image=${start + imageNum}`]);
+        const card = resultTmpl.render({ imageNum: imageNum, imageIndex: start + imageNum });
         cards.push(card);
     }
     // Render cards to user as a carousel

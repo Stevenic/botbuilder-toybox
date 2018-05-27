@@ -21,29 +21,14 @@ class CardTemplate {
     static adaptiveCard(template, cache) {
         return new CardTemplate(botbuilder_1.CardFactory.contentTypes.adaptiveCard, template, cache);
     }
-    static animationCard(template, cache) {
-        return new CardTemplate(botbuilder_1.CardFactory.contentTypes.animationCard, template, cache);
-    }
-    static audioCard(template, cache) {
-        return new CardTemplate(botbuilder_1.CardFactory.contentTypes.audioCard, template, cache);
-    }
     static heroCard(template, cache) {
         return new CardTemplate(botbuilder_1.CardFactory.contentTypes.heroCard, template, cache);
     }
     static oauthCard(template, cache) {
         return new CardTemplate(botbuilder_1.CardFactory.contentTypes.oauthCard, template, cache);
     }
-    static receiptCard(template, cache) {
-        return new CardTemplate(botbuilder_1.CardFactory.contentTypes.receiptCard, template, cache);
-    }
-    static signinCard(template, cache) {
-        return new CardTemplate(botbuilder_1.CardFactory.contentTypes.signinCard, template, cache);
-    }
     static thumbnailCard(template, cache) {
         return new CardTemplate(botbuilder_1.CardFactory.contentTypes.thumbnailCard, template, cache);
-    }
-    static videoCard(template, cache) {
-        return new CardTemplate(botbuilder_1.CardFactory.contentTypes.videoCard, template, cache);
     }
 }
 exports.CardTemplate = CardTemplate;
