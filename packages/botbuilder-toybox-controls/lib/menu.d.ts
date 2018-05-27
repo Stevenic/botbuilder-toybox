@@ -2,25 +2,64 @@
  * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-import { TurnContext } from 'botbuilder';
-import { Choice, FoundChoice, FindChoicesOptions } from 'botbuilder-choices';
-export declare type MenuChoiceHandler<T = any, C extends TurnContext = TurnContext> = (context: C, data: T | undefined, next: () => Promise<void>) => Promise<any>;
-export declare enum MenuStyle {
+import { Activity, HeroCard } from 'botbuilder';
+import { Choice, FindChoicesOptions } from 'botbuilder-choices';
+import { MenuContext } from './menuManager';
+export interface MenuSettings {
     /**
-     * The menu is the default menu and will always be displayed unless a context menu is shown.
+     * (Optional) if `true` the menu should be shown as the bots default menu.  Only one default
+     * menu is allowed for the bot. Defaults to a value of `false`.
      */
-    defaultMenu = "defaultMenu",
+    isDefaultMenu: boolean;
     /**
-     * The menu is the default menu but will be displayed to the user as a single button to
-     * conserve space.  Pressing the button will cause all of menus choices to be rendered as a
-     * carousel of hero cards.
+     * (Optional) if `true` the menu will be collapsed down to a single button to conserve space.
+     * Clicking the button will cause the menus choices to be rendered as a carousel of hero cards.
      */
-    defaultButton = "defaultButton",
+    showAsButton: boolean;
     /**
-     * The menu is a context menu that will only be displayed by calling `context.menus.show()`.
-     * Additionally, the context menus choices will only be recognized while the menu is shown.
+     * (Optional) setting that controls how the menus choices are merged with any existing
+     * suggested actions for the outgoing activity. Defaults to a value of `MergeStyle.none`.
      */
-    contextMenu = "contextMenu",
+    mergeStyle: MergeStyle;
+    /**
+     * (Optional) set of options used to customize the way choices for the menu are recognized.
+     */
+    recognizeOptions?: FindChoicesOptions;
+    /**
+     * (Optional) title or choice to use when a menu is displayed as a button on another menu.
+     */
+    buttonTitleOrChoice?: string | MenuChoice;
+    /**
+     * (Optional) minimum score, on a scale from `0.0` to `1.0`, that's needed for the menus choices to be
+     * considered recognized. Defaults to a value of `1.0` meaning that an exact match is required.
+     *
+     * Lower values allow for a fuzzier match of the users input but increase the chance of a menu
+     * choice being accidentally triggered.
+     */
+    minRecognizeScore: number;
+    /**
+     * (Optional) causes a menu to be hidden after having been shown to the user for a number of
+     * seconds.
+     *
+     * Should be a value greater than 0 and not valid for `defaultMenu` or `defaultButton` style
+     * menus.
+     */
+    hideAfter?: number;
+    /**
+     * (Optional) if true the menu will be automatically hidden after one of its choices are
+     * triggered.
+     *
+     * Not valid for `defaultMenu` or `defaultButton` style menus.
+     */
+    hideAfterClick?: boolean;
+    /**
+     * (Optional) causes a menu to be hidden after having been shown to the user for a number of
+     * conversational turns.
+     *
+     * Should be a value of 1 or more and not valid for `defaultMenu` or `defaultButton` style
+     * menus.
+     */
+    hideAfterTurns?: number;
 }
 export declare enum MergeStyle {
     /**
@@ -36,53 +75,40 @@ export declare enum MergeStyle {
      */
     right = "right",
 }
-export interface MenuSettings {
-    /**
-     * (Optional) style of menu to render. Defaults to a value of `MenuStyle.contextMenu`.
-     */
-    menuStyle: MenuStyle;
-    /**
-     * (Optional) setting that controls how the menus choices are merged with any existing
-     * suggested actions for the outgoing activity. Defaults to a value of `MergeStyle.none`.
-     */
-    mergeStyle: MergeStyle;
-    /**
-     * (Optional) set of options used to customize the way choices for the menu are recognized.
-     */
-    recognizeOptions?: FindChoicesOptions;
-    /**
-     * (Optional) title or choice to use when a menu is displayed as a button on another menu.
-     */
-    buttonTitleOrChoice?: string | Choice;
-    /**
-     * (Optional) minimum score, on a scale from `0.0` to `1.0`, that's needed for the menus choices to be
-     * considered recognized. Defaults to a value of `1.0` meaning that an exact match is required.
-     *
-     * Lower values allow for a fuzzier match of the users input but increase the chance of a menu
-     * choice being accidentally triggered.
-     */
-    minRecognizeScore: number;
-}
-export interface MenuChoiceOptions {
+export interface MenuChoice extends Choice {
+    title?: string;
+    image?: string;
     /**
      * (Optional) category the choice should rendered within. When `renderMenu()` is called each
      * category is rendered as a card within a carousel. Defaults to a value of "default".
      */
     category?: string;
 }
-export declare class Menu<C extends TurnContext = TurnContext> {
+export declare type MenuChoiceHandler<T = any, C extends MenuContext = MenuContext> = (context: C, data: T | undefined, next: () => Promise<void>) => Promise<any>;
+export interface FoundMenuChoice {
+    choice: MenuChoice;
+    score: number;
+    handler: MenuChoiceHandler;
+}
+export declare class Menu<C extends MenuContext = MenuContext> {
     name: string;
     private readonly handlers;
-    private readonly options;
     private readonly children;
-    readonly choices: Choice[];
+    private readonly cards;
+    private readonly buttonChoice;
+    readonly choices: MenuChoice[];
     readonly settings: MenuSettings;
     constructor(name: string, settings?: Partial<MenuSettings>);
-    addChoice(titleOrChoice: string | Choice, handlerOrOptions?: MenuChoiceHandler<any, C>): this;
-    addChoice(titleOrChoice: string | Choice, handlerOrOptions: MenuChoiceOptions, handler?: MenuChoiceHandler<any, C>): this;
-    addMenu(childMenu: Menu, handlerOrOptions?: MenuChoiceHandler<any, C>): this;
-    addMenu(childMenu: Menu, handlerOrOptions: MenuChoiceOptions, handler?: MenuChoiceHandler<any, C>): this;
-    invokeChoice(context: TurnContext, value: string, data: any, next: () => Promise<void>): Promise<void>;
-    recognizeChoice(utterance: string): FoundChoice | undefined;
-    renderMenu(context: C): Promise<void>;
+    setCard(category: string, card: Partial<HeroCard>): this;
+    addChoice(titleOrChoice: string | MenuChoice, handler?: MenuChoiceHandler<any, C>): this;
+    addMenu(childMenu: Menu, handler?: MenuChoiceHandler<any, C>): this;
+    recognizeChoice(context: C): Promise<FoundMenuChoice | undefined>;
+    renderSuggestedActions(activity: Partial<Activity>): Promise<void>;
+    renderCards(context: C): Promise<void>;
+    protected onRecognizeChoice(context: C, choices: MenuChoice[], settings: MenuSettings, children: Menu[]): Promise<FoundMenuChoice | undefined>;
+    protected onRenderSuggestedActions(activity: Partial<Activity>, choices: MenuChoice[], settings: MenuSettings): Promise<void>;
+    protected onRenderCards(context: C, choices: MenuChoice[], settings: MenuSettings, cards: {
+        [category: string]: Partial<HeroCard>;
+    }): Promise<void>;
+    protected findTopChoice(context: C, choices: MenuChoice[], settings: MenuSettings): Promise<FoundMenuChoice | undefined>;
 }

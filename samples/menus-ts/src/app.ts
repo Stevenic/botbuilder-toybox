@@ -1,6 +1,6 @@
 import { BotFrameworkAdapter, MemoryStorage, TurnContext } from 'botbuilder';
 import { ConversationScope, UserScope, ManageScopes, ScopeAccessor } from 'botbuilder-toybox-memories';
-import { ManageMenus, DialogSet } from 'botbuilder-toybox-controls';
+import { ManageMenus, DialogSet, MenuContext } from 'botbuilder-toybox-controls';
 import * as restify from 'restify';
 
 import { Alarm } from './models';
@@ -36,7 +36,7 @@ const cancelMenu = menus.createCancelMenu('cancel', dialogs);
 adapter.use(new ManageMenus(menuState, alarmMenu, cancelMenu));
 
 // Extend interface for context object
-interface BotContext extends menus.MenuContext {
+interface BotContext extends MenuContext {
     conversation: ScopeAccessor;
     user: ScopeAccessor;
 }

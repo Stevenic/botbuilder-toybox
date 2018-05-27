@@ -1,9 +1,9 @@
 import { DialogContainer, ChoicePrompt, ConfirmPrompt, FoundChoice } from 'botbuilder-dialogs';
 import { ReadWriteFragment } from 'botbuilder-toybox-memories';
+import { MenuContext } from 'botbuilder-toybox-controls';
 import { UserState } from 'botbuilder';
 
 import { Alarm } from './models';
-import { MenuContext } from './menus';
 
 export class DeleteAlarmDialog extends DialogContainer<any, any, MenuContext> {
     constructor(alarmsList: ReadWriteFragment<Alarm[]>) {

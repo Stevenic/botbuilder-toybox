@@ -1,10 +1,10 @@
 import { DialogContainer } from 'botbuilder-dialogs';
 import { ReadOnlyFragment } from 'botbuilder-toybox-memories';
+import { MenuContext } from 'botbuilder-toybox-controls';
 import { UserState } from 'botbuilder';
 import * as moment from 'moment';
 
 import { Alarm } from './models';
-import { MenuContext } from './menus';
 
 export class ShowAlarmsDialog extends DialogContainer<any, any, MenuContext> {
     constructor(alarmsList: ReadOnlyFragment<Alarm[]>) {

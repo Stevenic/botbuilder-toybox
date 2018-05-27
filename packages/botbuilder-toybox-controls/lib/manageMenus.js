@@ -13,24 +13,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 /** Licensed under the MIT License. */
 const botbuilder_1 = require("botbuilder");
-const menu_1 = require("./menu");
 const menuManager_1 = require("./menuManager");
 class ManageMenus {
     constructor(menuState, ...menus) {
         this.menuState = menuState;
         this.menus = {};
         // Ensure all menu names unique
-        let hasDefault = false;
         menus.forEach((m) => {
-            const style = m.settings.menuStyle;
-            const isDefault = style === menu_1.MenuStyle.defaultMenu || style === menu_1.MenuStyle.defaultButton;
             if (this.menus.hasOwnProperty(m.name)) {
                 throw new Error(`ManageMenus: duplicate menu named '${m.name}' detected.`);
             }
-            if (isDefault && hasDefault) {
-                throw new Error(`ManageMenus: only one default menu allowed.`);
-            }
-            hasDefault = isDefault;
             this.menus[m.name] = m;
         });
     }

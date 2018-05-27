@@ -1,10 +1,10 @@
 import { DialogContainer, TextPrompt, DatetimePrompt } from 'botbuilder-dialogs';
 import { ReadWriteFragment } from 'botbuilder-toybox-memories';
+import { MenuContext } from 'botbuilder-toybox-controls';
 import { UserState } from 'botbuilder';
 import * as moment from 'moment';
 
 import { Alarm } from './models';
-import { MenuContext } from './menus';
 
 export class AddAlarmDialog extends DialogContainer<any, any, MenuContext> {
     constructor(alarmsList: ReadWriteFragment<Alarm[]>) {

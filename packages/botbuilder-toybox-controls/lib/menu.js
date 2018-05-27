@@ -14,24 +14,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /** Licensed under the MIT License. */
 const botbuilder_1 = require("botbuilder");
 const botbuilder_choices_1 = require("botbuilder-choices");
-var MenuStyle;
-(function (MenuStyle) {
-    /**
-     * The menu is the default menu and will always be displayed unless a context menu is shown.
-     */
-    MenuStyle["defaultMenu"] = "defaultMenu";
-    /**
-     * The menu is the default menu but will be displayed to the user as a single button to
-     * conserve space.  Pressing the button will cause all of menus choices to be rendered as a
-     * carousel of hero cards.
-     */
-    MenuStyle["defaultButton"] = "defaultButton";
-    /**
-     * The menu is a context menu that will only be displayed by calling `context.menus.show()`.
-     * Additionally, the context menus choices will only be recognized while the menu is shown.
-     */
-    MenuStyle["contextMenu"] = "contextMenu";
-})(MenuStyle = exports.MenuStyle || (exports.MenuStyle = {}));
 var MergeStyle;
 (function (MergeStyle) {
     /**
@@ -51,124 +33,198 @@ class Menu {
     constructor(name, settings) {
         this.name = name;
         this.handlers = {};
-        this.options = {};
         this.children = {};
+        this.cards = {};
         this.choices = [];
         this.settings = Object.assign({
-            menuStyle: MenuStyle.contextMenu,
+            isDefaultMenu: false,
+            showAsButton: false,
             mergeStyle: MergeStyle.none,
             minRecognizeScore: 1.0
         }, settings);
-    }
-    addChoice(titleOrChoice, handlerOrOptions, handler) {
-        let options;
-        if (typeof handlerOrOptions === 'function') {
-            handler = handlerOrOptions;
-            options = {};
-        }
-        else if (typeof handlerOrOptions === 'object') {
-            options = handlerOrOptions;
+        // Validate settings
+        const { isDefaultMenu, hideAfter, hideAfterClick, hideAfterTurns } = this.settings;
+        if (isDefaultMenu) {
+            if (hideAfter !== undefined) {
+                throw new Error(`Menu('${name}'): 'hideAfter' setting not supported for this menu style.`);
+            }
+            if (hideAfterClick !== undefined) {
+                throw new Error(`Menu('${name}'): 'hideAfterClick' setting not supported for this menu style.`);
+            }
+            if (hideAfterTurns !== undefined) {
+                throw new Error(`Menu('${name}'): 'hideAfterTurns' setting not supported for this menu style.`);
+            }
         }
         else {
-            options = {};
+            if (hideAfter !== undefined && hideAfter <= 0) {
+                throw new Error(`Menu('${name}'): value for 'hideAfter' setting should be greater than 0.`);
+            }
+            if (hideAfterTurns !== undefined && hideAfterTurns < 1) {
+                throw new Error(`Menu('${name}'): value for 'hideAfterTurns' setting should be 1 or more.`);
+            }
         }
-        if (!handler) {
-            handler = (context, data, next) => next();
+        // Add handler if shown as a button
+        const { showAsButton, buttonTitleOrChoice } = this.settings;
+        if (showAsButton) {
+            this.buttonChoice = formatChoice(buttonTitleOrChoice || this.name);
+            this.handlers[this.buttonChoice.value] = (context) => this.renderCards(context);
         }
-        // Format choice 
-        const choice = typeof titleOrChoice === 'string' ? { value: titleOrChoice } : titleOrChoice;
-        // Ensure choice valid and unique
-        if (!choice.value) {
-            throw new Error(`Menu.addChoice(): invalid choice added, missing 'value'.`);
+    }
+    setCard(category, card) {
+        if (this.cards.hasOwnProperty(category)) {
+            throw new Error(`Menu('${this.name}').addCard(): a card for the category named '${category}' already added.`);
         }
-        if (this.handlers.hasOwnProperty(choice.value)) {
-            throw new Error(`Menu.addChoice(): a choice with a value of '${choice.value}' has already been added.`);
-        }
-        // Append to collections
-        this.choices.push(choice);
-        this.handlers[choice.value] = handler;
-        this.options[choice.value] = options;
+        this.cards[category] = card;
         return this;
     }
-    addMenu(childMenu, handlerOrOptions, handler) {
-        if (typeof handlerOrOptions === 'function') {
-            handler = handlerOrOptions;
-            handlerOrOptions = {};
-        }
-        if (handlerOrOptions === undefined) {
-            handlerOrOptions = {};
-        }
-        // Format choice for menu
-        let choice;
-        const titleOrChoice = childMenu.settings.buttonTitleOrChoice;
-        if (titleOrChoice) {
-            if (typeof titleOrChoice === 'string') {
-                choice = { value: childMenu.name, action: { type: botbuilder_1.ActionTypes.ImBack, title: titleOrChoice, value: childMenu.name } };
-            }
-            else {
-                choice = titleOrChoice;
-            }
-        }
-        else {
-            choice = { value: childMenu.name };
-        }
+    addChoice(titleOrChoice, handler) {
         // Ensure choice valid and unique
-        if (!choice.value) {
-            throw new Error(`Menu.addChoice(): invalid choice added, missing 'value'.`);
-        }
+        const choice = formatChoice(titleOrChoice);
         if (this.handlers.hasOwnProperty(choice.value)) {
-            throw new Error(`Menu.addChoice(): a choice with a value of '${choice.value}' has already been added.`);
+            throw new Error(`Menu('${this.name}').addChoice(): a choice with a value of '${choice.value}' has already been added.`);
         }
         // Append to collections
         this.choices.push(choice);
-        this.children[choice.value] = childMenu;
-        this.options[choice.value] = handlerOrOptions;
         if (handler) {
             this.handlers[choice.value] = handler;
         }
         else {
-            this.handlers[choice.value] = (context, data, next) => __awaiter(this, void 0, void 0, function* () { return childMenu.renderMenu(context); });
+            this.handlers[choice.value] = (context, data, next) => next();
         }
         return this;
     }
-    invokeChoice(context, value, data, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this.handlers.hasOwnProperty(value)) {
-                throw new Error(`menu.invokeChoice(): a choice with a value of '${value}' couldn't be found.`);
-            }
-            yield this.handlers[value](context, data, next);
-        });
+    addMenu(childMenu, handler) {
+        // Ensure choice valid and unique
+        const choice = formatChoice(childMenu.settings.buttonTitleOrChoice || childMenu.name);
+        if (this.handlers.hasOwnProperty(choice.value)) {
+            throw new Error(`Menu('${this.name}').addMenu(): a menu with a value of '${choice.value}' has already been added.`);
+        }
+        // Append to collections
+        this.choices.push(choice);
+        this.children[choice.value] = childMenu;
+        if (handler) {
+            this.handlers[choice.value] = handler;
+        }
+        else {
+            this.handlers[choice.value] = (context, data, next) => __awaiter(this, void 0, void 0, function* () { return childMenu.renderCards(context); });
+        }
+        return this;
     }
-    recognizeChoice(utterance) {
-        // Find possible choices
-        const found = botbuilder_choices_1.findChoices(utterance, this.choices, this.settings.recognizeOptions);
-        // Filter to top scoring choice
-        let top;
-        found.forEach((c) => {
-            if (!top || c.resolution.score > top.score) {
-                top = c.resolution;
-            }
-        });
-        return top && top.score >= this.settings.minRecognizeScore ? top : undefined;
+    recognizeChoice(context) {
+        const menus = [];
+        for (const name in this.children) {
+            menus.push(this.children[name]);
+        }
+        return this.onRecognizeChoice(context, this.choices, this.settings, menus);
     }
-    renderMenu(context) {
+    renderSuggestedActions(activity) {
+        return this.onRenderSuggestedActions(activity, this.choices, this.settings);
+    }
+    renderCards(context) {
+        return this.onRenderCards(context, this.choices, this.settings, this.cards);
+    }
+    onRecognizeChoice(context, choices, settings, children) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Organize menus by category
-            const categories = {};
-            this.choices.forEach((c) => {
-                const o = this.options[c.value];
-                const category = o.category || 'default';
-                const action = c.action ? c.action : { type: botbuilder_1.ActionTypes.ImBack, title: c.value, value: c.value };
-                if (categories.hasOwnProperty(category)) {
-                    categories[category].push(action);
+            // Recognize button click first
+            const { showAsButton, buttonTitleOrChoice, minRecognizeScore } = settings;
+            let top = showAsButton ? yield this.findTopChoice(context, [this.buttonChoice], settings) : undefined;
+            // Check our own choices for a better match
+            const match = yield this.findTopChoice(context, choices, settings);
+            if (!top || (match && match.score > top.score)) {
+                top = match;
+            }
+            // Check child menus for a better match
+            children.forEach((c) => __awaiter(this, void 0, void 0, function* () {
+                const match = yield c.recognizeChoice(context);
+                if (!top || (match && match.score > top.score)) {
+                    top = match;
                 }
-                else {
-                    categories[category] = [action];
+            }));
+            return top;
+        });
+    }
+    onRenderSuggestedActions(activity, choices, settings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let { mergeStyle, showAsButton, buttonTitleOrChoice } = settings;
+            if (!activity.suggestedActions || !activity.suggestedActions.actions) {
+                activity.suggestedActions = { actions: [] };
+            }
+            if (mergeStyle === MergeStyle.none && activity.suggestedActions.actions.length === 0) {
+                mergeStyle = MergeStyle.right;
+            }
+            // Render choices
+            choices = showAsButton ? [this.buttonChoice] : this.choices;
+            const actions = toActions(choices);
+            switch (mergeStyle) {
+                case MergeStyle.left:
+                    actions.reverse().forEach((a) => activity.suggestedActions.actions.unshift(a));
+                    break;
+                case MergeStyle.right:
+                    actions.forEach((a) => activity.suggestedActions.actions.push(a));
+                    break;
+            }
+        });
+    }
+    onRenderCards(context, choices, settings, cards) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Populate cards
+            const output = JSON.parse(JSON.stringify(cards));
+            this.choices.forEach((c) => {
+                const category = c.category || this.name;
+                const action = toActions([c]);
+                let card = output[category];
+                if (!card) {
+                    output[category] = card = { title: category };
+                }
+                if (!Array.isArray(card.buttons)) {
+                    card.buttons = [];
+                }
+                card.buttons.push(action[0]);
+            });
+            // Convert cards to attachment array
+            const list = [];
+            for (const key in output) {
+                list.push({ contentType: botbuilder_1.CardFactory.contentTypes.heroCard, content: output[key] });
+            }
+            // Render cards as a carousel
+            const msg = botbuilder_1.MessageFactory.carousel(list);
+            yield context.sendActivity(msg);
+        });
+    }
+    findTopChoice(context, choices, settings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { recognizeOptions, minRecognizeScore } = settings;
+            // Find possible choices
+            const utterance = context.activity.text.trim();
+            const found = botbuilder_choices_1.findChoices(utterance, choices, recognizeOptions);
+            // Filter to top scoring choice
+            let top;
+            found.forEach((c) => {
+                if (!top || c.resolution.score > top.score) {
+                    top = {
+                        choice: choices[c.resolution.index],
+                        score: c.resolution.score,
+                        handler: this.handlers[c.resolution.value]
+                    };
                 }
             });
-            // Render choices as a carousel of hero cards
+            return top && top.score >= minRecognizeScore ? top : undefined;
         });
     }
 }
 exports.Menu = Menu;
+/** @private */
+function formatChoice(titleOrChoice) {
+    const c = typeof titleOrChoice === 'string' ? { value: titleOrChoice } : titleOrChoice;
+    if (!c.title) {
+        c.title = c.value;
+    }
+    return c;
+}
+/** @private */
+function toActions(choices) {
+    return choices.map((c) => {
+        return c.action ? c.action : { type: botbuilder_1.ActionTypes.ImBack, title: c.title || c.value, value: c.value, image: c.image };
+    });
+}
 //# sourceMappingURL=menu.js.map

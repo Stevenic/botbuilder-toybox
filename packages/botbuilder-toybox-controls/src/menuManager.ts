@@ -3,77 +3,39 @@
  */
 /** Licensed under the MIT License. */
 import { TurnContext, Activity, SuggestedActions, CardAction, ActionTypes } from 'botbuilder';
-import { FoundChoice, Choice } from 'botbuilder-choices';
+import { FoundChoice } from 'botbuilder-choices';
 import { ReadWriteFragment } from 'botbuilder-toybox-memories';
-import { Menu, MenuStyle, MergeStyle } from './menu';
+import { Menu, MergeStyle, MenuChoice, FoundMenuChoice } from './menu';
 
 /** @private */
 export interface MenuMap {
     [name: string]: Menu;
 }
 
-export class MenuManager {
-    private readonly defaultMenu: Menu|undefined;
 
+export interface MenuContext extends TurnContext {
+    menus: MenuManager;
+}
+
+export class MenuManager {
     /** @private */
-    constructor (private context: TurnContext, private menuState: ReadWriteFragment<object>, private menus: MenuMap) { 
-        // Identify default menu
-        for (const key in menus) {
-            const m = menus[key];
-            switch (m.settings.menuStyle) {
-                case MenuStyle.defaultMenu:
-                case MenuStyle.defaultButton:
-                    this.defaultMenu = m;
-                    break;
-            }
-        }
-    }
+    constructor (private context: MenuContext, private menuState: ReadWriteFragment<object>, private menus: MenuMap) { }
 
     public async appendSuggestedActions(activity: Partial<Activity>): Promise<void> {
-        function toAction(choice: Choice): CardAction {
-            return choice.action ? choice.action : { type: ActionTypes.ImBack, title: choice.value, value: choice.value };
-        }
-
-        function appendMenu(button: string|Choice|undefined, menu?: Menu) {
-            if (!activity.suggestedActions || !activity.suggestedActions.actions) { 
-                activity.suggestedActions = { actions: [] } as SuggestedActions;
-            }
-            if (menu) {
-                // Identify type of merge to do
-                // - If there are no existing actions we'll always just do a right merge
-                let style = menu.settings.mergeStyle;
-                if (activity.suggestedActions.actions.length === 0) { style = MergeStyle.right }
-
-                // Merge actions with existing 
-                switch (style) {
-                    case MergeStyle.left:
-                        // Insert before existing actions
-                        menu.choices.reverse().forEach((choice) => { activity.suggestedActions.actions.unshift(toAction(choice)) })
-                        break;
-                    case MergeStyle.right:
-                        // Append after existing actions
-                        menu.choices.forEach((choice) => { activity.suggestedActions.actions.push(toAction(choice)) });
-                        break;
-                }
-            }
-            if (button) {
-                const choice = typeof button === 'string' ? { value: button } : button;
-                activity.suggestedActions.actions.unshift(toAction(choice));
-            }
-        }
-
         const state = await this.loadMenuState();
-        const contextMenu = state.contextMenu && this.menus.hasOwnProperty(state.contextMenu) ? this.menus[state.contextMenu] : undefined;
-        const button = this.defaultMenu && this.defaultMenu.settings.menuStyle === MenuStyle.defaultButton ? this.defaultMenu.settings.buttonTitleOrChoice || this.defaultMenu.name : undefined;
 
-        // Append menu
+        // Append context menu
+        const contextMenu = state.shown && this.menus.hasOwnProperty(state.shown.name) ? this.menus[state.shown.name] : undefined;
         if (contextMenu) {
-            const defaultShown = this.defaultMenu && this.defaultMenu.name === contextMenu.name;
-            appendMenu(!defaultShown ? button : undefined, contextMenu);
-        } else if (button) {
-            appendMenu(button);
-        } else if (this.defaultMenu) {
-            appendMenu(undefined, this.defaultMenu);
+            await contextMenu.renderSuggestedActions(activity);
+        }
+
+        // Append default menus
+        for (const name in this.menus) {
+            const menu = this.menus[name];
+            if (menu.settings.isDefaultMenu && (!contextMenu || menu.name !== contextMenu.name)) {
+                await menu.renderSuggestedActions(activity);
+            }
         }
     }
 
@@ -81,29 +43,46 @@ export class MenuManager {
         // Build up list of menus to search over
         const state = await this.loadMenuState();
         const menus: InvokedMenu[] = [];
-        if (state.contextMenu && this.menus.hasOwnProperty(state.contextMenu)) {
+        const contextMenu = state.shown && this.menus.hasOwnProperty(state.shown.name) ? this.menus[state.shown.name] : undefined;
+        if (contextMenu) {
             menus.push({
-                menu: this.menus[state.contextMenu],
-                data: state.contextData
+                menu: contextMenu,
+                data: state.shown.data    
             });
         }
-        if (this.defaultMenu) {
-            menus.push({ menu: this.defaultMenu });
+        for (const name in this.menus) {
+            const menu = this.menus[name];
+            if (menu.settings.isDefaultMenu && (!contextMenu || menu.name !== contextMenu.name)) {
+                menus.push({ menu: menu });
+            }
         }
 
         // Recognize an invoked menu choice
         let top: InvokedMenu|undefined;
-        const utterance = (this.context.activity.text || '').trim(); 
-        menus.forEach((entry) => {
-            entry.choice = entry.menu.recognizeChoice(utterance);
+        for (let i = 0; i < menus.length; i++) {
+            const entry = menus[i];
+            entry.choice = await entry.menu.recognizeChoice(this.context);
             if (entry.choice && (!top || entry.choice.score > top.choice.score)) {
                 top = entry;
             }
-        });
+        }
+
+        // Process auto-hide rules
+        if (contextMenu) {
+            state.shown.turns++;
+            const s = contextMenu.settings;
+            if (
+                (s.hideAfterClick && top && top.menu.name === contextMenu.name) ||
+                (s.hideAfter && new Date().getTime() >=  (state.shown.timestamp + (s.hideAfter * 1000))) ||
+                (s.hideAfterTurns && s.hideAfterTurns >= state.shown.turns)
+            ) {
+                await this.hideMenu();
+            }
+        }
 
         // Invoke recognized menu choice or continue
         if (top) {
-            await top.menu.invokeChoice(this.context, top.choice.value, top.data, next);
+            await top.choice.handler(this.context, top.data, next);
         } else {
             await next();
         }
@@ -112,14 +91,17 @@ export class MenuManager {
     public async showMenu(name: string, data?: any): Promise<void> {
         if (!this.menus.hasOwnProperty(name)) { throw new Error(`MenuManager.showMenu(): a menu named '${name}' doesn't exist.`) }
         const state = await this.loadMenuState();
-        state.contextMenu = name;
-        state.contextData = data;
+        state.shown = {
+            name: name,
+            timestamp: new Date().getTime(),
+            turns: 0,
+            data: data
+        };
     }
 
     public async hideMenu(): Promise<void> {
         const state = await this.loadMenuState();
-        if (state.contextMenu) { delete state.contextMenu }
-        if (state.contextData) { delete state.contextData }        
+        if (state.shown) { delete state.shown }
     }
 
     private async loadMenuState(): Promise<MenuState> {
@@ -135,13 +117,17 @@ export class MenuManager {
 
 /** @private */
 interface MenuState {
-    contextMenu?: string;
-    contextData?: any;
+    shown?: {
+        name: string;
+        timestamp: number;
+        turns: number;
+        data?: any;
+    }
 }
 
 /** @private */
 interface InvokedMenu {
     menu: Menu;
-    choice?: FoundChoice;
     data?: any;
+    choice?: FoundMenuChoice;
 }
