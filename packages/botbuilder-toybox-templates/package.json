@@ -1,7 +1,7 @@
 {
-  "name": "botbuilder-toybox-extensions",
+  "name": "botbuilder-toybox-templates",
   "author": "stevenic@microsoft.com",
-  "description": "Useful collection of extensions for Bot Builder v4.",
+  "description": "A JSON based template engine for Bot Builder v4.",
   "version": "0.1.0-preview1.2",
   "license": "MIT",
   "keywords": [
@@ -19,15 +19,10 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "@types/node-fetch": "^1.6.9",
-    "botbuilder-core": "4.0.0-preview1.2",
-    "botbuilder-core-extensions": "4.0.0-preview1.2",
-    "botbuilder-toybox-memories": "0.1.0-preview1.2",
-    "botbuilder-toybox-templates": "0.1.0-preview1.2",
-    "node-fetch": "^2.1.2"
+    "jsonpath": "^1.0.0"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "7.2.5",
+    "@types/jsonwebtoken": "7.2.5",    
     "@types/mocha": "^2.2.47",
     "@types/node": "^9.3.0",
     "codelyzer": "^4.1.0",

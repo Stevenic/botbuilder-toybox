@@ -3,10 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @module botbuilder-toybox
  */
-/**
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
- */
+/** Licensed under the MIT License. */
 const botbuilder_core_1 = require("botbuilder-core");
 /**
  * :package: **botbuilder-toybox-extensions**

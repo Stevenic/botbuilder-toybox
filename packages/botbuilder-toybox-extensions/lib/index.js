@@ -8,6 +8,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 /** Licensed under the MIT License. */
 __export(require("./activityFactory"));
+__export(require("./cardTemplate"));
 __export(require("./catchError"));
 __export(require("./checkVersion"));
 __export(require("./filterActivity"));

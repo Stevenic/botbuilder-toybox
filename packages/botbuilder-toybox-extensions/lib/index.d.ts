@@ -3,6 +3,7 @@
  */
 /** Licensed under the MIT License. */
 export * from './activityFactory';
+export * from './cardTemplate';
 export * from './catchError';
 export * from './checkVersion';
 export * from './filterActivity';
