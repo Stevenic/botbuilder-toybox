@@ -7,10 +7,10 @@ import { processNode } from './directives';
 
 
 /**
- * A cache of compiled Joust Templates. 
+ * A cache of compiled templates. 
  */
-export class Cache  {
-    /** Collection of template functions. */
+export class TemplateCache  {
+    /** Collection of template functions that are cached. */
     public readonly templates: TemplateFunctionMap = {};
 
     /**

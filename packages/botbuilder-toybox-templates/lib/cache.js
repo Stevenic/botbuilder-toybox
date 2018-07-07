@@ -7,11 +7,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const compiler_1 = require("./compiler");
 const directives_1 = require("./directives");
 /**
- * A cache of compiled Joust Templates.
+ * A cache of compiled templates.
  */
-class Cache {
+class TemplateCache {
     constructor() {
-        /** Collection of template functions. */
+        /** Collection of template functions that are cached. */
         this.templates = {};
     }
     /**
@@ -78,5 +78,5 @@ class Cache {
         return object;
     }
 }
-exports.Cache = Cache;
+exports.TemplateCache = TemplateCache;
 //# sourceMappingURL=cache.js.map

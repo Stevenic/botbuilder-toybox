@@ -6,12 +6,12 @@ import {
     Attachment, CardFactory, AnimationCard, AudioCard, HeroCard, 
     SigninCard, OAuthCard, ReceiptCard, ThumbnailCard, VideoCard 
 } from 'botbuilder';
-import { compile, processNode, TemplateFunction, Cache } from 'botbuilder-toybox-templates';
+import { compile, processNode, TemplateFunction, TemplateCache } from 'botbuilder-toybox-templates';
 
 export class CardTemplate {
     private readonly fn: TemplateFunction;
 
-    constructor(private contentType: string, template: string|object, cache?: Cache) {
+    constructor(private contentType: string, template: string|object, cache?: TemplateCache) {
         this.fn = compile(template, cache ? cache.templates : undefined)
     }
 
@@ -24,19 +24,19 @@ export class CardTemplate {
         return { contentType: this.contentType, content: card };
     }
 
-    static adaptiveCard(template: AdaptiveCardTemplate, cache?: Cache): CardTemplate {
+    static adaptiveCard(template: AdaptiveCardTemplate, cache?: TemplateCache): CardTemplate {
         return new CardTemplate(CardFactory.contentTypes.adaptiveCard, template, cache);
     }
 
-    static heroCard(template: HeroCardTemplate, cache?: Cache): CardTemplate {
+    static heroCard(template: HeroCardTemplate, cache?: TemplateCache): CardTemplate {
         return new CardTemplate(CardFactory.contentTypes.heroCard, template, cache);
     }
 
-    static oauthCard(template: OAuthCardTemplate, cache?: Cache): CardTemplate {
+    static oauthCard(template: OAuthCardTemplate, cache?: TemplateCache): CardTemplate {
         return new CardTemplate(CardFactory.contentTypes.oauthCard, template, cache);
     }
 
-    static thumbnailCard(template: ThumbnailCardTemplate, cache?: Cache): CardTemplate {
+    static thumbnailCard(template: ThumbnailCardTemplate, cache?: TemplateCache): CardTemplate {
         return new CardTemplate(CardFactory.contentTypes.thumbnailCard, template, cache);
     }
 }

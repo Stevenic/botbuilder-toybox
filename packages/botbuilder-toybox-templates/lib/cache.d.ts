@@ -4,10 +4,10 @@
 /** Licensed under the MIT License. */
 import { TemplateFunction, TemplateFunctionMap } from './compiler';
 /**
- * A cache of compiled Joust Templates.
+ * A cache of compiled templates.
  */
-export declare class Cache {
-    /** Collection of template functions. */
+export declare class TemplateCache {
+    /** Collection of template functions that are cached. */
     readonly templates: TemplateFunctionMap;
     /**
      * Caches a new Joust template. The template will be compiled and cached.

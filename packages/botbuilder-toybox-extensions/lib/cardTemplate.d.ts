@@ -3,16 +3,16 @@
  */
 /** Licensed under the MIT License. */
 import { Attachment } from 'botbuilder';
-import { Cache } from 'botbuilder-toybox-templates';
+import { TemplateCache } from 'botbuilder-toybox-templates';
 export declare class CardTemplate {
     private contentType;
     private readonly fn;
-    constructor(contentType: string, template: string | object, cache?: Cache);
+    constructor(contentType: string, template: string | object, cache?: TemplateCache);
     render(data: object): Attachment;
-    static adaptiveCard(template: AdaptiveCardTemplate, cache?: Cache): CardTemplate;
-    static heroCard(template: HeroCardTemplate, cache?: Cache): CardTemplate;
-    static oauthCard(template: OAuthCardTemplate, cache?: Cache): CardTemplate;
-    static thumbnailCard(template: ThumbnailCardTemplate, cache?: Cache): CardTemplate;
+    static adaptiveCard(template: AdaptiveCardTemplate, cache?: TemplateCache): CardTemplate;
+    static heroCard(template: HeroCardTemplate, cache?: TemplateCache): CardTemplate;
+    static oauthCard(template: OAuthCardTemplate, cache?: TemplateCache): CardTemplate;
+    static thumbnailCard(template: ThumbnailCardTemplate, cache?: TemplateCache): CardTemplate;
 }
 export interface AdaptiveCardTemplate {
     /**
