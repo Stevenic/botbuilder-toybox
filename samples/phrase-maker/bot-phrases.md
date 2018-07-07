@@ -1,4 +1,4 @@
-# Bot Dialog
+# Bot Phrases
 The text in this file defines the phrases sent from our bot to the user. It uses the `phrase-maker` tool to parse the file and generate the bots output.  Standard markdown is used to express something the but should say. 
 
 - [Formatting Rules](#formatting-rules)
@@ -63,15 +63,49 @@ Tables can be used to express a conditional set of rules for how the bot should 
 We've updated our bots response to conditionally include the users name if it's known.  Basic true/false style expressions are supported and you can specify a condition of `true` for the last entry to identify the response that should be returned by default.
 
 ## Sample Code
-To load this file into a bot using the following code:
+To load this file into the bot you can create a new `PhaseMaker` instance and call the `addFile()` method:
 
 ```JS
+const { PhraseMaker } = require('botbuilder-toybox-lg');
 
+const phrases = new PhraseMaker();
+phrases.addFile('./bot-phrases.md');
 ```
 
+The file will be asynchronously loaded and parsed in the background. The `render()` method can then be used to compose responses to the user:
+
+```JS
+// Listen for incoming requests 
+server.post('/api/messages', (req, res) => {
+    // Route received request to adapter for processing
+    adapter.processActivity(req, res, async (context) => {
+        if (context.activity.type === 'message') {
+            const response = await phrases.render('greeting', { name: undefined });
+            
+            await context.sendActivity(response);
+        }
+    });
+});
+```
 
 ## Phrases
 All of the phrases the bot can say to the user.
 
+### greeting
+[hi](#hi)[add name](#add-name)... I'm echo. Say something to me and I'll echo it back.
+
+### goodbye
+Goodbye[add name](#add-name). Talk to you soon!
+
 ## Substitutions
 Substitutions that will be included in the bots [output phrases](#phrases).
+
+### hi
+- Hi
+- Hello
+- Hey there
+
+### add name
+| Condition         | Response             |
+| ----------------- | -------------------- |
+| name != undefined | , ${name}            |
