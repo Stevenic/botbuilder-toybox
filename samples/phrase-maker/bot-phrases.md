@@ -92,10 +92,10 @@ server.post('/api/messages', (req, res) => {
 All of the phrases the bot can say to the user.
 
 ### greeting
-[hi](#hi)[add name](#add-name)... I'm echo. Say something to me and I'll echo it back.
+[hi](#hi) [name](#add-name)... I'm echo. Say something to me and I'll echo it back.
 
 ### goodbye
-Goodbye[add name](#add-name). Talk to you soon!
+Goodbye [name](#add-name). Talk to you soon!
 
 ## Substitutions
 Substitutions that will be included in the bots [output phrases](#phrases).
