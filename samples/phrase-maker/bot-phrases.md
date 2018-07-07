@@ -106,8 +106,8 @@ Substitutions that will be included in the bots [output phrases](#phrases).
 - Hey there
 
 ### add name
-> The users name will be conditionally appended to some otehr text.
- 
+> The users name will be conditionally appended to some other text. By default an empty string will be returned if the users name isn't known.
+
 | Condition         | Response             |
 | ----------------- | -------------------- |
 | name != undefined | , ${name}            |
