@@ -12,10 +12,9 @@
   "dependencies": {
     "@types/node": "^9.3.0",
     "@types/restify": "^5.0.7",
-    "botbuilder": "4.0.0-preview1.2",
-    "botbuilder-dialogs": "4.0.0-preview1.2",
-    "botbuilder-toybox-controls": "0.1.0-preview1.2.1",
-    "botbuilder-toybox-memories": "0.1.0-preview1.2",
+    "botbuilder": "^4.0.0",
+    "botbuilder-dialogs": "^4.0.0",
+    "botbuilder-toybox-controls": "^0.1.0",
     "restify": "6.3.4"
   }
 }

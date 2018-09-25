@@ -3,9 +3,7 @@
  */
 /** Licensed under the MIT License. */
 export * from './activityFactory';
-export * from './catchError';
-export * from './checkVersion';
-export * from './filterActivity';
-export * from './httpAdapter';
-export * from './patchFrom';
-export * from './showTyping';
+export * from './checkVersionMiddleware';
+export * from './filterActivityMiddleware';
+export * from './patchFromMiddleware';
+export * from './showTypingMiddleware';

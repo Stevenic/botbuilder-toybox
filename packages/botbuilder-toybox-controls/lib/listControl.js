@@ -12,14 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-const botbuilder_1 = require("botbuilder");
-const botbuilder_choices_1 = require("botbuilder-choices");
+const botbuilder_core_1 = require("botbuilder-core");
 const botbuilder_dialogs_1 = require("botbuilder-dialogs");
 /**
  * :package: **botbuilder-toybox-controls**
  *
  * List control capable of displaying multiple pages of results to a user.
  *
+ * ## Remarks
  * The developer provides a pager function to retrieve and render individual pages of results and
  * the ListControl will automatically add suggested action(s) for paging in additional results when
  * there are more results available.
@@ -33,10 +33,10 @@ const botbuilder_dialogs_1 = require("botbuilder-dialogs");
  * ```JavaScript
  * const { ListControl } = require('botbuilder-toybox-controls');
  *
- * dialogs.add('imageList', new ListControl(async (context, filter, continueToken) => {
+ * dialogs.add(new ListControl('imageList', async (list) => {
  *     // Render a page of images to hero cards
- *     const start = filter && typeof filter.start === 'number' ? filter.start : 0;
- *     const page = typeof continueToken === 'number' ? continueToken : 0;
+ *     const start = list.filter && typeof list.filter.start === 'number' ? list.filter.start : 0;
+ *     const page = typeof list.continueToken === 'number' ? list.continueToken : 0;
  *     const cards: Attachment[] = [];
  *     for (let i = 0; i < 10; i++) {
  *         const imageNum = i + (page * 10) + 1;
@@ -70,23 +70,24 @@ const botbuilder_dialogs_1 = require("botbuilder-dialogs");
  *
  * ### List Consumption
  * Starting a list works very similar to the way you'd start any other prompt. You can call
- * `dc.begin()` to start the list and pass in an optional `filter` and initial `continueToken`.
+ * `DialogContext.beginDialog()` to start the list and pass in an optional `filter` and initial
+ * `continueToken`.
  *
  * ```JavaScript
- * dialogs.add('showImages', [
- *      async function (dc) {
+ * dialogs.add(new WaterfallDialog('showImages', [
+ *      async (step) => {
  *          const startImage = Math.floor(Math.random() * 100);
- *          await dc.begin('imageList', {
+ *          return await step.beginDialog('imageList', {
  *              filter: { start: startImage }
  *          });
  *      },
- *      async function (dc, result) {
- *          if (result.noResults) {
- *              await dc.context.sendActivity(`no results found`);
+ *      async (step) => {
+ *          if (step.result.noResults) {
+ *              await step.context.sendActivity(`no results found`);
  *          }
- *          await dc.end();
+ *          return await step.endDialog();
  *      }
- * ]);
+ * ]));
  * ```
  *
  * When the list ends for whatever reason a `ListControlResult` object with additional information
@@ -105,7 +106,7 @@ const botbuilder_dialogs_1 = require("botbuilder-dialogs");
  *      { type: 'imBack', title: 'Show More', value: 'more' },
  *      { type: 'imBack', title: 'Edit Filter', value: 'edit' }
  * ];
- * dialogs.add('imageList', new ListControl((context, filter), actions));
+ * dialogs.add(new ListControl('imageList', async (list) => { }, actions));
  * ```
  *
  * When you provide custom actions you should include at least one action with a value of `more` as
@@ -116,93 +117,99 @@ const botbuilder_dialogs_1 = require("botbuilder-dialogs");
  * the triggered actions value to the caller as part of the ListControlResult that's returned.
  *
  * ```JavaScript
- * dialogs.add('showImages', [
- *      async function (dc, filter) {
- *          dc.activeDialog.state.filter = filter;
- *          await dc.begin('imageList', {
- *              filter: filter
+ * dialogs.add(new WaterfallDialog('showImages', [
+ *      async (step) => {
+ *          // Start list control with passed in filter
+ *          return await step.beginDialog('imageList', {
+ *              filter: step.options.filter
  *          });
  *      },
- *      async function (dc, result) {
- *          if (result.action === 'edit') {
- *              const filter = dc.activeDialog.state.filter;
- *              await dc.replace('editImageFilter', filter);
+ *      async (step) => {
+ *          if (step.result.action === 'edit') {
+ *              // Edit filter passed in
+ *              return await step.replaceDialog('editImageFilter', state.options.filter);
  *          } else {
+ *              // End dialog
  *              if (result.noResults) {
- *                  await dc.context.sendActivity(`no results found`);
+ *                  await step.context.sendActivity(`no results found`);
  *              }
- *              await dc.end();
+ *              return await dc.endDialog();
  *          }
  *      }
- * ]);
+ * ]));
  * ```
  *
  * > While the list of custom actions supported by an instance of a ListControl is static you can
  * > display a dynamic subset of those actions to the user by simply including `suggestedActions`
  * > on the `result` activity returned by your pager.
- * @param C (Optional) type of context object passed to the controls ListPager.
  */
 class ListControl extends botbuilder_dialogs_1.Dialog {
     /**
      * Creates a new ListControl instance.
+     * @param dialogId Unique ID for the dialog.
      * @param pager Function used to page in results when the control is activated.
      * @param actions (Optional) custom suggested actions to display when the control is active and has more results to display. Defaults to showing a single "Show More" button.
      */
-    constructor(pager, actions) {
-        super();
+    constructor(dialogId, pager, actions) {
+        super(dialogId);
         this.pager = pager;
         this.actions = actions || [{ type: 'imBack', title: 'Show More', value: 'more' }];
     }
     /** @private */
-    dialogBegin(dc, args) {
+    beginDialog(dc, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            dc.activeDialog.state = Object.assign({}, args);
-            yield this.showMore(dc, true);
+            dc.activeDialog.state = Object.assign({}, options);
+            return yield this.showMore(dc, true);
         });
     }
     /** @private */
-    dialogContinue(dc) {
+    continueDialog(dc) {
         return __awaiter(this, void 0, void 0, function* () {
             // Recognize selected action
             const utterance = (dc.context.activity.text || '').trim();
             const choices = this.actions.map((a) => {
                 return typeof a === 'object' ? { value: a.value, action: a } : a;
             });
-            const found = botbuilder_choices_1.findChoices(utterance, choices);
+            const found = botbuilder_dialogs_1.findChoices(utterance, choices);
             // Check for 'more' action
             const action = found.length > 0 ? found[0].resolution.value : undefined;
             if (action === 'more') {
-                yield this.showMore(dc, false);
+                return yield this.showMore(dc, false);
             }
             else {
                 const state = dc.activeDialog.state;
-                yield dc.end({ noResults: false, action: action, continueToken: state.continueToken });
+                return yield dc.endDialog({ noResults: false, action: action, continueToken: state.continueToken });
             }
         });
     }
     showMore(dc, noResults) {
         return __awaiter(this, void 0, void 0, function* () {
             const state = dc.activeDialog.state;
-            const page = (yield Promise.resolve(this.pager(dc.context, state.filter, state.continueToken))) || {};
+            const page = yield this.pager({
+                context: dc.context,
+                filter: state.filter,
+                continueToken: state.continueToken
+            });
             if (page.result) {
-                if (page.continueToken) {
+                if (page.continueToken !== undefined) {
                     // Save continuation token
                     state.continueToken = page.continueToken;
                     // Add suggested actions to results
                     // - If the result already contains suggestedActions the static ones will be ignored.
-                    const msg = Object.assign(botbuilder_1.MessageFactory.suggestedActions(this.actions), page.result);
+                    const msg = Object.assign(botbuilder_core_1.MessageFactory.suggestedActions(this.actions), page.result);
                     // Send user the results
                     yield dc.context.sendActivity(msg);
+                    return botbuilder_dialogs_1.Dialog.EndOfTurn;
                 }
                 else {
                     // Send user the results and end dialog.
                     yield dc.context.sendActivity(page.result);
-                    yield dc.end({ noResults: noResults });
+                    return yield dc.endDialog({ noResults: noResults });
                 }
             }
             else {
                 // Just end the dialog
-                yield dc.end({ noResults: noResults });
+                return yield dc.endDialog({ noResults: noResults });
             }
         });
     }

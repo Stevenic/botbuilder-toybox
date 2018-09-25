@@ -7,5 +7,8 @@
 	},
 	"scripts": {
 		"build-docs": "typedoc --theme markdown --entryPoint botbuilder-toybox --excludePrivate --includeDeclarations --ignoreCompilerErrors --module amd --out .\\docs\\reference .\\packages\\botbuilder-toybox-controls\\lib\\index.d.ts .\\packages\\botbuilder-toybox-extensions\\lib\\index.d.ts .\\packages\\botbuilder-toybox-memories\\lib\\index.d.ts --hideGenerator --name \"Bot Builder Toybox\" --readme none"
+	},
+	"dependencies": {
+		"@types/lodash": "^4.14.116"
 	}
 }

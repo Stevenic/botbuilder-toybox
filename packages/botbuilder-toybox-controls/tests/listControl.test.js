@@ -1,21 +1,27 @@
 const assert = require('assert');
-const { TestAdapter } = require('botbuilder-core-extensions');
+const { TestAdapter, MemoryStorage, ConversationState } = require('botbuilder-core');
+const { DialogSet, DialogTurnStatus } = require('botbuilder-dialogs');
 const { ListControl } = require('../lib');
 
 describe('ListControl', function() {
     this.timeout(5000);
 
     it('should render a single page of results.', function (done) {
-        const control = new ListControl((context, filter, continueToken) => {
+        const convoState = new ConversationState(new MemoryStorage());
+        const dialogState = convoState.createProperty('dialogState');
+        const dialogs = new DialogSet(dialogState);
+        dialogs.add(new ListControl('control', async (list) => {
+            assert(list);
+            assert(list.context);
             return {
-                results: { text: 'results' }
+                result: { text: 'results' }
             };
-        });
+        }));
 
-        const state = {};
         const adapter = new TestAdapter(async (context) => {
-            const completed = await control.begin(context, state);
-            assert(completed && completed.isCompleted, `Not completed and should be.`);
+            const dc = await dialogs.createContext(context);
+            const result = await dc.beginDialog('control');
+            assert(result.status === DialogTurnStatus.complete, `Not completed and should be.`);
         });
 
         adapter.test('test', `results`)
@@ -23,17 +29,20 @@ describe('ListControl', function() {
     });
 
     it('should more button for multiple pages of results.', function (done) {
-        const control = new ListControl((context, filter, continueToken) => {
+        const convoState = new ConversationState(new MemoryStorage());
+        const dialogState = convoState.createProperty('dialogState');
+        const dialogs = new DialogSet(dialogState);
+        dialogs.add(new ListControl('control', async (list) => {
             return {
-                results: { text: 'results' },
+                result: { text: 'results' },
                 continueToken: 1
             };
-        });
+        }));
 
-        const state = {};
         const adapter = new TestAdapter(async (context) => {
-            const completed = await control.begin(context, state);
-            assert(completed && !completed.isCompleted, `Completed and shouldn't be.`);
+            const dc = await dialogs.createContext(context);
+            const result = await dc.beginDialog('control');
+            assert(result.status === DialogTurnStatus.waiting, `Completed and shouldn't be.`);
         });
 
         adapter.test('test', (activity) => {
@@ -44,23 +53,24 @@ describe('ListControl', function() {
     });
 
     it('should render multiple pages of results.', function (done) {
-        const control = new ListControl((context, filter, continueToken) => {
-            continueToken = typeof continueToken === 'number' ? continueToken : 0;
+        const convoState = new ConversationState(new MemoryStorage());
+        const dialogState = convoState.createProperty('dialogState');
+        const dialogs = new DialogSet(dialogState);
+        dialogs.add(new ListControl('control', async (list) => {
+            const page = typeof list.continueToken === 'number' ? list.continueToken : 0;
             return {
-                results: { text: 'page' + continueToken },
-                continueToken: continueToken + 1
+                result: { text: 'page' + page },
+                continueToken: page + 1
             };
-        });
+        }));
 
-        let started = false;
-        const state = {};
         const adapter = new TestAdapter(async (context) => {
-            if (!started) {
-                started = true;
-                await control.begin(context, state);
-            } else {
-                await control.continue(context, state);
+            const dc = await dialogs.createContext(context);
+            const result = await dc.continueDialog();
+            if (result.status === DialogTurnStatus.empty) {
+                await dc.beginDialog('control');
             }
+            await convoState.saveChanges(context);
         });
 
         adapter.test('test', `page0`)

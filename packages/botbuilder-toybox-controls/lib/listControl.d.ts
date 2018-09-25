@@ -2,23 +2,20 @@
  * @module botbuilder-toybox
  */
 /** Licensed under the MIT License. */
-import { TurnContext, Promiseable, Activity, CardAction } from 'botbuilder';
-import { DialogContext, Dialog } from 'botbuilder-dialogs';
+import { TurnContext, Activity, CardAction } from 'botbuilder-core';
+import { DialogContext, Dialog, DialogTurnResult } from 'botbuilder-dialogs';
 /**
  * :package: **botbuilder-toybox-controls**
  *
  * Function that will be called by a `ListControl` to load individual pages of results.
  *
+ * ## Remarks
  * - Returning a ListPagerResult with both `results` and a `continueToken` will cause the results to be rendered and a "more" button included to trigger rendering of the next page. The ListControl will remain active.
  * - Returning a ListPagerResult with just `results` will cause the results to be rendered and the ListControl to end.
  * - Returning an empty ListPagerResult will cause the ListControl to just immediately end.
- *
- * @param C Type of context object passed to pager.
- * @param ListPager.context Context for the current turn of conversation with the user.
- * @param ListPager.filter (Optional) filter passed in by caller to pager.
- * @param ListPager.continueToken (Optional) continuation token passed by ListControl to fetch the next page of results.
+ * @param ListPager.list Context for the current list instance.
  */
-export declare type ListPager<C extends TurnContext> = (context: C, filter?: any, continueToken?: any) => Promiseable<ListPagerResult>;
+export declare type ListPager = (list: ListControlContext) => Promise<ListPagerResult>;
 /**
  * :package: **botbuilder-toybox-controls**
  *
@@ -26,12 +23,16 @@ export declare type ListPager<C extends TurnContext> = (context: C, filter?: any
  */
 export interface ListPagerResult {
     /**
-     * (Optional) result activity to render to the user. If this is omitted the ListControl
-     * will end immediately.
+     * (Optional) result activity to render to the user.
+     *
+     * ## Remarks
+     * If this is omitted the ListControl will end immediately.
      */
     result?: Partial<Activity>;
     /**
      * (Optional) continuation token that should be used to retrieve the next page of results.
+     *
+     * ## Remarks
      * If this is omitted the results will be rendered and then the ListControl will end.
      */
     continueToken?: any;
@@ -39,7 +40,7 @@ export interface ListPagerResult {
 /**
  * :package: **botbuilder-toybox-controls**
  *
- * Options passed in by a caller to a ListControl on the call to `begin()`.
+ * Options passed in by a caller to a `ListControl` on the call to `DialogContext.beginDialog()`.
  */
 export interface ListControlOptions {
     /**
@@ -47,15 +48,23 @@ export interface ListControlOptions {
      */
     filter?: any;
     /**
-     * (Optional) continuation token used to fetch the first page of results. This is useful for
-     * resuming a list that was paused for some reason.
+     * (Optional) continuation token used to fetch the first page of results.
+     *
+     * ## Remarks
+     * This is useful for resuming a list that has been paused.
      */
     continueToken?: any;
+}
+export interface ListControlContext extends ListControlOptions {
+    /**
+     * Context for the current turn of conversation.
+     */
+    context: TurnContext;
 }
 /**
  * :package: **botbuilder-toybox-controls**
  *
- * Result resulted by a ListControl when it ends.
+ * Result resulted by a `ListControl` when it ends.
  */
 export interface ListControlResult {
     /**
@@ -67,8 +76,10 @@ export interface ListControlResult {
      */
     action?: string;
     /**
-     * (Optional) continuation token for the next page of results. If this is missing then the end
-     * of the result set was reached.
+     * (Optional) continuation token for the next page of results.
+     *
+     * ## Remarks
+     * If this is missing then the end of the result set was reached.
      */
     continueToken?: any;
 }
@@ -77,6 +88,7 @@ export interface ListControlResult {
  *
  * List control capable of displaying multiple pages of results to a user.
  *
+ * ## Remarks
  * The developer provides a pager function to retrieve and render individual pages of results and
  * the ListControl will automatically add suggested action(s) for paging in additional results when
  * there are more results available.
@@ -90,10 +102,10 @@ export interface ListControlResult {
  * ```JavaScript
  * const { ListControl } = require('botbuilder-toybox-controls');
  *
- * dialogs.add('imageList', new ListControl(async (context, filter, continueToken) => {
+ * dialogs.add(new ListControl('imageList', async (list) => {
  *     // Render a page of images to hero cards
- *     const start = filter && typeof filter.start === 'number' ? filter.start : 0;
- *     const page = typeof continueToken === 'number' ? continueToken : 0;
+ *     const start = list.filter && typeof list.filter.start === 'number' ? list.filter.start : 0;
+ *     const page = typeof list.continueToken === 'number' ? list.continueToken : 0;
  *     const cards: Attachment[] = [];
  *     for (let i = 0; i < 10; i++) {
  *         const imageNum = i + (page * 10) + 1;
@@ -127,23 +139,24 @@ export interface ListControlResult {
  *
  * ### List Consumption
  * Starting a list works very similar to the way you'd start any other prompt. You can call
- * `dc.begin()` to start the list and pass in an optional `filter` and initial `continueToken`.
+ * `DialogContext.beginDialog()` to start the list and pass in an optional `filter` and initial
+ * `continueToken`.
  *
  * ```JavaScript
- * dialogs.add('showImages', [
- *      async function (dc) {
+ * dialogs.add(new WaterfallDialog('showImages', [
+ *      async (step) => {
  *          const startImage = Math.floor(Math.random() * 100);
- *          await dc.begin('imageList', {
+ *          return await step.beginDialog('imageList', {
  *              filter: { start: startImage }
  *          });
  *      },
- *      async function (dc, result) {
- *          if (result.noResults) {
- *              await dc.context.sendActivity(`no results found`);
+ *      async (step) => {
+ *          if (step.result.noResults) {
+ *              await step.context.sendActivity(`no results found`);
  *          }
- *          await dc.end();
+ *          return await step.endDialog();
  *      }
- * ]);
+ * ]));
  * ```
  *
  * When the list ends for whatever reason a `ListControlResult` object with additional information
@@ -162,7 +175,7 @@ export interface ListControlResult {
  *      { type: 'imBack', title: 'Show More', value: 'more' },
  *      { type: 'imBack', title: 'Edit Filter', value: 'edit' }
  * ];
- * dialogs.add('imageList', new ListControl((context, filter), actions));
+ * dialogs.add(new ListControl('imageList', async (list) => { }, actions));
  * ```
  *
  * When you provide custom actions you should include at least one action with a value of `more` as
@@ -173,44 +186,45 @@ export interface ListControlResult {
  * the triggered actions value to the caller as part of the ListControlResult that's returned.
  *
  * ```JavaScript
- * dialogs.add('showImages', [
- *      async function (dc, filter) {
- *          dc.activeDialog.state.filter = filter;
- *          await dc.begin('imageList', {
- *              filter: filter
+ * dialogs.add(new WaterfallDialog('showImages', [
+ *      async (step) => {
+ *          // Start list control with passed in filter
+ *          return await step.beginDialog('imageList', {
+ *              filter: step.options.filter
  *          });
  *      },
- *      async function (dc, result) {
- *          if (result.action === 'edit') {
- *              const filter = dc.activeDialog.state.filter;
- *              await dc.replace('editImageFilter', filter);
+ *      async (step) => {
+ *          if (step.result.action === 'edit') {
+ *              // Edit filter passed in
+ *              return await step.replaceDialog('editImageFilter', state.options.filter);
  *          } else {
+ *              // End dialog
  *              if (result.noResults) {
- *                  await dc.context.sendActivity(`no results found`);
+ *                  await step.context.sendActivity(`no results found`);
  *              }
- *              await dc.end();
+ *              return await dc.endDialog();
  *          }
  *      }
- * ]);
+ * ]));
  * ```
  *
  * > While the list of custom actions supported by an instance of a ListControl is static you can
  * > display a dynamic subset of those actions to the user by simply including `suggestedActions`
  * > on the `result` activity returned by your pager.
- * @param C (Optional) type of context object passed to the controls ListPager.
  */
-export declare class ListControl<C extends TurnContext = TurnContext> extends Dialog<C, ListControlResult, ListControlOptions> {
+export declare class ListControl extends Dialog<ListControlOptions> {
     private pager;
     private readonly actions;
     /**
      * Creates a new ListControl instance.
+     * @param dialogId Unique ID for the dialog.
      * @param pager Function used to page in results when the control is activated.
      * @param actions (Optional) custom suggested actions to display when the control is active and has more results to display. Defaults to showing a single "Show More" button.
      */
-    constructor(pager: ListPager<C>, actions?: (string | CardAction)[]);
+    constructor(dialogId: string, pager: ListPager, actions?: (string | CardAction)[]);
     /** @private */
-    dialogBegin(dc: DialogContext<C>, args?: ListControlOptions): Promise<any>;
+    beginDialog(dc: DialogContext, options?: ListControlOptions): Promise<DialogTurnResult>;
     /** @private */
-    dialogContinue(dc: DialogContext<C>): Promise<any>;
-    private showMore(dc, noResults);
+    continueDialog(dc: DialogContext): Promise<DialogTurnResult>;
+    private showMore;
 }
