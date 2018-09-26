@@ -26,7 +26,7 @@ export class ConfigurablePrompt extends ComponentDialog {
         this.addDialog(prompt);
     }
 
-    public configure(config: PromptConfiguration): this {
+    public configure(config: Partial<PromptConfiguration>): this {
         this.options = Object.assign({}, this.options, config);
         return this;
     }

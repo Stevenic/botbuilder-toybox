@@ -27,14 +27,18 @@ export interface ComponentDialogConfiguration extends DialogConfiguration {
 export class ConfigurableComponentDialog extends ComponentDialog {
 
     public configure(config: ComponentDialogConfiguration): this {
-        config.dialogs.forEach((child) => this.onConfigureDialog(child));
-        if (config.initialDialogId) {
-            this.initialDialogId = config.initialDialogId;
-        }
+        this.onConfigure(config);
         return this;
     }
 
-    protected onConfigureDialog(config: DialogConfiguration): void {
+    protected onConfigure(config: ComponentDialogConfiguration): void {
+        config.dialogs.forEach((child) => this.onConfigureChild(child));
+        if (config.initialDialogId) {
+            this.initialDialogId = config.initialDialogId;
+        }
+    }
+
+    protected onConfigureChild(config: DialogConfiguration): void {
         // Find existing dialog
         let dialog = this.findDialog(config.id);
         if (dialog) {
