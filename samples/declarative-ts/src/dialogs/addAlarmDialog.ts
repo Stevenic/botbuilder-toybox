@@ -2,7 +2,7 @@ import { StatePropertyAccessor, MessageFactory } from 'botbuilder';
 import { WaterfallDialog, WaterfallStepContext, PromptValidatorContext, DateTimeResolution } from 'botbuilder-dialogs';
 import { ConfigurableComponentDialog, ConfigurableTextPrompt, ConfigurableDateTimePrompt, TypeFactory, ComponentDialogConfiguration } from 'botbuilder-toybox-declarative';
 import * as moment from 'moment';
-import { Alarm } from './models';
+import { Alarm } from '../models';
 
 export interface AddAlarmDialogConfiguration extends ComponentDialogConfiguration {
     titlePrompt?: string,
@@ -12,11 +12,11 @@ export interface AddAlarmDialogConfiguration extends ComponentDialogConfiguratio
 
 export class AddAlarmDialog extends ConfigurableComponentDialog {
     private titlePrompt = new ConfigurableTextPrompt('titlePrompt', {
-        prompt: MessageFactory.text(`What would you like to call your alarm?`)
+        prompt: MessageFactory.text(`Enter alarm title`)
     });
     
     private timePrompt = new ConfigurableDateTimePrompt('timePrompt', {
-        prompt: MessageFactory.text(`What time would you like to set the alarm for?`),
+        prompt: MessageFactory.text(`Enter alarm time`),
         retryPrompt: MessageFactory.text(`Please enter a valid time in the future like "tomorrow at 9am".`)
     }, this.timePromptValidation.bind(this));
 
@@ -94,10 +94,4 @@ TypeFactory.register('AddAlarmDialog', (config: ComponentDialogConfiguration) =>
     // Create and configure dialog
     const dialog = new AddAlarmDialog(config.id, alarmsList);
     return dialog.configure(config);
-});
-
-const dialog = TypeFactory.create({
-    type: 'AddAlarmDialog',
-    id: 'addAlarm',
-    titlePrompt: 'What should we call your alarm?'
 });

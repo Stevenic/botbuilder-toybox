@@ -19,8 +19,9 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "botbuilder-core": "^4.0.0",
-    "botbuilder-dialogs": "^4.0.0"
+    "botbuilder": "^4.0.0",
+    "botbuilder-dialogs": "^4.0.0",
+    "botbuilder-ai": "^4.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.47",

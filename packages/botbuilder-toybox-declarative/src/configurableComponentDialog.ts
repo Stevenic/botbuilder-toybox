@@ -16,7 +16,7 @@ export interface ComponentDialogConfiguration extends DialogConfiguration {
     /**
      * Components collection of child dialogs.
      */
-    dialogs: DialogConfiguration[];
+    dialogs?: DialogConfiguration[];
 
     /**
      * (Optional) initial dialog id.
@@ -26,19 +26,24 @@ export interface ComponentDialogConfiguration extends DialogConfiguration {
 
 export class ConfigurableComponentDialog extends ComponentDialog {
 
-    public configure(config: ComponentDialogConfiguration): this {
-        this.onConfigure(config);
+    public configure(config: ComponentDialogConfiguration, factory: TypeFactory): this {
+        this.onConfigure(config, factory);
         return this;
     }
 
-    protected onConfigure(config: ComponentDialogConfiguration): void {
-        config.dialogs.forEach((child) => this.onConfigureChild(child));
+    protected onConfigure(config: ComponentDialogConfiguration, factory: TypeFactory): void {
         if (config.initialDialogId) {
             this.initialDialogId = config.initialDialogId;
         }
     }
 
-    protected onConfigureChild(config: DialogConfiguration): void {
+    protected configureDialogs(config: ComponentDialogConfiguration, factory: TypeFactory): void {
+        if (config.dialogs) {
+            config.dialogs.forEach((child) => this.onConfigureDialog(child, factory));
+        }
+    }
+
+    protected onConfigureDialog(config: DialogConfiguration, factory: TypeFactory): void {
         // Find existing dialog
         let dialog = this.findDialog(config.id);
         if (dialog) {
@@ -46,10 +51,12 @@ export class ConfigurableComponentDialog extends ComponentDialog {
             if (typeof (dialog as any).configure === 'function') {
                 (dialog as any).configure(config);
             }
-        } else {
+        } else if (config.type) {
             // Create and add new dialog
-            dialog = TypeFactory.create(config) as Dialog;
+            dialog = factory.create(config) as Dialog;
             this.addDialog(dialog);
+        } else {
+            throw new Error(`ConfigurableComponentDialog.onConfigureDialog(): can't find dialog with an id of '${config.id}'.`);
         }
     }
 }
