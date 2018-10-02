@@ -11,6 +11,7 @@ export class IntentDialog extends ComponentDialog {
     public readonly intents: { [name: string]: IntentMapping; } = {};
     public readonly recognizer: Recognizer;
     public noneIntent: string;
+    public minScore: number = 0.0;
 
     constructor(dialogId: string, recognizer: Recognizer, noneIntent = 'None') {
         super(dialogId);
@@ -18,8 +19,18 @@ export class IntentDialog extends ComponentDialog {
         this.noneIntent = noneIntent;
     }
 
-    public addIntent(name: string, dialog: Dialog, canInterrupt: boolean = false): this {
+    public addIntent(name: string, dialog: Dialog): this;
+    public addIntent(name: string, canInterrupt: boolean, dialog: Dialog): this;
+    public addIntent(name: string, dialogOrCanInterrupt: Dialog|boolean, dialog?: Dialog ): this {
+        let canInterrupt = false;
         if (this.intents.hasOwnProperty(name)) { throw new Error(`IntentDialog.addIntent(): an intent named '${name}' already registered.`) }
+        if (typeof dialogOrCanInterrupt === 'boolean') {
+            canInterrupt = dialogOrCanInterrupt;
+        } else {
+            dialog = dialogOrCanInterrupt;
+        }
+
+        // Add dialog and intent mapping
         this.addDialog(dialog);
         this.intents[name] = { name: name, dialogId: dialog.id, canInterrupt: canInterrupt };
         return this;
@@ -42,15 +53,9 @@ export class IntentDialog extends ComponentDialog {
             const intentName = this.findIntent(recognized);
             const intentMapping = this.intents[intentName];
             if (intentMapping) {
-                if (isRunning) {
-                    if (intentName !== this.noneIntent && intentMapping.canInterrupt) {
-                        await dc.cancelAllDialogs();
-                        return await dc.beginDialog(intentMapping.dialogId, recognized);
-                    }
-                } else {
-                    return await dc.beginDialog(intentMapping.dialogId, recognized);
+                if (!isRunning || (intentName !== this.noneIntent && intentMapping.canInterrupt)) {
+                    return await this.onBeginInterruption(dc, intentMapping.dialogId, recognized);
                 }
-    
             }
         }
 
@@ -60,6 +65,11 @@ export class IntentDialog extends ComponentDialog {
         } else {
             return Dialog.EndOfTurn;
         }
+    }
+
+    protected async onBeginInterruption(dc: DialogContext, dialogId: string, recognized: RecognizerResult): Promise<DialogTurnResult> {
+        await dc.cancelAllDialogs();
+        return await dc.beginDialog(dialogId, recognized);
     }
 
     private interruptionEnabled() {
@@ -77,9 +87,10 @@ export class IntentDialog extends ComponentDialog {
             let topName = this.noneIntent;
             let topScore = 0;
             for (const name in recognized.intents) {
-                if (recognized.intents[name].score > topScore) {
+                const score = recognized.intents[name].score;
+                if (score > this.minScore && score > topScore) {
                     topName = name;
-                    topScore = recognized.intents[name].score;
+                    topScore = score;
                 }
             }
 
