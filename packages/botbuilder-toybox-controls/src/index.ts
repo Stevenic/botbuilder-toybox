@@ -7,6 +7,7 @@ export * from './selectors/index';
 export * from './slots/index';
 export * from './actionContext';
 export * from './actionDialog';
+export * from './addChoices';
 export * from './ensureTermsMiddleware';
 export * from './listControl';
 export * from './termsControl';
