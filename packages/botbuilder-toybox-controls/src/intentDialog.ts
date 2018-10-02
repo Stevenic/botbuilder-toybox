@@ -3,9 +3,15 @@
  */
 /** Licensed under the MIT License. */
 import { TurnContext, RecognizerResult, ActivityTypes } from 'botbuilder-core';
-import { ComponentDialog, Dialog, DialogContext, DialogTurnResult, DialogTurnStatus } from 'botbuilder-dialogs';
+import { ComponentDialog, Dialog, DialogContext, DialogTurnResult } from 'botbuilder-dialogs';
 
 export type Recognizer = { recognize(context: TurnContext): Promise<RecognizerResult>; };
+
+export enum InterruptionModel {
+    none = 'none',
+    replace = 'replace',
+    append = 'append'
+}
 
 export class IntentDialog extends ComponentDialog {
     public readonly intents: { [name: string]: IntentMapping; } = {};
@@ -19,20 +25,10 @@ export class IntentDialog extends ComponentDialog {
         this.noneIntent = noneIntent;
     }
 
-    public addIntent(name: string, dialog: Dialog): this;
-    public addIntent(name: string, canInterrupt: boolean, dialog: Dialog): this;
-    public addIntent(name: string, dialogOrCanInterrupt: Dialog|boolean, dialog?: Dialog ): this {
-        let canInterrupt = false;
+    public addIntent(name: string, dialog: Dialog, interruption: InterruptionModel = InterruptionModel.none): this {
         if (this.intents.hasOwnProperty(name)) { throw new Error(`IntentDialog.addIntent(): an intent named '${name}' already registered.`) }
-        if (typeof dialogOrCanInterrupt === 'boolean') {
-            canInterrupt = dialogOrCanInterrupt;
-        } else {
-            dialog = dialogOrCanInterrupt;
-        }
-
-        // Add dialog and intent mapping
         this.addDialog(dialog);
-        this.intents[name] = { name: name, dialogId: dialog.id, canInterrupt: canInterrupt };
+        this.intents[name] = { name: name, dialogId: dialog.id, interruption: interruption };
         return this;
     }
 
@@ -53,8 +49,8 @@ export class IntentDialog extends ComponentDialog {
             const intentName = this.findIntent(recognized);
             const intentMapping = this.intents[intentName];
             if (intentMapping) {
-                if (!isRunning || (intentName !== this.noneIntent && intentMapping.canInterrupt)) {
-                    return await this.onBeginInterruption(dc, intentMapping.dialogId, recognized);
+                if (!isRunning || (intentName !== this.noneIntent && intentMapping.interruption !== InterruptionModel.none)) {
+                    return await this.onBeginInterruption(dc, intentMapping.dialogId, recognized, intentMapping.interruption);
                 }
             }
         }
@@ -67,14 +63,16 @@ export class IntentDialog extends ComponentDialog {
         }
     }
 
-    protected async onBeginInterruption(dc: DialogContext, dialogId: string, recognized: RecognizerResult): Promise<DialogTurnResult> {
-        await dc.cancelAllDialogs();
+    protected async onBeginInterruption(dc: DialogContext, dialogId: string, recognized: RecognizerResult, interruption: InterruptionModel): Promise<DialogTurnResult> {
+        if (interruption === InterruptionModel.replace) {
+            await dc.cancelAllDialogs();
+        }
         return await dc.beginDialog(dialogId, recognized);
     }
 
     private interruptionEnabled() {
         for (const name in this.intents) {
-            if (this.intents[name].canInterrupt) {
+            if (this.intents[name].interruption) {
                 return true;
             }
         }
@@ -106,5 +104,5 @@ export class IntentDialog extends ComponentDialog {
 interface IntentMapping {
     name: string;
     dialogId: string;
-    canInterrupt: boolean;
+    interruption: InterruptionModel;
 }
