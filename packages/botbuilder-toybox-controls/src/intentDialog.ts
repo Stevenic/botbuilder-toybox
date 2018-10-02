@@ -7,7 +7,7 @@ import { ComponentDialog, Dialog, DialogContext, DialogTurnResult } from 'botbui
 
 export type Recognizer = { recognize(context: TurnContext): Promise<RecognizerResult>; };
 
-export enum InterruptionModel {
+export enum InterruptionMode {
     none = 'none',
     replace = 'replace',
     append = 'append'
@@ -25,7 +25,7 @@ export class IntentDialog extends ComponentDialog {
         this.noneIntent = noneIntent;
     }
 
-    public addIntent(name: string, dialog: Dialog, interruption: InterruptionModel = InterruptionModel.none): this {
+    public addIntent(name: string, dialog: Dialog, interruption: InterruptionMode = InterruptionMode.none): this {
         if (this.intents.hasOwnProperty(name)) { throw new Error(`IntentDialog.addIntent(): an intent named '${name}' already registered.`) }
         this.addDialog(dialog);
         this.intents[name] = { name: name, dialogId: dialog.id, interruption: interruption };
@@ -49,7 +49,7 @@ export class IntentDialog extends ComponentDialog {
             const intentName = this.findIntent(recognized);
             const intentMapping = this.intents[intentName];
             if (intentMapping) {
-                if (!isRunning || (intentName !== this.noneIntent && intentMapping.interruption !== InterruptionModel.none)) {
+                if (!isRunning || (intentName !== this.noneIntent && intentMapping.interruption !== InterruptionMode.none)) {
                     return await this.onBeginInterruption(dc, intentMapping.dialogId, recognized, intentMapping.interruption);
                 }
             }
@@ -63,8 +63,8 @@ export class IntentDialog extends ComponentDialog {
         }
     }
 
-    protected async onBeginInterruption(dc: DialogContext, dialogId: string, recognized: RecognizerResult, interruption: InterruptionModel): Promise<DialogTurnResult> {
-        if (interruption === InterruptionModel.replace) {
+    protected async onBeginInterruption(dc: DialogContext, dialogId: string, recognized: RecognizerResult, interruption: InterruptionMode): Promise<DialogTurnResult> {
+        if (interruption === InterruptionMode.replace) {
             await dc.cancelAllDialogs();
         }
         return await dc.beginDialog(dialogId, recognized);
@@ -104,5 +104,5 @@ export class IntentDialog extends ComponentDialog {
 interface IntentMapping {
     name: string;
     dialogId: string;
-    interruption: InterruptionModel;
+    interruption: InterruptionMode;
 }
