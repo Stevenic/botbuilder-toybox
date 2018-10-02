@@ -1,7 +1,7 @@
 {
-  "name": "botbuilder-toybox-controls",
+  "name": "botbuilder-toybox-declarative",
   "author": "stevenic@microsoft.com",
-  "description": "A collection of controls for Bot Builder v4.",
+  "description": "Declarative system for loading Bot Builder v4 dialogs.",
   "version": "0.1.0",
   "license": "MIT",
   "keywords": [
@@ -19,13 +19,11 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
-    "@types/node-fetch": "^1.6.9",
-    "botbuilder-core": "^4.0.0",
+    "botbuilder": "^4.0.0",
     "botbuilder-dialogs": "^4.0.0",
-    "node-fetch": "^2.1.2"
+    "botbuilder-ai": "^4.0.0"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "7.2.5",    
     "@types/mocha": "^2.2.47",
     "@types/node": "^9.3.0",
     "codelyzer": "^4.1.0",
