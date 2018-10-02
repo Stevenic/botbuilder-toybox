@@ -1,16 +1,12 @@
 /**
- * @module botbuilder-dialogs
+ * @module botbuilder-toybox
  */
-/**
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
- */
+/** Licensed under the MIT License. */
 import { RecognizerResult, TurnContext } from 'botbuilder-core';
 import { ActionSlotFiller } from './actionSlotSet'; 
 import { ActionContext } from '../actionContext';
 import { ActionSlotRecognizePolicy } from './actionSlotSet';
-
-export type Recognizer = { recognize(context: TurnContext): Promise<RecognizerResult>; };
+import { Recognizer } from '../intentDialog';
 
 export class EntitySlot implements ActionSlotFiller {
     private readonly recognizer: Recognizer;

@@ -1,10 +1,7 @@
 /**
- * @module botbuilder-dialogs
+ * @module botbuilder-toybox
  */
-/**
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
- */
+/** Licensed under the MIT License. */
 import { ActionContext } from '../actionContext';
 
 export enum ActionSlotRecognizePolicy {
