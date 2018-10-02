@@ -19,8 +19,10 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "dependencies": {
+    "@types/node-fetch": "^1.6.9",
     "botbuilder-core": "^4.0.0",
-    "botbuilder-dialogs": "^4.0.0"
+    "botbuilder-dialogs": "^4.0.0",
+    "node-fetch": "^2.1.2"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "7.2.5",    
