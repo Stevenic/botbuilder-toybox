@@ -56,11 +56,7 @@ export class IntentDialog extends ComponentDialog {
         }
 
         // Perform default routing logic
-        if (isRunning) {
-            return await dc.continueDialog();
-        } else {
-            return Dialog.EndOfTurn;
-        }
+        return await dc.continueDialog();
     }
 
     protected async onBeginInterruption(dc: DialogContext, dialogId: string, recognized: RecognizerResult, interruption: InterruptionMode): Promise<DialogTurnResult> {
