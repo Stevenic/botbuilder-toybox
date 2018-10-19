@@ -9,7 +9,8 @@ import {
 import { TurnContext, ActivityTypes, Activity, SuggestedActions, ActionTypes } from 'botbuilder-core';
 import { InterruptionMode } from './intentDialog';
 
-const PERSISTED_VISIBLE_ACTIONS: string = 'actions';
+const PERSISTED_VISIBLE_ACTIONS: string = 'visible';
+const PERSISTED_RENDERED_ACTIONS: string = 'rendered';
 
 export enum SuggestedActionsMergeMode {
     none = 'none',
@@ -19,7 +20,7 @@ export enum SuggestedActionsMergeMode {
 
 export class SuggestedActionsDialog extends ComponentDialog {
     private readonly outerDcKey = Symbol('outerDC');
-    private readonly choices: { [value: string]: ActionInfo; } = {};
+    private readonly actions: { [value: string]: ActionInfo; } = {};
     private readonly mergeMode: SuggestedActionsMergeMode;
     private position: number = 0;
 
@@ -30,15 +31,15 @@ export class SuggestedActionsDialog extends ComponentDialog {
 
     public addDialogAction(action: string|Choice, dialog: Dialog, visible = true, interruption = InterruptionMode.append): this {
         const choice = ChoiceFactory.toChoices([action])[0];
-        if (this.choices.hasOwnProperty(choice.value)) { throw new Error(`SuggestedActionsDialog.addAction(): an actions with a value of '${choice.value}' has already been added.`) }
-        this.choices[choice.value] = {
+        if (this.actions.hasOwnProperty(choice.value)) { throw new Error(`SuggestedActionsDialog.addAction(): an actions with a value of '${choice.value}' has already been added.`) }
+        this.actions[choice.value] = {
             type: ActionType.dialog,
             choice: choice, 
             visible: visible, 
             position: this.position++,
             dialogId: dialog.id,
             interruption: interruption
-        };
+        } as DialogActionInfo;
         this.addDialog(dialog);
 
         return this;
@@ -46,8 +47,8 @@ export class SuggestedActionsDialog extends ComponentDialog {
 
     public addCancelAction(action: string|Choice, visible = true): this {
         const choice = ChoiceFactory.toChoices([action])[0];
-        if (this.choices.hasOwnProperty(choice.value)) { throw new Error(`SuggestedActionsDialog.addCancelAction(): an actions with a value of '${choice.value}' has already been added.`) }
-        this.choices[choice.value] = {
+        if (this.actions.hasOwnProperty(choice.value)) { throw new Error(`SuggestedActionsDialog.addCancelAction(): an actions with a value of '${choice.value}' has already been added.`) }
+        this.actions[choice.value] = {
             type: ActionType.cancel,
             choice: choice, 
             visible: visible, 
@@ -58,15 +59,15 @@ export class SuggestedActionsDialog extends ComponentDialog {
     }
     
     public getVisibleActions(context: TurnContext): Choice[] {
-        const values = this.visibleChoices(context).sort((a, b) => this.choices[a].position - this.choices[b].position);
-        const choices = values.map((value) => this.choices[value].choice);
+        const values = this.visibleActions(context).sort((a, b) => this.actions[a].position - this.actions[b].position);
+        const choices = values.map((value) => this.actions[value].choice);
 
         return choices;
     }
 
     public hideAction(context: TurnContext, value: string): this {
-        if (!this.choices.hasOwnProperty(value)) { throw new Error(`SuggestedActionsDialog.hideAction(): no action with a value of '${value}' found.`) }
-        const visible = this.visibleChoices(context);
+        if (!this.actions.hasOwnProperty(value)) { throw new Error(`SuggestedActionsDialog.hideAction(): no action with a value of '${value}' found.`) }
+        const visible = this.visibleActions(context);
         for (let i = 0; i < visible.length; i++) {
             if (visible[i] === value) {
                 visible.splice(i, 1);
@@ -77,8 +78,8 @@ export class SuggestedActionsDialog extends ComponentDialog {
     }
 
     public isActionVisible(context: TurnContext, value: string): boolean {
-        if (!this.choices.hasOwnProperty(value)) { throw new Error(`SuggestedActionsDialog.isActionVisible(): no action with a value of '${value}' found.`) }
-        const visible = this.visibleChoices(context);
+        if (!this.actions.hasOwnProperty(value)) { throw new Error(`SuggestedActionsDialog.isActionVisible(): no action with a value of '${value}' found.`) }
+        const visible = this.visibleActions(context);
         for (let i = 0; i < visible.length; i++) {
             if (visible[i] === value) {
                 return true;
@@ -89,9 +90,9 @@ export class SuggestedActionsDialog extends ComponentDialog {
     }
 
     public showAction(context: TurnContext, value: string): this {
-        if (!this.choices.hasOwnProperty(value)) { throw new Error(`SuggestedActionsDialog.showAction(): no action with a value of '${value}' found.`) }
+        if (!this.actions.hasOwnProperty(value)) { throw new Error(`SuggestedActionsDialog.showAction(): no action with a value of '${value}' found.`) }
         if (!this.isActionVisible(context, value)) {
-            const visible = this.visibleChoices(context);
+            const visible = this.visibleActions(context);
             visible.push(value);
         }
 
@@ -116,14 +117,28 @@ export class SuggestedActionsDialog extends ComponentDialog {
 
     protected async onContinueDialog(innerDC: DialogContext): Promise<DialogTurnResult> {
         // Check for an invoked action
-        const choices = this.getVisibleActions(innerDC.context);
+        const choices = this.getRenderedActions(innerDC.context).map((value) => this.actions[value].choice);
         const found = findChoices(innerDC.context.activity.text, choices);
         if (found.length > 0) {
-            // 
-
-        } else {
-            return await super.onContinueDialog(innerDC);
+            // Invoke action
+            const action = this.actions[found[0].resolution.value];
+            switch(action.type) {
+                case ActionType.dialog:
+                    const dialogAction = action as DialogActionInfo;
+                    switch(dialogAction.interruption) {
+                        case InterruptionMode.append:
+                            return await innerDC.beginDialog(dialogAction.dialogId);
+                        case InterruptionMode.replace:
+                            await innerDC.cancelAllDialogs();
+                            return await innerDC.beginDialog(dialogAction.dialogId);
+                    }
+                    break;
+                case ActionType.cancel:
+                    return await innerDC.cancelAllDialogs();
+            }
         }
+
+        return await super.onContinueDialog(innerDC);
     }
 
     private cacheOuterDC(outerDC: DialogContext): void {
@@ -147,7 +162,7 @@ export class SuggestedActionsDialog extends ComponentDialog {
     }
 
     private appendActions(context: TurnContext, activity: Partial<Activity>): void {
-        const choices = this.getVisibleActions(context);
+        let choices = this.getVisibleActions(context);
         const actions = choices.map((choice) => choice.action || { type: ActionTypes.ImBack, title: choice.value, value: choice.value });
         if (actions.length > 0) {
             if (!activity.suggestedActions) { activity.suggestedActions = {} as SuggestedActions }
@@ -156,6 +171,8 @@ export class SuggestedActionsDialog extends ComponentDialog {
                 case SuggestedActionsMergeMode.none:
                     if (activity.suggestedActions.actions.length == 0) {
                         activity.suggestedActions.actions = actions;
+                    } else {
+                        choices = [];
                     }
                     break;
                 case SuggestedActionsMergeMode.left:
@@ -170,16 +187,16 @@ export class SuggestedActionsDialog extends ComponentDialog {
                     break;
             }
         }
+        this.setRenderedActions(context, choices.map((choice) => choice.value));
     }
 
-    private visibleChoices(context: TurnContext): string[] {
-        // Populate visible choices on first access
+    private visibleActions(context: TurnContext): string[] {
         const outerDC: DialogContext = context.turnState.get(this.outerDcKey);
         let visible: string[] = outerDC.activeDialog.state[PERSISTED_VISIBLE_ACTIONS];
         if (!Array.isArray(visible)) {
             visible = [];
-            for (const value in this.choices) {
-                if (this.choices[value].visible) {
+            for (const value in this.actions) {
+                if (this.actions[value].visible) {
                     visible.push(value);
                 }
             }
@@ -187,6 +204,16 @@ export class SuggestedActionsDialog extends ComponentDialog {
         }
 
         return visible;
+    }
+
+    private getRenderedActions(context: TurnContext): string[] {
+        const outerDC: DialogContext = context.turnState.get(this.outerDcKey);
+        return outerDC.activeDialog.state[PERSISTED_RENDERED_ACTIONS] || [];
+    }
+
+    private setRenderedActions(context: TurnContext, values: string[]): void {
+        const outerDC: DialogContext = context.turnState.get(this.outerDcKey);
+        outerDC.activeDialog.state[PERSISTED_RENDERED_ACTIONS] = values;
     }
 }
 
@@ -200,6 +227,9 @@ interface ActionInfo {
     choice: Choice;
     visible: boolean;
     position: number;
-    dialogId?: string;
-    interruption?: InterruptionMode;
+}
+
+interface DialogActionInfo extends ActionInfo {
+    dialogId: string;
+    interruption: InterruptionMode;
 }
