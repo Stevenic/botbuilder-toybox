@@ -11,4 +11,5 @@ export * from './addChoices';
 export * from './ensureTermsMiddleware';
 export * from './intentDialog';
 export * from './listControl';
+export * from './suggestedActionsDialog';
 export * from './termsControl';
