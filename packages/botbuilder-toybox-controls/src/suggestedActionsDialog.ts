@@ -28,7 +28,7 @@ export class SuggestedActionsDialog extends ComponentDialog {
         this.mergeMode = mergeMode;
     }
 
-    public addAction(action: string|Choice, dialog: Dialog, visible = true, interruption = InterruptionMode.append): this {
+    public addDialogAction(action: string|Choice, dialog: Dialog, visible = true, interruption = InterruptionMode.append): this {
         const choice = ChoiceFactory.toChoices([action])[0];
         if (this.choices.hasOwnProperty(choice.value)) { throw new Error(`SuggestedActionsDialog.addAction(): an actions with a value of '${choice.value}' has already been added.`) }
         this.choices[choice.value] = {
