@@ -7,3 +7,4 @@ export * from './expiringProperty';
 export * from './historyProperty';
 export * from './listProperty';
 export * from './listReferenceProperty';
+export * from './readonlyProperty';
