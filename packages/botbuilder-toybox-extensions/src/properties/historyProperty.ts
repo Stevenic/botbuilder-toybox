@@ -20,7 +20,8 @@ export class HistoryProperty<T = any> implements StatePropertyAccessor<T> {
 
     public async get(context: TurnContext, defaultValue?: T): Promise<T | undefined> {
         const val = await this.property.get(context);
-        if (val && val.current && val.current.value !== undefined) {
+        if (val && val.current) {
+            val.current.timestamp = new Date().getTime();
             return val.current.value;
         } else if (defaultValue !== undefined) {
             await this.set(context, defaultValue);
