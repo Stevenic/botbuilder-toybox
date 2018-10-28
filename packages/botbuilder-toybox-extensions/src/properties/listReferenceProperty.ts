@@ -21,7 +21,7 @@ export class ListReferenceProperty<T = any> implements StatePropertyAccessor<str
         return this.property.set(context, value);
     }
 
-    public async getSelectedItem(context: TurnContext): Promise<T|undefined> {
+    public async getItem(context: TurnContext): Promise<T|undefined> {
         const id = await this.property.get(context);
         if (id) {
             return await this.list.getItem(context, id);

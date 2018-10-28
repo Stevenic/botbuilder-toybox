@@ -73,4 +73,3 @@ export class HistoryProperty<T = any> implements StatePropertyAccessor<T> {
         }
     }
 }
-
