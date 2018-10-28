@@ -21,6 +21,7 @@ export class ExpiringProperty<T = any> implements StatePropertyAccessor<T> {
         const now = new Date().getTime();
         const val = await this.property.get(context);
         if (val && now < (val.timestamp + this.ttl)) {
+            val.timestamp = now;
             return val.value;
         } else if (defaultValue !== undefined) {
             await this.set(context, defaultValue);
