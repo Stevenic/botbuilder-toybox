@@ -95,7 +95,7 @@ The sendActivity() method can be used to send more complicated messages to the u
 You can use `MessageFactory.contentUrl()` to send an image to the user:
 
 ```JS
-const { BotFrameworkAdapter, ActivityTypes, MessageFactory, CardFactory } = require('botbuilder');
+const { MessageFactory, CardFactory } = require('botbuilder');
 
 server.post('/api/messages', async (req, res) => {
     await adapter.processActivity(req, res, async (context) => {
@@ -197,6 +197,115 @@ async function sendMessage(context, text) {
 } 
 ```
 
-> **note:** Another popular use for the `delay` activity is to insert a pause before sending a text message immediately after a message containing an image.  This is to avoid the messages from being shown to the user out of order. Most chat clients want to pre-download images to the users device before showing them a message containing images so in order to avoid the messages being displayed out of order you should either put all images in the last message you send for a turn or insert a 1 - 2 second pause before sending a message containing only text.  
+> **note:** Another popular use for the `delay` activity is to insert a pause before sending a text message immediately after a message containing an image.  Most chat clients want to pre-download images to the users device before showing them a message containing images so in order to avoid the messages being displayed out of order you should either put all images in the last message you send for a turn or insert a 1 - 2 second pause before sending a message containing only text.  
 
 ## Multi-Turn Conversations
+Every concept we learned for managing single-turn conversations applies to multi-turn conversations as well.  With multi-turn conversations we have the added complexity that we'd like to ask a user questions and then do something with their responses.  To achieve that we need to introduce the concept of **conversation state**.
+
+### Tracking Conversation State
+The framework provides a `ConversationState` class which our bot can use to remember things in-between interactions with the user:
+
+```JS
+const { MemoryStorage, ConversationState } = require('botbuilder');
+
+const storage = new MemoryStorage();
+const convoState = new ConversationState(storage);
+const topicProp = convoState.createProperty('topic');
+```
+
+The first thing we have to do is create the storage provider we'll use to persist our bots conversation state. In this example we're just using an in-memory storage provider which will be cleared every time our bots process restarts. The framework also provides providers that use either Azure Blob Storage or Azure CosmosDB and there are plenty of 3rd party storage providers available for the various ways you might want to persist your bots state.
+
+Next we pass our storage provider into a new `ConversationState` instance.  Since our bot can have multiple conversations going on simultaniously, this class will manage the reading & writing of each individual conversation.
+
+Finally we need to define a property that we'll use to remember that we've asked the user a question.  We'll talk more about state properties in future articles but for know it's enough to know that call to `createProperty()` returns a `StatePropertyAccessor` instance which we can use to `get()` and `set()` an individual property for the conversation.
+
+### Asking Questions
+Now that we have our conversation state setup we can update our bots code to ask the user a question:
+
+```JS
+const Topics = {
+    none: '',
+    name: 'name'
+};
+
+server.post('/api/messages', async (req, res) => {
+    await adapter.processActivity(req, res, async (context) => {
+        // Only process 'message' activities
+        if (context.activity.type === ActivityTypes.Message) {
+            const topic = await topicProp.get(context, Topics.none);
+            switch (topic) {
+                case Topics.none:
+                    await context.sendActivity(`Hi! What's your name?`);
+                    await topicProp.set(context, Topics.name);
+                    break;
+                case Topics.name:
+                    const name = context.activity.text;
+                    await context.sendActivity(`Nice to meet you ${name}!`);
+                    await topicProp.set(context, Topics.none);
+                    break;
+            }
+            await convoState.saveChanges(context);
+        }
+    });
+});
+```
+
+For every message from the user, we're first reading the current topic (which defaults to `none`) and then using a `switch` statement to determine which topic is currently active. We can use `topicProp.set()` to change topics and then we use `convoState.saveChanges()` to persist the new topic at the end of the turn.    
+
+If we message this bot from the emulator we'll see that it in fact asks us for our name on the first turn and then greets us using that name on the next turn. The problem with this bot is that if we then message it again it will simply loop and ask us for our name again which isn't very useful. To fix that we need to save the users name somewhere. We can save it to either a database or use the frameworks `UserState` class.
+
+### Remembering Answers
+The framework provides a `UserState` class which our bot can use to remember things across conversations with a user. If you think of ConversationState as the bots short term memory then UserState is the bots long term memory.  The setup and usage is similar to ConversationState:
+
+```JS
+const { MemoryStorage, ConversationState, UserState } = require('botbuilder');
+
+const storage = new MemoryStorage();
+const convoState = new ConversationState(storage);
+const topicProp = convoState.createProperty('topic');
+
+const userState = new UserState(storage);
+const nameProp = userState.createProperty('name');
+```
+
+Next we can update our bots message handling logic to inspect this property as well:
+
+```JS
+const Topics = {
+    none: '',
+    name: 'name'
+};
+
+server.post('/api/messages', async (req, res) => {
+    await adapter.processActivity(req, res, async (context) => {
+        // Only process 'message' activities
+        if (context.activity.type === ActivityTypes.Message) {
+            const topic = await topicProp.get(context, Topics.none);
+            switch (topic) {
+                case Topics.none:
+                    const name = await nameProp.get(context, '');
+                    if (name.length > 0) {
+                        await context.sendActivity(`Hi ${name}.`);
+                    } else {
+                        await context.sendActivity(`Hi! What's your name?`);
+                        await topicProp.set(context, Topics.name);
+                    }
+                    break;
+                case Topics.name:
+                    const name = context.activity.text;
+                    await context.sendActivity(`Nice to meet you ${name}!`);
+                    await nameProp.set(context, name);
+                    await topicProp.set(context, Topics.none);
+                    break;
+            }
+            await convoState.saveChanges(context);
+        }
+    });
+});
+```
+
+With our updated code the `nameProp` will be empty on the first message so we'll prompt the user for their name and update our topic. When they reply we'll greet them as before but we'll also update our name property before switching the topic back to none.  Now when the user sends any future messages they'll get greeted with their name instead of being asked for it again.
+
+We could extend this sample with additional `topics` to either ask for other things like the users age or to perform some requested task but you can probably see how this switch statement can get a little unwieldy as the complexity of your bot grows.  So next we'll show you how you can use the frameworks `Dialog` abstraction to simplify building more complicated bots.
+
+## Multi-Turn Conversations using Dialogs
