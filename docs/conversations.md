@@ -127,7 +127,7 @@ server.post('/api/messages', async (req, res) => {
 });
 ```
 
-And finally you can `MessageFactory.list()` or `MessageFactory.carousel()` to send up to 10 cards to the user:
+And finally you can use `MessageFactory.list()` or `MessageFactory.carousel()` to send up to 10 cards to the user:
 
 ```JS
 server.post('/api/messages', async (req, res) => {
@@ -196,5 +196,7 @@ async function sendMessage(context, text) {
     await context.sendActivity(text);
 } 
 ```
+
+> **note:** Another popular use for the `delay` activity is to insert a pause before sending a text message immediately after a message containing an image.  This is to avoid the messages from being shown to the user out of order. Most chat clients want to pre-download images to the users device before showing them a message containing images so in order to avoid the messages being displayed out of order you should either put all images in the last message you send for a turn or insert a 1 - 2 second pause before sending a message containing only text.  
 
 ## Multi-Turn Conversations
