@@ -299,6 +299,7 @@ server.post('/api/messages', async (req, res) => {
                     break;
             }
             await convoState.saveChanges(context);
+            await userState.saveChanges(context);
         }
     });
 });
